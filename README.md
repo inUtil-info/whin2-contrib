@@ -1,11 +1,12 @@
 # Summary
-Node-red nodes that allow users to keep a 2-way Whatsapp communication with one's mobile.
-The package includes three nodes:
-- whin-send, to send out whatsapp texts from your NR flows to your whatsapp number.
-- whin-receive, to inject whatsapp texts from within whatsapp into node-red flows.
-- whin-confirm, think of it as a confirmation gate; when used in the middle of a flow, you can request permission to proceed the execution of the flow.
+Whin2 is the evolution of former whin service. Whin2 node requests are now routes through rapidapi service to increase service robustness.
+It is still a free service for home-lab installations but power users tiers have been added at a cost.
 
-## Install:
+Token has been deprecated in favour of rapidapi apikey. Signup process is described below.
+
+# BELOW IS OLD CONTENT
+
+## Install: 
 
 [![NPM](https://nodei.co/npm/node-red-contrib-whin.png?mini=true)](https://nodei.co/npm/node-red-contrib-whin/)
 
