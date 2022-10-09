@@ -1,10 +1,10 @@
 {
-  "name": "red-contrib-whin2",
+  "name": "inUtil-Labs@node-red-whin-whatsapp",
   "version": "0.0.4",
-  "description": "Whatsapp on node-red, through a shared gateway",
+  "description": "Whin is a whatsapp node for node-red, through a shared gateway",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inutil-info/node-red-contrib-whin.git"
+    "url": "git+https://github.com/inUtil-info/whin2-contrib.git"
   },
   "main": "whin.js",
   "node-red": {
@@ -18,7 +18,7 @@
     "whin",
     "whatsapp"
   ],
-  "author": "alsak0de@protonmail.com",
+  "author": "info@inutil.info",
   "bugs": {
     "url": "https://github.com/inutil-info/whin2-contrib/issues"
   },
