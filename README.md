@@ -21,7 +21,7 @@ To get your user credentials, you need to become a whin user first. There's a FR
 
 If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) a step-by-step video shows how to get subscribed on the FREE tier.
 
-If you don't like following videos, the back-end API can be found here: https://rapidapi.com/inutil-inutil-default/api/whin2/ it includes documentation, FAQ and a How-To tutorial.
+If you don't like following videos, the back-end API can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/) it includes documentation, FAQ and a How-To tutorial.
 
 
 
