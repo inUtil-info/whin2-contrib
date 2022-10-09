@@ -1,6 +1,6 @@
 {
   "name": "red-contrib-whin2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Whatsapp on node-red, through a shared gateway",
   "repository": {
     "type": "git",
