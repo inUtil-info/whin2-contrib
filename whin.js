@@ -33,13 +33,14 @@ module.exports = function (RED) {
                       const req = https.request(options, (res) => {	
                       res.setEncoding('utf8');  
                           res.on('data', (d) => {
-                              msg.payload = d;    
+                          //    msg.payload = d;    
                           node.send(msg);
                           })
                         })
                     req.on('error', (e) => {
                       //msg.payload = "ERROR";
-                             msg.payload = e;
+                      msg.payload = {"ERROR":e}
+                      // msg.payload = e;
                       node.send(msg);
                         })
                           req.write(postData);
