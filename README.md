@@ -1,30 +1,29 @@
 # Summary
-Whin2 is the evolution of former whin service. Whin2 node requests are now routes through rapidapi service to increase service robustness.
-It is still a free service for home-lab installations but power users tiers have been added at a cost.
+Whin is whatsapp gateway designed to be used at home-lab installations; on its simplest form factor the back-end is a shared gateway supporting the most frequent use cases, the client side is a set of node-red nodes available on the editor Palette.
 
-Token has been deprecated in favour of rapidapi apikey. Signup process is described below.
+Power users can signup for paid Tiers that support: special use-cases, custom front-ends / clients, extrenely high throughput, or even a dedicated tenant. 
 
-# BELOW IS OLD CONTENT
 
 ## Install: 
 
-[![NPM](https://nodei.co/npm/node-red-contrib-whin.png?mini=true)](https://nodei.co/npm/node-red-contrib-whin/)
+Your first choice should be using node-red Editor Palette
 
-Your first choice should be using the Palette in node-red Editor.
+As an alt method, cd to the user directory and run this command:
 
-If you are more confortable using the terminal, cd to the user directory and run this command:
-
-    npm install node-red-contrib-whin
+    npm install inUtil-Labs@node-red-whin-whatsapp
 
 
-## Set-up and Usage:
-Before using this node, we strongly recommend you read the FAQ first:
-https://github.com/inUtil-info/node-red-contrib-whin/wiki/FAQ
+## Set-up:
 
-The three nodes described above share a configuration node that stores your phone and private token.
-To get your token, just send a text Whatsapp with your mobile to +34 613 164 997 including the word *signup*, and you will get your token in a response text.
+The nodes described below share a configuration node that stores your user credentials.
 
-If you click on this link: https://wa.me/34613164997?text=signup all you need is click send from within whatsapp and you'll get your token.
+To get your user credentials, you need to become a whin user first. There's a FREE Tier for home-Labs which will cover (hopefully) all your needs.
+
+If you click on this link: https://www.youtube.com/watch?v=uOZ-oH4kP58 a step-by-step video shows how to get subscribed on the FREE tier.
+
+If you don't like following videos, the back-end API can be found here: https://rapidapi.com/inutil-inutil-default/api/whin2/ it includes documentation, FAQ and a How-To tutorial.
+
+
 
 ![signup](./icons/signup.png)
 
