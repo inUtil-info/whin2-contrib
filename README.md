@@ -24,22 +24,18 @@ If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) a step-
 If you don't like following videos, the back-end API can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/) it includes documentation, FAQ and a How-To tutorial.
 
 
-
-![signup](./icons/signup.png)
-
-To set up whin: open the configuration node and fill in the fields *Phone* and *Token*, and you'll be all set.
+To set up whin: open the configuration node and fill in the fields *Phone* and *ApiKey*, and you'll be all set.
 
 - *Phone* field has the following format: countrycode and number, without spaces; example for Spain: 346XXYYYZZZ
-- *Token* field has the following format: hex string, with 40 characters, no spaces; example: 21f5da020bad5919d1fba72e74c15da5881efb4a
+- *ApiKey* field has the following format: hex string with no spaces.
 
+![ApiKey](./icons/api-key.png)
 
-Note that the Phone and Token values are linked, this means that the node wont work if the phone
-number used to get the token is not matching the one you used to get the token. This is to prevent spam.
+Note that the Phone and ApiKey values are linked, if the phone number used to get ApiKey doesn't match, the node wont work. This is to prevent spam.
 
-The token is valid for 30 days. Everytime you send a whatsapp message using whin-send node, Time-To-Live is reset to 30 days. Keep using the service from time to time, and it won't expire.
-If for whatever reason you do not use the service for 30 days, your token will be removed from the cache. 
-Dont panic, you can get a new token repeating the signup process.
+![Config](./icons/config-node.png)
 
+The ApiKey is valid forever, as long as you keep subscribed to whin (even if you're subscribed to the Free plan). 
 
 ### Set-up and usage flow:
 
