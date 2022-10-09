@@ -19,7 +19,7 @@ module.exports = function (RED) {
           const options = {
                   hostname: 'whin2.p.rapidapi.com',
                   port: 443,
-                  path: '/whin',
+                  path: '/send',
                   method: 'POST',
                   headers: {
                       "content-type": "application/json",
