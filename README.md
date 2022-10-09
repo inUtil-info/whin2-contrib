@@ -10,7 +10,7 @@ Your first choice should be using node-red Editor Palette
 
 As an alt method, cd to the user directory and run this command:
 
-    npm install inUtil-Labs@node-red-whin-whatsapp
+    npm install inutil-labs@node-red-whin-whatsapp
 
 
 ## Set-up:
