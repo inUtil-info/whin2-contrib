@@ -21,7 +21,6 @@
         category: 'config',
         defaults: {
             name: { value: "", required: true },
-            phone: { value: "", required: false },
             apikey: { value: "", required: false }
         },
         label: function () {
@@ -52,10 +51,6 @@
         <input type="text" id="node-config-input-name">
     </div>
     <div class="form-row">
-        <label for="node-config-input-phone"><i class="fa fa-user"></i> Phone#</label>
-        <input type="text" id="node-config-input-phone">
-    </div>
-    <div class="form-row">
         <label for="node-config-input-apikey"><i class="fa fa-key"></i> ApiKey</label>
         <input type="text" id="node-config-input-apikey">
     </div>
@@ -78,7 +73,6 @@
  <ul>
  <li><code>payload</code> the message content</li>
  <li><code>apikey</code> the APIKey (set on the config-node</li>
- <li><code>phone</code> the phone number receiving the msg (set on the config-node</li>
  </ul>
 </p>	
 
