@@ -22,10 +22,10 @@ module.exports = function (RED) {
                   path: '/whin',
                   method: 'POST',
                   headers: {
-                      'content-type': 'application/json',
-                          'X-RapidAPI-Key': node.authconf.apikey,
-                          'X-RapidAPI-Host': 'whin2.p.rapidapi.com'
-                        'Content-Type': 'application/json'
+                      "content-type": "application/json",
+                          "X-RapidAPI-Key": node.authconf.apikey,
+                          "X-RapidAPI-Host": "whin2.p.rapidapi.com",
+                        "Content-Type": "application/json"
                       }
                   };
           node.on('input', function (msg) {	
