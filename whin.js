@@ -76,7 +76,7 @@ module.exports = function (RED) {
                     } else {
                       // e.g. server process killed or network down
                       // event.code is usually 1006 in this case
-                      node.warn(('[WHIN] Connection died');
+                      node.warn('[WHIN] Connection died');
                       konekt();
                     }
                   };    
