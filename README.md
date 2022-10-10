@@ -22,7 +22,8 @@ If you don't like following videos, the back-end API documentation and how-to tu
 Once you get subscribed, open the configuration node and fill in the field *ApiKey*. That's all you need to do to start using whin.
 
 ### About the ApiKey:
-The *ApiKey* field is expecting a string, numbers and letters with no spaces. if you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
+The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
+A whin-config node, when properly configured, looks like this:
 
 ![Config](./icons/config-node.png)
 
