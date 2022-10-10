@@ -1,25 +1,25 @@
 # Summary
 Whin is a whatsapp gateway designed to be used at home-lab installations; on its simplest form factor the back-end is a shared gateway supporting the most frequent use cases, the client side is a set of node-red nodes available on the editor Palette.
 
-Power users can signup for paid Tiers that support: special use-cases, custom front-ends / clients, extrenely high throughput, or even a dedicated tenant. 
+Power users can signup for paid Tiers that support: special use-cases, custom front-ends / clients, extremely high throughput, or even a dedicated tenant. 
 
 
 ## Install: 
 
-Your first choice should be using node-red Editor Palette
+To install whin, your first choice should be using node-red editor Palette. Find the repo: inutil-labs@node-red-whin-whatsapp and install.
 
-As an alt method, cd to the user directory and run this command:
+As an alt method: open a terminal, cd to the user directory (tipically ~/data/node_modules/), git clone this repository inside, cd into the folder created, and run this command:
 
     npm install inutil-labs@node-red-whin-whatsapp
 
 
-## Set-up:
+## Set-up whin:
 
-The nodes described below share a configuration node that stores your user credentials. You need to become a whin user to get your user credentials. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs. If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to whin **free Tier**.
+All whin nodes installed share a configuration node that stores your user credentials. You need to become a whin user to get your user credentials. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs, so there's no intrinsic cost associated to use whin. If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to whin **free Tier**.
 
 If you don't like following videos, the back-end API documentation and how-to tutorials can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/).
 
-Once you get subscribed, open the configuration node and fill in the field *ApiKey*. That's all you need to do to start using whin.
+Once you get subscribed, an ApiKey will show up: copy it; then open the configuration node and paste it on the field named: *ApiKey*. That's all you need to do to start using whin.
 
 ### About the ApiKey:
 The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
