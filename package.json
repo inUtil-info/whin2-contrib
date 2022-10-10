@@ -1,5 +1,5 @@
 {
-  "name": "inutil-labs@node-red-whin-whatsapp",
+  "name": "@inutil-labs/node-red-whin-whatsapp",
   "version": "0.0.5",
   "description": "Whin is a whatsapp node for node-red, through a shared gateway",
   "repository": {
