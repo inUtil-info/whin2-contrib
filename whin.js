@@ -72,7 +72,7 @@ module.exports = function (RED) {
             socket.onclose = function(event) {
                 node.status({fill:"red",shape:"dot",text:"disconnected"});    
                 if (event.wasClean) {
-                    node.warn((`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+                    node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
                     } else {
                       // e.g. server process killed or network down
                       // event.code is usually 1006 in this case
