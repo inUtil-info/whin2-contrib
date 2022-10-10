@@ -109,7 +109,7 @@ Whin will route several types of messages, you can send:
 
 You need to adjust the payload schema so that the back-end understands the requests.
 
-### Text messages:
+### Text message:
 
 ```json
 {
@@ -118,7 +118,7 @@ You need to adjust the payload schema so that the back-end understands the reque
 ```
 
 
-### Lists messages:
+### List message:
 
 ```json
 {
@@ -142,6 +142,21 @@ You need to adjust the payload schema so that the back-end understands the reque
 		]
     },
   ]
+}
+```
+
+### Buttons message:
+
+```json
+{
+    "text": "This is a button message",
+    "footer": "Hello World",
+    "buttons": [
+  {"buttonId": "id1", "buttonText": {"displayText": "Button 1"}, "type": 1},
+  {"buttonId": "id2", "buttonText": {"displayText": "Button 2"}, "type": 1},
+  {"buttonId": "id3", "buttonText": {"displayText": "Button 3"}, "type": 1}
+		],
+    "headerType": 1
 }
 ```
 
