@@ -67,7 +67,7 @@ module.exports = function (RED) {
             socket.onopen = function(e) {
                 node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});;
                 //socket.send({"mykey":apikey});
-                socket.send("Initial Message")
+                socket.send(apikey)
                 };
         
             socket.onclose = function(event) {
