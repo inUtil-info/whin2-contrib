@@ -21,20 +21,21 @@ If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can
 
 If you don't like following videos, the back-end API can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/); you will find there: documentation, FAQ and a How-To tutorial.
 
+To set up whin, open the configuration node, fill in the field *ApiKey* and you'll be all set.
 
-To set up whin: open the configuration node and fill in the field *ApiKey*, and you'll be all set.
-
-- The *ApiKey* field is expecting a string, numbers and letters, with no spaces. You can get copy and paste the field value from here: 
-
-![ApiKey](./icons/api-key.png)
-
-Note that the ApiKey value is linked with the phone number you used to sign-up. Consequently the messages sent from node-red will be delivered by whin to the phone number asociated with the ApiKey you set on the config node. This is to prevent spam.
+The *ApiKey* field is expecting a string, numbers and letters, with no spaces. Check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) to see from where can you copy the key that you have to paste on the config node.
 
 ![Config](./icons/config-node.png)
 
-The ApiKey is valid forever as long as you keep subscribed to whin; this is true even if you are subscribed to the free plan. 
+Note that the ApiKey value is linked with the phone number you used to sign-up. Consequently the messages sent from node-red will always be delivered by whin to the phone number linked with the ApiKey used. This is to prevent spam.
 
-### Set-up and usage flow:
+Each ApiKey is valid forever as long as you keep subscribed to whin; this remains true even if you are subscribed to the free plan.
+
+### Full Set-up flow:
+This picture shows the overall process: 
+1. subscribe to the free tier and get an apikey.
+2. link your phone number with the apikey.
+3. config whin on node-red.
 
 ![whin-nodes](./icons/whin.png)
 
