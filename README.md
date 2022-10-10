@@ -1,5 +1,5 @@
 # Summary
-Whin is whatsapp gateway designed to be used at home-lab installations; on its simplest form factor the back-end is a shared gateway supporting the most frequent use cases, the client side is a set of node-red nodes available on the editor Palette.
+Whin is a whatsapp gateway designed to be used at home-lab installations; on its simplest form factor the back-end is a shared gateway supporting the most frequent use cases, the client side is a set of node-red nodes available on the editor Palette.
 
 Power users can signup for paid Tiers that support: special use-cases, custom front-ends / clients, extrenely high throughput, or even a dedicated tenant. 
 
