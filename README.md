@@ -163,7 +163,7 @@ If you want to send a set of buttons, the msg.payload schema expected is:
 
 ### vCard message:
 If you want to send a contact vCard, the msg.payload schema expected is:
-```json
+```
 { 
     "displayName": "whin", 
     "contacts": 
