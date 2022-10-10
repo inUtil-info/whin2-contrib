@@ -23,7 +23,7 @@ Once you get subscribed an ApiKey will show up: copy it; then open the configura
 
 ### About the ApiKey:
 The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
-A whin-config node, when properly configured, looks like this:
+A whin-config node looks like this when properly configured:
 
 ![Config](./icons/config-node.png)
 
