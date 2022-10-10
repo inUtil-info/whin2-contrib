@@ -66,7 +66,8 @@ module.exports = function (RED) {
             const apikey=node.authconf.apikey;
             socket.onopen = function(e) {
                 node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});;
-                socket.send({"mykey":apikey});
+                //socket.send({"mykey":apikey});
+                socket.send("Initial Message")
                 };
         
             socket.onclose = function(event) {
