@@ -4,7 +4,7 @@ module.exports = function (RED) {
       this.phone = n.phone;
       this.apikey = n.apikey;
       }  
-      function WhinNode(config) {
+      function WhinSend(config) {
           var https = require('https');
           RED.nodes.createNode(this, config);
           const node = this;
@@ -46,7 +46,45 @@ module.exports = function (RED) {
                           req.write(postData);
                           req.end()	;
                   });
-          }      
-    RED.nodes.registerType("whin-send", WhinNode);
+          } 
+          
+      function WhinReceive(config){
+            const WebSocket = require('ws');
+            let socket = null;
+            RED.nodes.createNode(this, config);
+            const node = this;
+            const resetStatus = () => node.status({});    
+            const raiseError = (text, msg) => {
+                node.status({ fill: "red", shape: "dot", text: text });
+                node.error(text, msg);
+                };
+            node.name = config.name;
+            node.authconf = RED.nodes.getNode(config.auth);
+            resetStatus();
+            function konekt() {socket = new WebSocket("wss://api.inutil.info/wh2/ws");}
+            konekt();
+            const apikey=node.authconf.apikey;
+            socket.onopen = function(e) {
+                node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});;
+                socket.send({"mykey":apikey});
+                };
+        
+            socket.onclose = function(event) {
+                node.status({fill:"red",shape:"dot",text:"disconnected"});    
+                if (event.wasClean) {
+                    node.warn((`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+                    } else {
+                      // e.g. server process killed or network down
+                      // event.code is usually 1006 in this case
+                      node.warn(('[WHIN] Connection died');
+                      konekt();
+                    }
+                  };    
+            socket.onmessage = function(event) {
+                node.send(event.data);
+                };
+          }
+    RED.nodes.registerType("whin-send", WhinSend);
+    RED.nodes.registerType("whin-receive", WhinReceive);
     RED.nodes.registerType("whin-config", WhinConfig);
   }
