@@ -1,0 +1,93 @@
+[
+    {
+        "id": "d6f47f62.648318",
+        "type": "comment",
+        "z": "58d0e056ac9b256d",
+        "name": "VCARD",
+        "info": "",
+        "x": 190,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "fbcf69bd.f4d3d8",
+        "type": "inject",
+        "z": "58d0e056ac9b256d",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 440,
+        "wires": [
+            [
+                "79ed70bc.d159b"
+            ]
+        ]
+    },
+    {
+        "id": "79ed70bc.d159b",
+        "type": "function",
+        "z": "58d0e056ac9b256d",
+        "name": "SetMessage",
+        "func": "const vcard = 'BEGIN:VCARD\\n' // metadata of the contact card\n            + 'VERSION:3.0\\n' \n            + 'FN:whin bot\\n' // full name\n            + 'ORG:Inutil Labs;\\n' // the organization of the contact\n    + 'TEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\\n' // WhatsApp ID + phone number\n            + 'END:VCARD'\n\nmsg.payload = { \n        contacts: { \n            displayName: 'whin', \n            contacts: [{ vcard }] \n        }}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "c1a2645eccea04a2"
+            ]
+        ]
+    },
+    {
+        "id": "c1a2645eccea04a2",
+        "type": "whin-send",
+        "z": "58d0e056ac9b256d",
+        "name": "",
+        "auth": "5174ca9081d74ef6",
+        "x": 590,
+        "y": 440,
+        "wires": [
+            [
+                "e8d8ea3f64f747a6"
+            ]
+        ]
+    },
+    {
+        "id": "e8d8ea3f64f747a6",
+        "type": "debug",
+        "z": "58d0e056ac9b256d",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5174ca9081d74ef6",
+        "type": "whin-config",
+        "name": "whin",
+        "apikey": "your_apikey_goes_here"
+    }
+]

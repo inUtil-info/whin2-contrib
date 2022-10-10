@@ -15,35 +15,30 @@ As an alt method, cd to the user directory and run this command:
 
 ## Set-up:
 
-The nodes described below share a configuration node that stores your user credentials.
+The nodes described below share a configuration node that stores your user credentials. To get your user credentials you need to become a whin user first. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs.
 
-To get your user credentials, you need to become a whin user first. There's a FREE Tier for home-Labs which will cover (hopefully) all your needs.
+If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to the **free Tier**.
 
-If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) a step-by-step video shows how to get subscribed on the FREE tier.
-
-If you don't like following videos, the back-end API can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/) it includes documentation, FAQ and a How-To tutorial.
+If you don't like following videos, the back-end API can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/); you will find there: documentation, FAQ and a How-To tutorial.
 
 
-To set up whin: open the configuration node and fill in the fields *Phone* and *ApiKey*, and you'll be all set.
+To set up whin: open the configuration node and fill in the field *ApiKey*, and you'll be all set.
 
-- *Phone* field has the following format: countrycode and number, without spaces; example for Spain: 346XXYYYZZZ
-- *ApiKey* field has the following format: hex string with no spaces.
+- The *ApiKey* field is expecting a string, numbers and letters, with no spaces. You can get copy and paste the field value from here: 
 
 ![ApiKey](./icons/api-key.png)
 
-Note that the Phone and ApiKey values are linked, if the phone number used to get ApiKey doesn't match, the node wont work. This is to prevent spam.
+Note that the ApiKey value is linked with the phone number you used to sign-up. Consequently the messages sent from node-red will be delivered by whin to the phone number asociated with the ApiKey you set on the config node. This is to prevent spam.
 
 ![Config](./icons/config-node.png)
 
-The ApiKey is valid forever, as long as you keep subscribed to whin (even if you're subscribed to the Free plan). 
+The ApiKey is valid forever as long as you keep subscribed to whin; this is true even if you are subscribed to the free plan. 
 
 ### Set-up and usage flow:
 
 ![whin-nodes](./icons/whin.png)
 
 
-## Types of messages:
-At the moment, the only type of messages we route are text messages (UTF8 strings). This is not preventing you from sending json data, or any other data format you stringify first.
 
 ## Whin Nodes:
 When you install node-red-contrib-whin package, you will get the following Nodes available on node-red Palette under the Network category: whin-receive, whin-send and whin-confirm. These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
@@ -110,6 +105,18 @@ The backend controls the message expirity as well and, should you exahust the tt
 
 ![confirm-node2](./icons/confirm_flow.jpg)
 
+## Types of messages:
+Whin will route several types of messages, you can send:
+- text messages.
+- buttons.
+- lists.
+- vCards.
+
+You need to adjust the payload schema so that the back-end understands the requests.
+
+### Text messages:
+
+![send a text](./examples/send-a-text-example.json)
 
 
 ## Sample Flows:

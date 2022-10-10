@@ -1,0 +1,93 @@
+[
+    {
+        "id": "cf90d56d.79ba58",
+        "type": "comment",
+        "z": "58d0e056ac9b256d",
+        "name": "Text Message",
+        "info": "",
+        "x": 210,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "254b3eb.401ea42",
+        "type": "inject",
+        "z": "58d0e056ac9b256d",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "11978f99.6a17d"
+            ]
+        ]
+    },
+    {
+        "id": "11978f99.6a17d",
+        "type": "function",
+        "z": "58d0e056ac9b256d",
+        "name": "SetMessage",
+        "func": "msg.payload = \n  {\n  'text' : 'Hello from whin'  \n  }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "c1a2645eccea04a2"
+            ]
+        ]
+    },
+    {
+        "id": "c1a2645eccea04a2",
+        "type": "whin-send",
+        "z": "58d0e056ac9b256d",
+        "name": "",
+        "auth": "5174ca9081d74ef6",
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "e8d8ea3f64f747a6"
+            ]
+        ]
+    },
+    {
+        "id": "e8d8ea3f64f747a6",
+        "type": "debug",
+        "z": "58d0e056ac9b256d",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "5174ca9081d74ef6",
+        "type": "whin-config",
+        "name": "whin",
+        "apikey": "your_key_goes_here"
+    }
+]
