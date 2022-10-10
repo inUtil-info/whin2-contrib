@@ -37,7 +37,7 @@ This picture shows the overall process:
 2. send a sign-up message to link your phone number with the apikey.
 3. config whin on node-red.
 
-![whin-nodes](./icons/whin.png)
+![whin-nodes](./icons/infographic-whin2.png)
 
 
 
