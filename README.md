@@ -113,7 +113,7 @@ You need to adjust the payload schema so that the back-end understands the reque
 
 ```json
   {
-  'text' : 'this is a text sent from whin'  
+  "text" : "this is a text sent from whin"
   }
 ```
 
@@ -121,7 +121,12 @@ You need to adjust the payload schema so that the back-end understands the reque
 ### Text messages:
 
 ```json
-const sections = [
+{
+  'text': "This is a list",
+  'footer': "nice footer, link: https://inutil.info",
+  'title': "Amazing boldfaced list title",
+  'buttonText': "Required, text on the button to view the list",
+  [
     {
 	title: "Section 1",
 	rows: [
@@ -137,13 +142,6 @@ const sections = [
 	]
     },
 ]
-
-const listMessage = {
-  'text': "This is a list",
-  'footer': "nice footer, link: https://inutil.info",
-  'title': "Amazing boldfaced list title",
-  'buttonText': "Required, text on the button to view the list",
-  sections
 }
 ```
 
