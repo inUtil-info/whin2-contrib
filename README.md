@@ -166,12 +166,14 @@ You need to adjust the payload schema so that the back-end understands the reque
 ```json
 { 
     "displayName": "whin", 
-    "contacts": [{ "BEGIN:VCARD\n" // metadata of the contact card
-            	+ "VERSION:3.0\n" 
-            	+ "FN:whin bot\n" // full name
-            	+ "ORG:Inutil Labs;\n" // the organization of the contact
-    		+ "TEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\n" // WhatsApp ID + phone number
-            	+ "END:VCARD" }] 
+    "contacts": 
+    	[{ 'BEGIN:VCARD\n' // metadata of the contact card
+            + 'VERSION:3.0\n' 
+            + 'FN:whin bot\n' // full name
+            + 'ORG:Inutil Labs;\n' // the organization of the contact
+	    + 'TEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\n' // WhatsApp ID + phone number
+            + 'END:VCARD' 
+	}] 
 }
 ```
 
