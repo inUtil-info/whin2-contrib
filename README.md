@@ -116,7 +116,7 @@ If you want to send a text, the msg.payload schema expected is:
   "text" : "this is a text sent from whin"
 }
 ```
-
+You will send a regular text message.
 
 ### List message:
 If you want to send a list, the msg.payload schema expected is:
@@ -144,6 +144,8 @@ If you want to send a list, the msg.payload schema expected is:
   ]
 }
 ```
+This is the message that you will send:
+![list](./icons/list.png)
 
 ### Buttons message:
 If you want to send a set of buttons, the msg.payload schema expected is:
@@ -159,7 +161,8 @@ If you want to send a set of buttons, the msg.payload schema expected is:
     "headerType": 1
 }
 ```
-
+This is the message that you will send:
+![button](./icons/button.png)
 
 ### vCard message:
 If you want to send a contact vCard, the msg.payload schema expected is:
@@ -176,6 +179,9 @@ If you want to send a contact vCard, the msg.payload schema expected is:
 	}] 
 }
 ```
+This is the message that you will send:
+![vCard](./icons/vcard.png)
+
 
 ## Sample Flows:
 
