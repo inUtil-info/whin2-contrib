@@ -15,6 +15,23 @@
     });
 </script>
 
+<script type="text/javascript">
+    RED.nodes.registerType('whin-receive',{
+        category: 'network',
+        color: '#25D366',
+        defaults: {
+            name:       {value:""},
+            auth:       {value: "", type: "whin-config"}
+        },
+        inputs:0,
+        outputs:1,
+        icon: "icons/whatsapp-rev.png",
+        label: function() {
+            return this.name||"whin-receive";
+        }
+    });
+</script>
+
 
 <script type="text/javascript">
     RED.nodes.registerType('whin-config', {
@@ -41,9 +58,22 @@
         <label for="node-input-auth"><i class="icon-tag"></i> Auth</label>
         <input type="text" id="node-input-auth" placeholder="Auth">
     </div>
-	
-	
+		
 </script>
+
+<script type="text/x-red" data-template-name="whin-receive">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-auth"><i class="icon-tag"></i> Auth</label>
+        <input type="text" id="node-input-auth" placeholder="Auth">
+    </div>
+</script>
+
 
 <script type="text/x-red" data-template-name="whin-config">
     <div class="form-row">
@@ -78,5 +108,15 @@
 
 </script>
 
-        
+<script type="text/x-red" data-help-name="whin-receive">
+
+    <p>A node-red node that allow users to receive a Whatsapp text foom the mobile defined on the config.</p>
+    
+    <h3>Output</h3>
+    <p>1. Standard Output: contains the message received, the content can be used for example as a command that is passed into a flow.</p>
+    
+    <h3>Details</h3>
+    <p>The <code>msg.payload</code> produced as output is a string.
+    
+</script>        
     
