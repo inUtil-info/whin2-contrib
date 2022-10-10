@@ -46,6 +46,7 @@ When you install inutil-labs@node-red-whin-whatsapp package, you will get severa
 - whin-receive, 
 - whin-send, 
 - whin-confirm. 
+
 These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
 
 ### The Configuration Node (whin-config):
