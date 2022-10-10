@@ -19,7 +19,7 @@ The nodes described below share a configuration node that stores your user crede
 
 If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to the **free Tier**.
 
-If you don't like following videos, the back-end API can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/); you will find there: documentation, FAQ and a How-To tutorial.
+If you don't like following videos, the back-end API documentation and how-to tutorials can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/).
 
 To set up whin, open the configuration node, fill in the field *ApiKey* and you'll be all set.
 
