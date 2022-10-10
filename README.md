@@ -188,16 +188,103 @@ This is how it looks the message that you will send:
 
 ## Sample Flows:
 
-We are including a very simple flow that will send a whatsapp, you can use it to bootstrap your own use cases. 
-
-Before inporting this flow, make sure you added the node-red-contrib-whin node on your palette:
-
-![palette](./icons/palete.png)
-
-You can inport this simple flow, just edit the config fields; add your phone/token pair, and you will get a whatsapp message when you click on the inject node.
+We are including a very simple set of flows under the examples folder on this repo. Use the examples to understand how the different messages formats are. We strongly recommend you use them to bootstrap your own use cases so that you get familiar with them.
+Or you can also import this flow and test them all at once.
 
 
-    [{"id":"efd5d46d4d8baab4","type":"whin","z":"cb358f93.bea12","name":"","auth":"f160031f44835f95","x":350,"y":650,"wires":[["4703f7051e36f3da"]]},{"id":"8c62536e8bf67956","type":"inject","z":"cb358f93.bea12","name":"","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"hello from node-red-contrib-whin","payloadType":"str","x":175,"y":650,"wires":[["efd5d46d4d8baab4"]]},{"id":"4703f7051e36f3da","type":"debug","z":"cb358f93.bea12","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":520,"y":725,"wires":[]},{"id":"f160031f44835f95","type":"whin-config","name":"whin","phone":"your_phone_goes_here","token":"your_token_goes_here"}]
+    [{"id": "cf90d56d.79ba58","type": "comment","z": "78016605e351f287","name": "Text Message","info": "","x": 890,"y": 60,"wires": []},{"id":"254b3eb.401ea42","type": "inject","z": "78016605e351f287","name": "Start","props": [{"p": "payload"}],"repeat": "","crontab": "","once": false,"onceDelay": 0.1,"topic": "","payload": "","payloadType": "date","x": 890,"y": 100,"wires": [["11978f99.6a17d"]]},{"id": "11978f99.6a17d","type": "function","z": "78016605e351f287","name": "SetMessage","func": "msg.payload = \n  {\n  'text' : 'Hello from whin'  \n  }\nreturn msg;","outputs": 1,"noerr": 0,"initialize": "","finalize": "","libs": [],"x": 1080,"y": 100,        "wires": [["c1a2645eccea04a2"]]},{"id": "d6f47f62.648318","type": "comment",        "z": "78016605e351f287",        "name": "VCARD",        "info": "",        "x": 870,        "y": 360,        "wires": []    },    {        "id": "fbcf69bd.f4d3d8",        "type": "inject",        "z": "78016605e351f287",        "name": "Start",        "props": [            {                "p": "payload"            }        ],     "repeat": "",        "crontab": "",        "once": false,        "onceDelay": 0.1,        "topic": "",        "payload": "",        "payloadType": "date",        "x": 890,        "y": 400,        "wires": [            [                "79ed70bc.d159b"            ]        ]    },    {        "id": "79ed70bc.d159b","type": "function","z": "78016605e351f287","name": "SetMessage","func": "const vcard = 'BEGIN:VCARD\\n' // metadata of the contact card\n            + 'VERSION:3.0\\n' \n            + 'FN:Alsa k0de\\n' // full name\n            + 'ORG:Inutil Labs;\\n' // the organization of the contact\n            + 'TEL;type=CELL;type=VOICE;waid=911234567890:+91 12345 67890\\n' // WhatsApp ID + phone number\n            + 'END:VCARD'\n\n\nmsg.payload = { \n        contacts: { \n            displayName: 'Alsak0de', \n            contacts: [{ vcard }] \n        }}\nreturn msg;\n","outputs": 1,"noerr": 0,"initialize": "","finalize": "","libs": [],"x": 1080,"y": 400,"wires": [["c1a2645eccea04a2"]]},{"id": "9f60d55f.a054d",       "type": "comment",        "z": "78016605e351f287",        "name": "List",      "info": "",        "x": 870,        "y": 160,        "wires": []    },    {        "id": "b773a4dc.c1b88",        "type": "inject",        "z": "78016605e351f287",      "name": "Start",        "props": [            {                "p": "payload"            }        ],        "repeat": "",        "crontab": "",        "once": false,        "onceDelay": 0.1,        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "893dbacb.e78468"
+            ]
+        ]
+    },
+    {
+        "id": "893dbacb.e78468",
+        "type": "function",
+        "z": "78016605e351f287",
+        "name": "SetMessage","func": "const sections = [\n    {\n\ttitle: \"Section 1\",\n\trows: [\n\t    {title: \"Option 1\", rowId: \"option1\"},\n\t    {title: \"Option 2\", rowId: \"option2\", description: \"This is a description\"}\n\t]\n    },\n   {\n\ttitle: \"Section 2\",\n\trows: [\n\t    {title: \"Option 3\", rowId: \"option3\"},\n\t    {title: \"Option 4\", rowId: \"option4\", description: \"This is a description V2\"}\n\t]\n    },\n]\n\nconst listMessage = {\n  'text': \"This is a list\",\n  'footer': \"nice footer, link: https://inutil.info\",\n  'title': \"Amazing boldfaced list title\",\n  'buttonText': \"Required, text on the button to view the list\",\n  sections\n}\n\n\nmsg.payload = listMessage;\nreturn msg;\n","outputs": 1,"noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 200,
+        "wires": [
+            [
+                "c1a2645eccea04a2"
+            ]
+        ]
+    },
+    {
+        "id": "282dfc0.fee7904",
+        "type": "comment",
+        "z": "78016605e351f287",
+        "name": "Buttons",
+        "info": "",
+        "x": 870,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8b0ec2c0.88f7c",
+        "type": "inject",
+        "z": "78016605e351f287",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 890,
+        "y": 300,
+        "wires": [
+            [
+                "a80c681f.e941d"
+            ]
+        ]
+    },
+    {
+        "id": "a80c681f.e941d",
+        "type": "function",
+        "z": "78016605e351f287",
+        "name": "SetMessage",
+        "func": "const buttons = [\n  {'buttonId': 'id1', 'buttonText': {'displayText': 'Button 1'}, 'type': 1},\n  {'buttonId': 'id2', 'buttonText': {'displayText': 'Button 2'}, 'type': 1},\n  {'buttonId': 'id3', 'buttonText': {'displayText': 'Button 3'}, 'type': 1}\n]\n\nconst buttonMessage = {\n    'text': \"Hi it's button message\",\n    'footer': 'Hello World',\n    'buttons': buttons,\n    'headerType': 1\n}\n\n\nmsg.payload = buttonMessage;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 300,
+        "wires": [
+            [
+                "c1a2645eccea04a2"
+            ]
+        ]
+    },
+    {
+        "id": "c1a2645eccea04a2",
+        "type": "whin-send",
+        "z": "78016605e351f287",
+        "name": "",
+        "auth": "10698f5ae088e44c",
+        "x": 1370,
+        "y": 240,
+        "wires": [
+            [
+                "e8d8ea3f64f747a6"
+            ]]},{"id": "e8d8ea3f64f747a6","type": "debug","z": "78016605e351f287","name": "debug 31","active": true,"tosidebar": true,"console": false,"tostatus": false,"complete": "false","statusVal": "","statusType": "auto","x": 1560,"y": 240,"wires": []},{"id": "10698f5ae088e44c","type": "whin-config","name": "whin","apikey": "your_api_goes_here"}]
 
 
 ![flow](./icons/simple-flow.png)
