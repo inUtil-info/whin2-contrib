@@ -46,16 +46,11 @@ When you install node-red-contrib-whin package, you will get the following Nodes
 
 
 ### Configuration Node:
-This node will be used to enter your credentials as shown below; each credentials pair (phone and token) will be available and shared among all whin nodes.
-These are the fields that you need to complete to set up the whin-config node:
+This node will be used to enter your credentials as shown below; the credentials will be available and shared among all whin nodes.
+This is the field that you need to complete to set up the whin-config node:
 
 ![config-node](./icons/config-node.png)
 
-Bear in mind: 
-- Do NOT include '+' before your countrycode,
-- Do NOT include a '-', or any other character or space (anything which is not a number) as part of your phone number.
-- If you do not know, or are not sure of, which is your country code check this: https://countrycode.org/
-- Make sure the token has no spaces before or after:
 
 ![config-node2](./icons/config-node2.png)
 
