@@ -107,7 +107,7 @@ Whin will route several types of messages, you can send:
 - lists.
 - vCards.
 
-You need to adjust the payload schema so that the back-end understands the requests.
+You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message.
 
 ### Text message:
 
