@@ -144,7 +144,7 @@ If you want to send a list, the msg.payload schema expected is:
   ]
 }
 ```
-This is the message that you will send:
+This is how it looks the message that you will send:
 
 ![list](./icons/list.png)
 
@@ -162,7 +162,7 @@ If you want to send a set of buttons, the msg.payload schema expected is:
     "headerType": 1
 }
 ```
-This is the message that you will send:
+This is how it looks the message that you will send:
 
 ![button](./icons/button.png)
 
@@ -181,7 +181,7 @@ If you want to send a contact vCard, the msg.payload schema expected is:
 	}] 
 }
 ```
-This is the message that you will send:
+This is how it looks the message that you will send:
 
 ![vCard](./icons/vcard.png)
 
