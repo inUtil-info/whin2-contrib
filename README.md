@@ -122,23 +122,23 @@ You need to adjust the payload schema so that the back-end understands the reque
 
 ```json
 {
-  'text': "This is a list",
-  'footer': "nice footer, link: https://inutil.info",
-  'title': "Amazing boldfaced list title",
-  'buttonText': "Required, text on the button to view the list",
+  "text": "This is a list",
+  "footer": "nice footer, link: https://inutil.info",
+  "title": "Amazing boldfaced list title",
+  "buttonText": "Required, text on the button to view the list",
   [
     {
-	title: "Section 1",
-	rows: [
-	    {title: "Option 1", rowId: "option1"},
-	    {title: "Option 2", rowId: "option2", description: "This is a description"}
+	"title": "Section 1",
+	"rows": [
+	    {"title": "Option 1", "rowId": "option1"},
+	    {"title": "Option 2", "rowId": "option2", "description": "This is a description"}
 	]
     },
    {
-	title: "Section 2",
-	rows: [
-	    {title: "Option 3", rowId: "option3"},
-	    {title: "Option 4", rowId: "option4", description: "This is a description V2"}
+	"title": "Section 2",
+	"rows": [
+	    {"title": "Option 3", "rowId": "option3"},
+	    {"title": "Option 4", "rowId": "option4", "description": "This is a description V2"}
 	]
     },
 ]
