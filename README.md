@@ -130,15 +130,15 @@ You need to adjust the payload schema so that the back-end understands the reque
     {
 	"title": "Section 1",
 	"rows": [
-	    {"title": "Option 1", "rowId": "option1"},
-	    {"title": "Option 2", "rowId": "option2", "description": "This is a description"}
+	    	{"title": "Option 1", "rowId": "option1"},
+	    	{"title": "Option 2", "rowId": "option2", "description": "This is a description"}
 		]
     },
    {
 	"title": "Section 2",
 	"rows": [
-	    {"title": "Option 3", "rowId": "option3"},
-	    {"title": "Option 4", "rowId": "option4", "description": "This is a description V2"}
+	    	{"title": "Option 3", "rowId": "option3"},
+	    	{"title": "Option 4", "rowId": "option4", "description": "This is a description V2"}
 		]
     },
   ]
@@ -152,11 +152,26 @@ You need to adjust the payload schema so that the back-end understands the reque
     "text": "This is a button message",
     "footer": "Hello World",
     "buttons": [
-  {"buttonId": "id1", "buttonText": {"displayText": "Button 1"}, "type": 1},
-  {"buttonId": "id2", "buttonText": {"displayText": "Button 2"}, "type": 1},
-  {"buttonId": "id3", "buttonText": {"displayText": "Button 3"}, "type": 1}
+  		{"buttonId": "id1", "buttonText": {"displayText": "Button 1"}, "type": 1},
+  		{"buttonId": "id2", "buttonText": {"displayText": "Button 2"}, "type": 1},
+  		{"buttonId": "id3", "buttonText": {"displayText": "Button 3"}, "type": 1}
 		],
     "headerType": 1
+}
+```
+
+
+### vCard message:
+
+```json
+{ 
+    "displayName": 'whin', 
+    "contacts": [{ 'BEGIN:VCARD\n' // metadata of the contact card
+            	+ 'VERSION:3.0\n' 
+            	+ 'FN:whin bot\n' // full name
+            	+ 'ORG:Inutil Labs;\n' // the organization of the contact
+    		+ 'TEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\n' // WhatsApp ID + phone number
+            	+ 'END:VCARD' }] 
 }
 ```
 
