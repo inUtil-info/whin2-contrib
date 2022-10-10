@@ -15,15 +15,14 @@ As an alt method, cd to the user directory and run this command:
 
 ## Set-up:
 
-The nodes described below share a configuration node that stores your user credentials. To get your user credentials you need to become a whin user first. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs.
-
-If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to the **free Tier**.
+The nodes described below share a configuration node that stores your user credentials. You need to become a whin user to get your user credentials. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs. If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to whin **free Tier**.
 
 If you don't like following videos, the back-end API documentation and how-to tutorials can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/).
 
-To set up whin, open the configuration node, fill in the field *ApiKey* and you'll be all set.
+Once you get subscribed, open the configuration node and fill in the field *ApiKey*. That's all you need to do to start using whin.
 
-The *ApiKey* field is expecting a string, numbers and letters, with no spaces. Check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) to see from where can you copy the key that you have to paste on the config node.
+### About the ApiKey:
+The *ApiKey* field is expecting a string, numbers and letters with no spaces. if you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
 
 ![Config](./icons/config-node.png)
 
@@ -32,40 +31,35 @@ Note that the ApiKey value is linked with the phone number you used to sign-up. 
 Each ApiKey is valid forever as long as you keep subscribed to whin; this remains true even if you are subscribed to the free plan.
 
 ### Full Set-up flow:
-This picture shows the overall process: 
+This picture shows the overall process:
 1. subscribe to the free tier and get an apikey.
-2. link your phone number with the apikey.
+2. send a sign-up message to link your phone number with the apikey.
 3. config whin on node-red.
-
 ![whin-nodes](./icons/whin.png)
 
 
 
 ## Whin Nodes:
-When you install node-red-contrib-whin package, you will get the following Nodes available on node-red Palette under the Network category: whin-receive, whin-send and whin-confirm. These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
+When you install inutil-labs@node-red-whin-whatsapp package, you will get several Nodes available on node-red Palette under the Network category: 
+- whin-receive, 
+- whin-send, 
+- whin-confirm. 
+These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
 
-
-
-### Configuration Node:
-This node will be used to enter your credentials as shown below; the credentials will be available and shared among all whin nodes.
+### The Configuration Node (whin-config):
+This node will be used to enter your credentials; the credentials will be available and shared among all whin nodes.
 This is the field that you need to complete to set up the whin-config node:
 
 ![config-node](./icons/config-node.png)
 
 
-![config-node2](./icons/config-node2.png)
-
-
 ### Sender Node (whin-send):
-This is the node we recomend you start using. If you completed and saved the config, you are all set.  Just select the configuration (next to Auth on the pic):
+This is the node we recomend you start using, right after you filled in and saved the config-node.  Just select the configuration you did:
 ![sender-node](./icons/sender-node.png)
-
 
 Wire an inject node to whin-send, press inject, and you should receive a whatsapp including the text. Anything that comes in whin-send as data payload will be sent.
 
 ![sender-node2](./icons/send_flow.png)
-
-
 
 
 ### Receiver Node (whin-receive):
@@ -101,8 +95,9 @@ The backend controls the message expirity as well and, should you exahust the tt
 
 ![confirm-node2](./icons/confirm_flow.jpg)
 
+
 ## Types of messages:
-Whin will route several types of messages, you can send:
+Whin will send / receive several types of messages, you can send:
 - text messages.
 - buttons.
 - lists.
@@ -111,6 +106,7 @@ Whin will route several types of messages, you can send:
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message.
 
 ### Text message:
+If you want to send a text, the msg.payload schema expected is:
 
 ```json
 {
@@ -120,7 +116,7 @@ You need to set the right payload schema so that the back-end understands the re
 
 
 ### List message:
-
+If you want to send a list, the msg.payload schema expected is:
 ```json
 {
   "text": "This is a list",
@@ -147,7 +143,7 @@ You need to set the right payload schema so that the back-end understands the re
 ```
 
 ### Buttons message:
-
+If you want to send a set of buttons, the msg.payload schema expected is:
 ```json
 {
     "text": "This is a button message",
@@ -163,7 +159,7 @@ You need to set the right payload schema so that the back-end understands the re
 
 
 ### vCard message:
-
+If you want to send a contact vCard, the msg.payload schema expected is:
 ```json
 { 
     "displayName": "whin", 
