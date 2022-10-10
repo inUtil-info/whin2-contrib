@@ -111,7 +111,13 @@ You need to adjust the payload schema so that the back-end understands the reque
 
 ### Text messages:
 
-![send a text](./examples/send-a-text-example.json)
+```json
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
 
 
 ## Sample Flows:
