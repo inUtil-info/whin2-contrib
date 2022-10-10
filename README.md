@@ -112,9 +112,9 @@ You need to adjust the payload schema so that the back-end understands the reque
 ### Text messages:
 
 ```json
-  {
+{
   "text" : "this is a text sent from whin"
-  }
+}
 ```
 
 
