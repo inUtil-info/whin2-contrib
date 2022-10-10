@@ -31,7 +31,7 @@ Note that the ApiKey value is linked with the phone number you used to sign-up. 
 
 Each ApiKey is valid forever as long as you keep subscribed to whin; this remains true even if you are subscribed to the free plan.
 
-### Full Set-up flow:
+### Infographic of the set-up:
 This picture shows the overall process:
 1. subscribe to the free tier and get an apikey.
 2. send a sign-up message to link your phone number with the apikey.
