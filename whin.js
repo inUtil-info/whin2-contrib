@@ -87,6 +87,7 @@ module.exports = function (RED) {
                 }, 30000);   // Interval set to 30 seconds
                 };
             socket.onmessage = function(event) {
+                var msg={};
                 node.warn(`[message] Data received from server: ${event.data}`);
                 msg.payload = event.data;
                 node.send(msg);  
