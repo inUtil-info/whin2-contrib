@@ -68,6 +68,7 @@ module.exports = function (RED) {
             console.log(wsurl);
             socket = new WebSocket(wsurl);
             socket.onopen = function(e) {
+                node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});
                 const datos = token.split("_");
                 datos.shift();
                 const subscription = datos.shift();
@@ -87,17 +88,18 @@ module.exports = function (RED) {
                 console.log(`[message] Data received from server: ${event.data}`);
                 };
             socket.onclose = function(event) {
+                node.status({ fill: "red", shape: "dot", text: "Disconnected" })
                 if (event.wasClean) {
                 node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
                 } else {
                       // e.g. server process killed or network down
                       // event.code is usually 1006 in this case
-                console.log('[WHIN] Connection died');
+                node.warn('[WHIN] Connection died');
                 
                 }
             };
             socket.onerror = function(error) {
-            console.log(`[error] ${error.message}`);
+            node.warn(`[WHIN-Error] ${error.message}`);
             };
             }
 
@@ -133,7 +135,7 @@ module.exports = function (RED) {
             const key=node.authconf.apikey;
             getToken(key)
           }
-          
+
     RED.nodes.registerType("whin-send", WhinSend);
     RED.nodes.registerType("whin-receive", WhinReceive);
     RED.nodes.registerType("whin-config", WhinConfig);
