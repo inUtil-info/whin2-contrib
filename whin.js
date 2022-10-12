@@ -67,7 +67,9 @@ module.exports = function (RED) {
             {
             console.log(wsurl);
             socket = new WebSocket(wsurl);
+            node.warn("Dentro de konekt");
             socket.onopen = function(e) {
+                node.warn("Konectado a ws!");
                 node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});
                 const datos = token.split("_");
                 datos.shift();
@@ -85,7 +87,9 @@ module.exports = function (RED) {
                 }, 30000);   // Interval set to 30 seconds
                 };
             socket.onmessage = function(event) {
-                console.log(`[message] Data received from server: ${event.data}`);
+                node.warn(`[message] Data received from server: ${event.data}`);
+                msg.payload = event.data;
+                node.send(msg);  
                 };
             socket.onclose = function(event) {
                 node.status({ fill: "red", shape: "dot", text: "Disconnected" })
@@ -124,10 +128,12 @@ module.exports = function (RED) {
                 res.on('data', (d) => {
                     token = d;
                     path = "?token="+d;
+                    node.warn("path = "+path);
                     konekt(baseurl+path);           
                     })
                 })
                 req.on('error', (e) => {
+                    node.warn("Error de conexion al pedir token")
                     return "ERROR";
                     })
             req.end();
