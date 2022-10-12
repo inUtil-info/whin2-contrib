@@ -65,8 +65,8 @@ Wire an inject node to whin-send, choose the type of message you want to send (s
 
 
 ### Listener Node (whin-receive):
-Whin-receive node will allow you sending whatsapps to your node-red environment, any message you send to the whin number linked with the ApiKey will be received and treated as message payload by whin-receive on node-red.
-You might create your own syntax to trigger stuff in node-red. Switching on lights or music, disconnect the alarm, run a sales report, receive a document and process it somehow... Sky is the limit.
+Whin-receive node will allow you to send whatsapps to your node-red environment; any message you send from the whatsapp number linked to the ApiKey to whin, will be received by this node on node-red.
+You might create your own syntax to trigger stuff in node-red from whatsapp. Switching on lights or music, disconnect the alarm, run a sales report, send a document and process it on node-red somehow... Sky is the limit.
 
 The Listener can operate on two different modes: webhook mode and always-on mode.
 
