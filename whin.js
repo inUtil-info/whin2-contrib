@@ -46,11 +46,13 @@ module.exports = function (RED) {
                           req.write(postData);
                           req.end()	;
                   });
-          } 
-          
+          }           
       function WhinReceive(config){
             const WebSocket = require('ws');
             let socket = null;
+            let token = ""
+            let baseurl = "wss://api.inutil.info/wh2/ws";
+            let path = "";
             RED.nodes.createNode(this, config);
             const node = this;
             const resetStatus = () => node.status({});    
@@ -61,30 +63,77 @@ module.exports = function (RED) {
             node.name = config.name;
             node.authconf = RED.nodes.getNode(config.auth);
             resetStatus();
-            function konekt() {socket = new WebSocket("wss://api.inutil.info/wh2/ws");}
-            konekt();
-            const apikey=node.authconf.apikey;
+            function konekt(wsurl) 
+            {
+            console.log(wsurl);
+            socket = new WebSocket(wsurl);
             socket.onopen = function(e) {
-                node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});;
-                //socket.send({"mykey":apikey});
-                socket.send(apikey)
+                const datos = token.split("_");
+                datos.shift();
+                const subscription = datos.shift();
+                const rapiduser = datos.join("-");
+                let datosstr = JSON.stringify(
+                    {
+                        'rapiduser':rapiduser,
+                        'subscription':subscription
+                    }
+                )
+                socket.send(datosstr);
+                setInterval(function() {            
+                    socket.send(datosstr);
+                }, 30000);   // Interval set to 30 seconds
                 };
-        
+            socket.onmessage = function(event) {
+                console.log(`[message] Data received from server: ${event.data}`);
+                };
             socket.onclose = function(event) {
-                node.status({fill:"red",shape:"dot",text:"disconnected"});    
                 if (event.wasClean) {
-                    node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-                    } else {
+                node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+                } else {
                       // e.g. server process killed or network down
                       // event.code is usually 1006 in this case
-                      node.warn('[WHIN] Connection died');
-                      konekt();
+                console.log('[WHIN] Connection died');
+                
+                }
+            };
+            socket.onerror = function(error) {
+            console.log(`[error] ${error.message}`);
+            };
+            }
+
+            function getToken(apikey)
+            {
+            var resp = "";
+            const https = require('https');
+            const options = {
+                hostname: 'whin2.p.rapidapi.com',
+                port: 443,
+                path: '/wskchk',
+                method: 'GET',
+                headers: {
+                    "content-type": "application/json",
+                        "X-RapidAPI-Key": apikey,
+                        "X-RapidAPI-Host": "whin2.p.rapidapi.com",
+                      "Content-Type": "application/json"
                     }
-                  };    
-            socket.onmessage = function(event) {
-                node.send(event.data);
                 };
+            const req = https.request(options, (res) => {	
+                res.setEncoding('utf8');  
+                res.on('data', (d) => {
+                    token = d;
+                    path = "?token="+d;
+                    konekt(baseurl+path);           
+                    })
+                })
+                req.on('error', (e) => {
+                    return "ERROR";
+                    })
+            req.end();
+            }; 
+            const key=node.authconf.apikey;
+            getToken(key)
           }
+          
     RED.nodes.registerType("whin-send", WhinSend);
     RED.nodes.registerType("whin-receive", WhinReceive);
     RED.nodes.registerType("whin-config", WhinConfig);
