@@ -28,6 +28,7 @@ A whin-config node looks like this when properly configured:
 ### About the ApiKey:
 The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
 Note that the ApiKey value is linked with the phone number you used to sign-up. Consequently the messages sent from node-red will always be delivered by whin to the phone number linked with the ApiKey used. This is to prevent spam.
+
 Each ApiKey is valid forever as long as you keep subscribed to whin; this remains true even if you are subscribed to the free plan.
 
 ### Infographic of the set-up:
