@@ -1,34 +1,33 @@
 # Summary
-Whin is a whatsapp gateway designed to be used at home-lab installations; on its simplest form factor the back-end is a shared gateway supporting the most frequent use cases, the client side is a set of node-red nodes available on the editor Palette.
+Whin is a whatsapp gateway designed to support home-lab most frequent use cases for free; the back-end acts as a whatsapp shared gateway, the client side is a set of node-red nodes available at the editor Palette.
 
-Power users can signup for paid Tiers that support: special use-cases, custom front-ends / clients, extremely high throughput, or even a dedicated tenant. 
+Since its first release we found some "Power users" that need more than the average home user to implement their use cases. If you are one of those, you can signup for one of the paid Tiers that support: special features, custom front-ends / clients, extremely high throughput, or even a dedicated tenant. 
 
 
 ## Install: 
 
-To install whin, your first choice should be using node-red editor Palette. Find the repo: inutil-labs@node-red-whin-whatsapp and install.
+To install whin, your first choice should be using node-red editor Palette. Find the repo: @inutil-labs/node-red-whin-whatsapp and install.
 
-As an alt method: open a terminal, cd to the user directory (tipically ~/data/node_modules/), git clone this repository inside, cd into the folder created, and run this command:
+As an alt method: open a terminal, cd to the user modules directory (tipically ~/data/node_modules/), git clone this repository inside, cd into the folder created, and run this command:
 
-    npm install inutil-labs@node-red-whin-whatsapp
+    npm install @inutil-labs/node-red-whin-whatsapp
 
 
 ## Set-up whin:
 
-All whin nodes installed share a configuration node that stores your user credentials. You need to become a whin user to get your user credentials. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs, so there's no intrinsic cost associated to use whin. If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to whin **free Tier**.
+You need to become a whin user to get your user credentials. There's a free Tier for home-Lab owners which will cover (hopefully) all your needs, so there's no intrinsic cost associated to use whin. If you click on this [link](https://www.youtube.com/watch?v=uOZ-oH4kP58) you can watch a step-by-step video showing how to get subscribed to whin **free Tier**.
 
 If you don't like following videos, the back-end API documentation and how-to tutorials can be found [here](https://rapidapi.com/inutil-inutil-default/api/whin2/).
 
-Once you get subscribed an ApiKey will show up: copy it; then open the configuration node and paste it on the field named: *ApiKey*. That's all you need to do to start using whin.
+All whin nodes installed share a configuration node that stores your user credentials. Once you get subscribed an ApiKey will show up: copy it; then open the configuration node and paste it on the field named: *ApiKey*. That's all you need to do to start using whin.
 
-### About the ApiKey:
-The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
 A whin-config node looks like this when properly configured:
 
 ![Config](./icons/config-node.png)
 
+### About the ApiKey:
+The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
 Note that the ApiKey value is linked with the phone number you used to sign-up. Consequently the messages sent from node-red will always be delivered by whin to the phone number linked with the ApiKey used. This is to prevent spam.
-
 Each ApiKey is valid forever as long as you keep subscribed to whin; this remains true even if you are subscribed to the free plan.
 
 ### Infographic of the set-up:
@@ -40,9 +39,8 @@ This picture shows the overall process:
 ![whin-nodes](./icons/infographic-whin2.png)
 
 
-
 ## Whin Nodes:
-When you install inutil-labs@node-red-whin-whatsapp package, you will get several Nodes available on node-red Palette under the Network category: 
+When you install @inutil-labs/node-red-whin-whatsapp package, you will get several Nodes available on node-red Palette under the Network category: 
 - whin-receive, 
 - whin-send, 
 - whin-confirm. 
@@ -51,25 +49,32 @@ These Nodes rely on a configuration Node called whin-config (not visible on the 
 
 ### The Configuration Node (whin-config):
 This node will be used to enter your credentials; the credentials will be available and shared among all whin nodes.
+If you happen to have several phone numbers at home, you will need an ApiKey for each number and create a profile for each on the whin-config node.
 This is the field that you need to complete to set up the whin-config node:
 
 ![config-node](./icons/config-node.png)
 
 
 ### Sender Node (whin-send):
-This is the node we recomend you start using, right after you filled in and saved the config-node.  Just select the configuration you did:
+This is the node we recomend you start using, right after you complete the config-node set-up. Just select the configuration you saved:
 ![sender-node](./icons/sender-node.png)
 
-Wire an inject node to whin-send, press inject, and you should receive a whatsapp including the text. Anything that comes in whin-send as data payload will be sent.
+Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive the whatsapp on your client (web or app). Anything that comes in whin-send as data payload will be sent, and bear in mind the payload MUST be a JSON object with any of the valid schemas described below.
 
 ![sender-node2](./icons/send_flow.png)
 
 
-### Receiver Node (whin-receive):
-Whin-receive node will allow you sending whatsapps to your node-red environment, any text message you send to the whin number used to sign-up and get the token, will be received and treated as message payload by whin-receive.
-You might create your own syntax to trigger stuff in your NR. Switching on lights or music, disconnect the alarm or run a sales report. Sky is the limit.
+### Listener Node (whin-receive):
+Whin-receive node will allow you sending whatsapps to your node-red environment, any message you send to the whin number linked with the ApiKey will be received and treated as message payload by whin-receive on node-red.
+You might create your own syntax to trigger stuff in node-red. Switching on lights or music, disconnect the alarm, run a sales report, receive a document and process it somehow... Sky is the limit.
 
-![receiver-node](./icons/receive_flow.png)
+The Listener can operate on two different modes: webhook mode and always-on mode.
+
+#### Running on webhook mode:
+This option is available for all users on all Tiers. You need to expose a webhook route, and tell whin back-end which is the route you wish the messages to be delivered.
+
+#### Running on always-on mode:
+This option is working for users on paid plans only. After adding this node to a flow, when you hit deploy on the node-red editor you will see that whin-receive shows a message saying: "connected to Whatsapp". No further configuration is needed.
 
 
 ### Confirmation Node (whin-confirm):
@@ -109,7 +114,7 @@ Whin will send / receive several types of messages, you can send:
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message.
 
 ### Text message:
-If you want to send a text, the msg.payload schema expected is:
+If you want to send a text, the msg.payload schema expected is a JSON object:
 
 ```json
 {
@@ -119,7 +124,7 @@ If you want to send a text, the msg.payload schema expected is:
 You will send a regular text message.
 
 ### List message:
-If you want to send a list, the msg.payload schema expected is:
+If you want to send a list, the msg.payload schema expected is a JSON object:
 ```json
 {
   "text": "This is a list",
@@ -149,7 +154,7 @@ This is how it looks the message that you will send:
 ![list](./icons/list.png)
 
 ### Buttons message:
-If you want to send a set of buttons, the msg.payload schema expected is:
+If you want to send a set of buttons, the msg.payload schema expected is a JSON object:
 ```json
 {
     "text": "This is a button message",
@@ -167,7 +172,7 @@ This is how it looks the message that you will send:
 ![button](./icons/button.png)
 
 ### vCard message:
-If you want to send a contact vCard, the msg.payload schema expected is:
+If you want to send a contact vCard, the msg.payload schema expected is a JSON object:
 ```
 { 
     "displayName": "whin", 
@@ -204,21 +209,22 @@ Do you want more videos? check this playlist:
 https://www.youtube.com/playlist?list=PLY4sFY6dmLqxpt3SM5IagyMSdCAc6WNMP
 
 ## Error handling:
-There are two types of errors that you can get when using the nodes:
-  1. Token - Number pair invalid. This means, very likely, that you did a mistake on your number / token values on the config node
-  2. Token do not exist: You either did not complete the sign-up step, or your token has expired (due to 30 days of inactivity)
+There are three types of errors that you can get when using the nodes:
+  1. ApiKey invalid. This means that you did a mistake when you entered the ApiKey on the config node.
+  2. The number of requests reached the limit. This means that you reached the limit on requests set on your Tier.
+  3. To use this API, you need to subscribe first. Self-explanatory.
 
 ## Known bugs. Please make sure you're always on the latest release.
 We tend to roll out new versions after deep testing, but you might find something not working as expected, please open an issue on the repo and we will follow up.
 At the moment we are not aware of anything that could be considered as a bug.
 
 ## Security:
-While we have not implemented military-class security, we have done our best to secure your data (both in transit and at rest). Should you need some answers with details, please reach out and we will try to help you understand better the internals of whin. 
+While we have not implemented military-class security, we have done our best to secure your data (both in transit and at rest). Should you need some answers with details please reach out and we will try to help you understand better the internals of whin. 
 
 ## Terms of use:
-The service can be used free of charge. You will need to register at rapidAPI.com to complete the set-up. 
-We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that orginated the request. We do not share the numbers using the service with anyone, nor we send messages to our users.
+The service can be used free of charge. You will need to register at [rapidAPI.com](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. 
+We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that was subscribed. We do not share the numbers using the service with anyone.
 
-There is a rate limit associated with the Tier choosen when you subscribe. When the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can also upgrade your Tier, if you need higher limits. 
+There is a rate limit associated with the Tier choosen when you subscribe. When the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits. 
 
-If you wish to stop using the service you need to unsubscribe; we do not (cannot) remove users not using the service.
+If you wish to stop using the service you need to unsubscribe; we do not remove (clean) users not using the service.
