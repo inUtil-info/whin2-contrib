@@ -178,7 +178,7 @@ This is how it looks the message that you will send:
 If you want to send a set of buttons with an image header, the msg.payload schema expected is a JSON object:
 ```json
 {
-    "image": {url: 'https://inutil.info/img/portfolio/4.jpg'},
+    "image": {"url": 'https://inutil.info/img/portfolio/4.jpg'},
     "caption": "This is a button message with img",
     "footer": "Hello World",
     "buttons": [
