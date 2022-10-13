@@ -111,6 +111,7 @@ Whin will send / receive several types of messages, you can send:
 - buttons.
 - lists.
 - vCards.
+- locations.
 
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message.
 
@@ -190,6 +191,16 @@ If you want to send a contact vCard, the msg.payload schema expected is a JSON o
 This is how it looks the message that you will send:
 
 ![vCard](./icons/vcard.png)
+
+### Location message:
+If you want to send a Location, the msg.payload schema expected is a JSON object:
+
+```json
+{
+  location: { degreesLatitude: 24.121231, degreesLongitude: 4.019293 }
+}
+```
+This is how it looks the message that you will send:
 
 
 ## Sample Flows:
