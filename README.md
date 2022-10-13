@@ -197,7 +197,7 @@ If you want to send a Location, the msg.payload schema expected is a JSON object
 
 ```json
 {
-  location: { degreesLatitude: 24.121231, degreesLongitude: 4.019293 }
+  "location": { "degreesLatitude": 24.121231, "degreesLongitude": 4.019293 }
 }
 ```
 This is how it looks the message that you will send:
