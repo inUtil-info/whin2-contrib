@@ -173,6 +173,26 @@ This is how it looks the message that you will send:
 
 ![button](./icons/button.png)
 
+
+
+If you want to send a set of buttons with an image header, the msg.payload schema expected is a JSON object:
+```json
+{
+    "image": {url: 'https://inutil.info/img/portfolio/4.jpg'},
+    "caption": "This is a button message with img",
+    "footer": "Hello World",
+    "buttons": [
+  		{"buttonId": "id1", "buttonText": {"displayText": "Button 1"}, "type": 1},
+  		{"buttonId": "id2", "buttonText": {"displayText": "Button 2"}, "type": 1},
+  		{"buttonId": "id3", "buttonText": {"displayText": "Button 3"}, "type": 1}
+		],
+    "headerType": 4
+}
+```
+
+
+
+
 ### vCard message:
 If you want to send a contact vCard, the msg.payload schema expected is a JSON object:
 ```
