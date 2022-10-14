@@ -41,10 +41,9 @@ This picture shows the overall process:
 
 
 ## Whin Nodes:
-When you install @inutil-labs/node-red-whin-whatsapp package, you will get several Nodes available on node-red Palette under the Network category: 
+When you install @inutil-labs/node-red-whin-whatsapp package, you will get two nodes available on node-red Palette under the Network category: 
 - whin-receive, 
-- whin-send, 
-- whin-confirm. 
+- whin-send.
 
 These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
 
@@ -76,33 +75,6 @@ This option is available for all users on all Tiers. You need to expose a webhoo
 
 #### Running on always-on mode:
 This option is working for users on paid plans only. After adding this node to a flow, when you hit deploy on the node-red editor you will see that whin-receive shows a message saying: "connected to Whatsapp". No further configuration is needed.
-
-
-### Confirmation Node (whin-confirm):
-This node sends a request to get an active user confirmation; when answered, you will get the response as an output of the node. 
-There's a max time to answer on whatsapp, if you reach the time without answering, the output payload will contain a time-out msg.
-
-whin-confirm node will take two inputs: a question and a time period. The question goes on the msg.payload property and a time-to-live (ttl) in the msg.ttl property (this integer number is treated as time, expressed in miliseconds). These are the two inputs expected.
-
-When the node is triggered, it will send you a whatsapp with the question you entered on the payload, and you will have a time to answer it (yes/no). 
-If you click "Yes" on whatsapp, you will get a "YES" as output of the node.
-If you click "No", you will get a "NO" on node-red output.
-If you reach the ttl and provide no answer, the node will default to a "Time-out" message.
-
-Each transaction is unique, meaning that you can only get one output after each trigger: YES, NO or Time-out
-
-We like to think of it as the SMS / push-notifications you get from your bank these days, but answered with a simple button. The main use-case here is allowing you to "authorize" the execution of a flow branch that you don't want to run without manual intervention on node-red.
-
-![confirm-node](./icons/confirm_inputs.jpg)
-
-Be mindful that if there is a whin-receive node running in parallel, the response will flow through both listeners. In that case, you might notice a difference.
-whin-confirm will output Yes, No, or TimeOut while your whin-receive node will receive whatever the answer is together with a 'unique request identifier'. That's the raw response.
-
-There's plenty of use-cases where one wants to grant permission to a flow, like: door opening, a server restart based on some alert / timing. In plain english: You get the request, you authorise, decline or ignore it.
-
-The backend controls the message expirity as well and, should you exahust the ttl, will respond directly in your phone and won't send the response back to node-red.
-
-![confirm-node2](./icons/confirm_flow.jpg)
 
 
 ## Types of messages:
