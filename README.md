@@ -231,7 +231,7 @@ At the moment we are not aware of anything that could be considered as a bug.
 While we have not implemented military-class security, we have done our best to secure your data (both in transit and at rest). Should you need some answers with details please reach out and we will try to help you understand better the internals of whin. 
 
 ## Terms of use:
-The service can be used free of charge. You will need to register at [rapidAPI.com](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. 
+The service can be used free of charge. You will need to register at [rapidAPI.com/whin](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. 
 We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that was subscribed. We do not share the numbers using the service with anyone.
 
 There is a rate limit associated with the Tier choosen when you subscribe. When the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits. 
