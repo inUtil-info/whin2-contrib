@@ -41,10 +41,9 @@ This picture shows the overall process:
 
 
 ## Whin Nodes:
-When you install @inutil-labs/node-red-whin-whatsapp package, you will get several Nodes available on node-red Palette under the Network category: 
+When you install @inutil-labs/node-red-whin-whatsapp package, you will get two nodes available on node-red Palette under the Network category: 
 - whin-receive, 
-- whin-send, 
-- whin-confirm. 
+- whin-send.
 
 These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
 
@@ -56,7 +55,7 @@ This is the field that you need to complete to set up the whin-config node:
 ![config-node](./icons/config-node.png)
 
 
-### Sender Node (whin-send):
+### Sender (whin-send):
 This is the node we recomend you start using, right after you complete the config-node set-up. Just select the configuration you saved:
 ![sender-node](./icons/sender-node.png)
 
@@ -65,44 +64,22 @@ Wire an inject node to whin-send, choose the type of message you want to send (s
 ![sender-node2](./icons/send_flow.png)
 
 
-### Listener Node (whin-receive):
-Whin-receive node will allow you to send whatsapps to your node-red environment; any message you send from the whatsapp number linked to the ApiKey to whin, will be received by this node on node-red.
+### Listener (whin-receive):
+Whin allows you to send whatsapps to your node-red environment; any message you send to whin from the whatsapp number linked to the ApiKey, will be received on node-red.
 You might create your own syntax to trigger stuff in node-red from whatsapp. Switching on lights or music, disconnect the alarm, run a sales report, send a document and process it on node-red somehow... Sky is the limit.
 
-The Listener can operate on two different modes: webhook mode and always-on mode.
+The Listener can operate on two different modes: webhook mode and always-on mode. Depending on the mode, you need to use whin-receive node or not.
 
 #### Running on webhook mode:
-This option is available for all users on all Tiers. You need to expose a webhook route, and tell whin back-end which is the route you wish the messages to be delivered.
+This option is available for all whin users on all Tiers. 
+You need to expose a webhook route (using a standard http-in node) for this mode to work; the route will receive all whatsapps as http POSTs. All you need to do is set the route configuration to tell whin back-end where you wish the messages to be delivered.
+You can follow this [video](https://www.youtube.com) showing how to set a webhook route, how to change to a new route, delete it...
+Any tool that allows exposing an end-point is valid (ngrok, cloudflare tunnel, expose a proxy, opening a port,...), click on the links to watch videos showing how-to.
 
 #### Running on always-on mode:
-This option is working for users on paid plans only. After adding this node to a flow, when you hit deploy on the node-red editor you will see that whin-receive shows a message saying: "connected to Whatsapp". No further configuration is needed.
-
-
-### Confirmation Node (whin-confirm):
-This node sends a request to get an active user confirmation; when answered, you will get the response as an output of the node. 
-There's a max time to answer on whatsapp, if you reach the time without answering, the output payload will contain a time-out msg.
-
-whin-confirm node will take two inputs: a question and a time period. The question goes on the msg.payload property and a time-to-live (ttl) in the msg.ttl property (this integer number is treated as time, expressed in miliseconds). These are the two inputs expected.
-
-When the node is triggered, it will send you a whatsapp with the question you entered on the payload, and you will have a time to answer it (yes/no). 
-If you click "Yes" on whatsapp, you will get a "YES" as output of the node.
-If you click "No", you will get a "NO" on node-red output.
-If you reach the ttl and provide no answer, the node will default to a "Time-out" message.
-
-Each transaction is unique, meaning that you can only get one output after each trigger: YES, NO or Time-out
-
-We like to think of it as the SMS / push-notifications you get from your bank these days, but answered with a simple button. The main use-case here is allowing you to "authorize" the execution of a flow branch that you don't want to run without manual intervention on node-red.
-
-![confirm-node](./icons/confirm_inputs.jpg)
-
-Be mindful that if there is a whin-receive node running in parallel, the response will flow through both listeners. In that case, you might notice a difference.
-whin-confirm will output Yes, No, or TimeOut while your whin-receive node will receive whatever the answer is together with a 'unique request identifier'. That's the raw response.
-
-There's plenty of use-cases where one wants to grant permission to a flow, like: door opening, a server restart based on some alert / timing. In plain english: You get the request, you authorise, decline or ignore it.
-
-The backend controls the message expirity as well and, should you exahust the ttl, will respond directly in your phone and won't send the response back to node-red.
-
-![confirm-node2](./icons/confirm_flow.jpg)
+This option is available for users on paid plans (any). 
+After adding this node to a flow, when you hit deploy on the node-red editor, you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports.
+The whin-receive node will stablish a persistent connection to whin back-end, it will receive any whatsapp as a raw stream at your end.
 
 
 ## Types of messages:
@@ -111,6 +88,7 @@ Whin will send / receive several types of messages, you can send:
 - buttons.
 - lists.
 - vCards.
+- locations.
 
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message.
 
@@ -172,6 +150,26 @@ This is how it looks the message that you will send:
 
 ![button](./icons/button.png)
 
+
+
+If you want to send a set of buttons with an image header, the msg.payload schema expected is a JSON object:
+```json
+{
+    "image": {"url": "https://inutil.info/img/portfolio/4.jpg"},
+    "caption": "This is a button message with img",
+    "footer": "Hello World",
+    "buttons": [
+  		{"buttonId": "id1", "buttonText": {"displayText": "Button 1"}, "type": 1},
+  		{"buttonId": "id2", "buttonText": {"displayText": "Button 2"}, "type": 1},
+  		{"buttonId": "id3", "buttonText": {"displayText": "Button 3"}, "type": 1}
+		],
+    "headerType": 4
+}
+```
+
+
+
+
 ### vCard message:
 If you want to send a contact vCard, the msg.payload schema expected is a JSON object:
 ```
@@ -190,6 +188,16 @@ If you want to send a contact vCard, the msg.payload schema expected is a JSON o
 This is how it looks the message that you will send:
 
 ![vCard](./icons/vcard.png)
+
+### Location message:
+If you want to send a Location, the msg.payload schema expected is a JSON object:
+
+```json
+{
+  "location": { "degreesLatitude": 24.121231, "degreesLongitude": 4.019293 }
+}
+```
+This is how it looks the message that you will send:
 
 
 ## Sample Flows:
@@ -223,7 +231,7 @@ At the moment we are not aware of anything that could be considered as a bug.
 While we have not implemented military-class security, we have done our best to secure your data (both in transit and at rest). Should you need some answers with details please reach out and we will try to help you understand better the internals of whin. 
 
 ## Terms of use:
-The service can be used free of charge. You will need to register at [rapidAPI.com](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. 
+The service can be used free of charge. You will need to register at [rapidAPI.com/whin](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. 
 We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that was subscribed. We do not share the numbers using the service with anyone.
 
 There is a rate limit associated with the Tier choosen when you subscribe. When the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits. 
