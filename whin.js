@@ -51,7 +51,7 @@ module.exports = function (RED) {
             const WebSocket = require('ws');
             let socket = null;
             let token = ""
-            let baseurl = "wss://api.inutil.info/wh2/ws";
+            let baseurl = "wss://wss.inutil.info/ws";
             let path = "";
             RED.nodes.createNode(this, config);
             const node = this;
@@ -65,11 +65,8 @@ module.exports = function (RED) {
             resetStatus();
             function konekt(wsurl) 
             {
-            console.log(wsurl);
             socket = new WebSocket(wsurl);
-            //node.warn("Dentro de konekt");
             socket.onopen = function(e) {
-                //node.warn("Konectado a ws!");
                 node.status({fill:"green",shape:"dot",text:"Listening to whatsapp"});
                 const datos = token.split("_");
                 datos.shift();
@@ -88,7 +85,6 @@ module.exports = function (RED) {
                 };
             socket.onmessage = function(event) {
                 var msg={};
-                //node.warn(`[message] Data received from server: ${event.data}`);
                 msg.payload = JSON.parse(event.data);
                 node.send(msg);  
                 };
@@ -96,10 +92,12 @@ module.exports = function (RED) {
                 node.status({ fill: "red", shape: "dot", text: "Disconnected" })
                 if (event.wasClean) {
                 node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+                konekt(baseurl+path);
                 } else {
                       // e.g. server process killed or network down
                       // event.code is usually 1006 in this case
                 node.warn('[WHIN] Connection died');
+                konekt(baseurl+path);
                 
                 }
             };
@@ -134,7 +132,6 @@ module.exports = function (RED) {
                     })
                 })
                 req.on('error', (e) => {
-                    //node.warn("Error de conexion al pedir token")
                     return "ERROR";
                     })
             req.end();
