@@ -110,6 +110,7 @@ If you want to send a list, the msg.payload schema expected is a JSON object:
   "footer": "nice footer, link: https://inutil.info",
   "title": "Amazing boldfaced list title",
   "buttonText": "Required, text on the button to view the list",
+  "sections": 
   [
     {
 	"title": "Section 1",
