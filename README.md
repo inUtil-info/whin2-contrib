@@ -204,6 +204,7 @@ If you want to send a Location, the msg.payload schema expected is a JSON object
 ```
 This is how it looks the message that you will send:
 
+![Location](./icons/location.png)
 
 ## Sample Flows:
 
