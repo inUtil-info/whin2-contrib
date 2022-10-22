@@ -173,19 +173,6 @@ If you want to send a set of buttons with an image header, the msg.payload schem
 
 ### vCard message:
 If you want to send a contact vCard, the msg.payload schema expected is a JSON object:
-```
-{ 
-    "displayName": "whin", 
-    "contacts": 
-    	[{ 'BEGIN:VCARD\n' // metadata of the contact card
-            + 'VERSION:3.0\n' 
-            + 'FN:whin bot\n' // full name
-            + 'ORG:Inutil Labs;\n' // the organization of the contact
-	    + 'TEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\n' // WhatsApp ID + phone number
-            + 'END:VCARD' 
-	}] 
-}
-```
 
 ```json
 {
