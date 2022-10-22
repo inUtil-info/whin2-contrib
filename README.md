@@ -186,6 +186,20 @@ If you want to send a contact vCard, the msg.payload schema expected is a JSON o
 	}] 
 }
 ```
+
+```json
+{
+    "contacts": {
+        "displayName": "whin",
+        "contacts": [
+            {
+                "vcard": "BEGIN:VCARD\nVERSION:3.0\nFN:whin bot\nORG:Inutil Labs;\nTEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\nEND:VCARD"
+            }
+        ]
+    }
+}
+```
+
 This is how it looks the message that you will send:
 
 ![vCard](./icons/vcard.png)
