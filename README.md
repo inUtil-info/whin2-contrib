@@ -123,7 +123,7 @@ If you want to send a list, the msg.payload schema expected is a JSON object:
 	    	{"title": "Option 3", "rowId": "option3"},
 	    	{"title": "Option 4", "rowId": "option4", "description": "This is a description V2"}
 		]
-    },
+    }
   ]
 }
 ```
