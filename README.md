@@ -1,8 +1,6 @@
 # Summary
 Whin is a whatsapp gateway designed to support home-lab most frequent use cases for free; the back-end acts as a whatsapp shared gateway, the client side is a set of node-red nodes available at the editor Palette.
 
-Since its first release we found some "Power users" that need more than the average home user to implement their use cases. If you are one of those, you can signup for one of the paid Tiers that support: special features, custom front-ends / clients, extremely high throughput, or even a dedicated tenant. 
-
 
 ## Install: 
 
@@ -237,9 +235,10 @@ At the moment we are not aware of anything that could be considered as a bug.
 While we have not implemented military-class security, we have done our best to secure your data (both in transit and at rest). Should you need some answers with details please reach out and we will try to help you understand better the internals of whin. 
 
 ## Terms of use:
-The service can be used free of charge. You will need to register at [rapidAPI.com/whin](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. 
-We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that was subscribed. We do not share the numbers using the service with anyone.
+The service can be used free of charge. You will need to register at [rapidAPI.com/whin](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that was subscribed. We do not share the numbers using the service with anyone.
 
-There is a rate limit associated with the Tier choosen when you subscribe. When the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits. 
+Since whin's first release we found some "Power users" need more than the average home user to implement their use cases. If you are one of those, you can signup for one of the paid Tiers that support: special features, custom front-ends / clients, extremely high throughput, or even a dedicated tenant. 
 
-If you wish to stop using the service you need to unsubscribe; we do not remove (clean) users not using the service.
+Bear in mind there is a rate limit associated with the Tier choosen when you subscribe. If the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits, or contact us at info@inutil.info for to get information on custom usage plans.
+
+You can to stop using the service and unsubscribe at anytime.
