@@ -219,8 +219,7 @@ Or you can also import this flow and test them all at once.
 ![demo-video](https://i.imgur.com/BntHvC7.gif[)
 
 
-Do you want more videos? check this playlist: 
-https://www.youtube.com/playlist?list=PLY4sFY6dmLqxpt3SM5IagyMSdCAc6WNMP
+Do you want more videos? check this [playlist](https://www.youtube.com/playlist?list=PLY4sFY6dmLqxpt3SM5IagyMSdCAc6WNMP).
 
 ## Error handling:
 There are three types of errors that you can get when using the nodes:
