@@ -215,7 +215,11 @@ Or you can also import this flow and test them all at once.
 
 ## Demo videos:
 
-![demo-video](https://imgur.com/BntHvC7)
+![demo-video](https://i.imgur.com/BntHvC7.gif[)
+
+
+
+[img]https://i.imgur.com/BntHvC7.gif[/img]
 
 
 Do you want more videos? check this playlist: 
