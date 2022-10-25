@@ -91,8 +91,9 @@ module.exports = function (RED) {
                     catch(e)
                      {
                      msg.payload = event.data;
-                     }                    
-                node.send(msg);  
+                     }   
+                //msg will only be sent if payload is not null
+                if (!!msg.payload) node.send(msg);  
                 };
             socket.onclose = function(event) {
                 node.status({ fill: "red", shape: "dot", text: "Disconnected" })
