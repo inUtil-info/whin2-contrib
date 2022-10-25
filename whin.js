@@ -85,7 +85,13 @@ module.exports = function (RED) {
                 };
             socket.onmessage = function(event) {
                 var msg={};
-                msg.payload = JSON.parse(event.data);
+                try {
+                    msg.payload = JSON.parse(event.data);
+                    }
+                    catch(e)
+                     {
+                     msg.payload = event.data;
+                     }                    
                 node.send(msg);  
                 };
             socket.onclose = function(event) {
