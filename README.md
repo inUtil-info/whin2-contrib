@@ -241,4 +241,4 @@ Since whin's first release we found some "Power users" need more than the averag
 
 Bear in mind there is a rate limit associated with the Tier choosen when you subscribe. If the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits, or contact us at info@inutil.info for to get information on custom usage plans.
 
-You can to stop using the service and unsubscribe at anytime.
+You are free to change subscription Tier, or stop using the service and unsubscribe, at anytime.
