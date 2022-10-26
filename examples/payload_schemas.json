@@ -1,0 +1,220 @@
+[
+    {
+        "id": "bc1081a6b57cfc49",
+        "type": "debug",
+        "z": "a2b5a95f0173aba2",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b3f12d9fe67d298a",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "list",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"text\":\"This is a list from whin\",\"footer\":\"nice footer, link: https://inutil.info\",\"title\":\"Amazing and great list title\",\"buttonText\":\"Required, text on the button to view the list\",\"sections\":[{\"title\":\"Section 1\",\"rows\":[{\"title\":\"Option 1\",\"rowId\":\"option1\"},{\"title\":\"Option 2\",\"rowId\":\"option2\",\"description\":\"This is a description\"}]},{\"title\":\"Section 2\",\"rows\":[{\"title\":\"Option 3\",\"rowId\":\"option3\"},{\"title\":\"Option 4\",\"rowId\":\"option4\",\"description\":\"This is a description V2\"}]}]}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 100,
+        "wires": [
+            [
+                "7801cb451d36396a"
+            ]
+        ]
+    },
+    {
+        "id": "f5e0f4ecdd624eb1",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "buttons",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"text\":\"This is a button message\",\"footer\":\"Hello from whin\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":1}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "7801cb451d36396a"
+            ]
+        ]
+    },
+    {
+        "id": "3f8228e7c05e7102",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "buttons and image",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"image\":{\"url\":\"https://inutil.info/img/portfolio/4.jpg\"},\"caption\":\"This is a button message with one img\",\"footer\":\"Hello youtube\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":4}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "7801cb451d36396a"
+            ]
+        ]
+    },
+    {
+        "id": "087c3e77df8d470e",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "text",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"text\":\"this is another text sent from whin\"}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 40,
+        "wires": [
+            [
+                "7801cb451d36396a"
+            ]
+        ]
+    },
+    {
+        "id": "8d22d09848a51ae7",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "vCard",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"contacts\":{\"displayName\":\"whin\",\"contacts\":[{\"vcard\":\"BEGIN:VCARD\\nVERSION:3.0\\nFN:whin bot\\nORG:Inutil Labs;\\nTEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\\nEND:VCARD\"}]}}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "7801cb451d36396a"
+            ]
+        ]
+    },
+    {
+        "id": "5a5f36cf66ee4c50",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "location",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"location\":{\"degreesLatitude\":40.4526941,\"degreesLongitude\":-3.6897589}}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 340,
+        "wires": [
+            [
+                "7801cb451d36396a"
+            ]
+        ]
+    },
+    {
+        "id": "7801cb451d36396a",
+        "type": "whin-send",
+        "z": "a2b5a95f0173aba2",
+        "name": "",
+        "auth": "20e03dc655ad6ba0",
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "bc1081a6b57cfc49"
+            ]
+        ]
+    },
+    {
+        "id": "c5e0c50b4d53951a",
+        "type": "whin-receive",
+        "z": "a2b5a95f0173aba2",
+        "name": "",
+        "auth": "20e03dc655ad6ba0",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "a73144cf0b19dcd0"
+            ]
+        ]
+    },
+    {
+        "id": "a73144cf0b19dcd0",
+        "type": "debug",
+        "z": "a2b5a95f0173aba2",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "20e03dc655ad6ba0",
+        "type": "whin-config",
+        "name": "whin",
+        "apikey": "YOUR-API-KEY-GOES-HERE!!!!"
+    }
+]
