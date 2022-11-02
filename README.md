@@ -229,8 +229,8 @@ There are three types of errors that you can get when using the nodes:
   2. The number of requests reached the limit. This means that you reached the limit on requests set on your Tier.
   3. To use this API, you need to subscribe first. Self-explanatory.
 
-## Known bugs. Please make sure you're always on the latest release.
-We tend to roll out new versions after deep testing, but you might find something not working as expected, please open an issue on the repo and we will follow up.
+## Known bugs. 
+Please make sure you're always on the latest release. We tend to roll out new versions after deep testing, but you might find something not working as expected, please open an issue on the repo and we will follow up.
 At the moment we are not aware of anything that could be considered as a bug.
 
 ## Security:
