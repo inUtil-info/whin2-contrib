@@ -57,6 +57,7 @@ This is the field that you need to complete to set up the whin-config node:
 
 ### Sender (whin-send):
 This is the node we recomend you start using, right after you complete the config-node set-up. Just select the configuration you saved:
+
 ![sender-node](./icons/sender-node.png)
 
 Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive the whatsapp on your client (web or app). 
@@ -65,21 +66,19 @@ Anything that comes in whin-send as data payload will be sent, and bear in mind 
 ![sender-node2](./icons/send_flow.png)
 
 ### Listener (whin-receive):
-Whin allows you to send whatsapps to your node-red environment; any message you send to whin from the whatsapp number linked to the ApiKey, will be received on node-red.
+Whin allows you to send whatsapps to your node-red environment; any message you send to whin from the whatsapp number linked to the ApiKey, will be delivered to node-red.
 You might create your own syntax to trigger stuff in node-red from whatsapp. Switching on lights or music, disconnect the alarm, run a sales report, send a document and process it on node-red somehow... Sky is the limit.
 
 The Listener can operate on two different modes: webhook mode and always-on mode. Depending on the mode, you need to use whin-receive node or not.
 
 #### Running on webhook mode:
-This option is available for all whin users on all Tiers. 
-You need to expose a webhook route (using a standard http-in node) for this mode to work; the route will receive all whatsapps as http POSTs. All you need to do is set the route configuration to tell whin back-end where you wish the messages to be delivered.
-You can follow this [video](https://www.youtube.com) showing how to set a webhook route, how to change to a new route, delete it...
-Any tool that allows exposing an end-point is valid (ngrok, cloudflare tunnel, expose a proxy, opening a port,...), click on the links to watch videos showing how-to.
+This option is available for all whin users on all Tiers. On this option whin-receive node is NOT needed, you don't need to deploy it on your flows.
+You have to expose a webhook route (using a standard http-in node) for this mode to work; the route will receive all whatsapps as http POSTs. All you need to do is set the route to tell whin back-end where you wish the messages to be delivered. You can follow the steps on this [video](https://youtu.be/8WyG_becZXM) showing how to set a webhook route, how to change to a new route, delete it...
+Any tool that allows exposing a node-red end-point is valid (ngrok, cloudflare tunnels, an exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
 
 #### Running on always-on mode:
-This option is available for users on paid plans (any). 
-After adding this node to a flow, when you hit deploy on the node-red editor, you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports.
-The whin-receive node will stablish a persistent connection to whin back-end, it will receive any whatsapp as a raw stream at your end.
+This option is available for users on paid plans (any). For this option you do need to deploy whin-receive node.
+After adding this node to a flow, when you hit deploy on the node-red editor, you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will stablish a persistent connection to whin back-end, it will receive any whatsapp as a raw stream at your end.
 
 
 ## Types of messages:
