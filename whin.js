@@ -101,9 +101,10 @@ module.exports = function (RED) {
                 };
             socket.onclose = function(event) {
                 node.status({ fill: "red", shape: "dot", text: "Disconnected" })
-                if (event.wasClean && event.code!=1005) {
+                if (event.wasClean) {
                 node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-                konekt(baseurl+path);
+                //  && event.code!=1005 (this is the closing code when .close() is called without parameters    
+                //konekt(baseurl+path);
                 } else {
                       // e.g. server process killed or network down
                       // event.code is usually 1006 in this case
