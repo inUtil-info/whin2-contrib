@@ -63,6 +63,10 @@ module.exports = function (RED) {
             node.name = config.name;
             node.authconf = RED.nodes.getNode(config.auth);
             resetStatus();
+            node.on('close', function() {
+                socket.close();// tidy up any state
+            });
+          
             function konekt(wsurl) 
             {
             socket = new WebSocket(wsurl);
