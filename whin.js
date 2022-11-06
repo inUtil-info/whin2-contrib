@@ -33,6 +33,7 @@ module.exports = function (RED) {
                   const postData = JSON.stringify(msg.payload);
                   if ('gid' in msg) //it is a group request
                   {
+                    node.warn("Ha llegado con GID = "+msg.gid)
                     options.params = {'gid':msg.gid};
                     options.path = '/send2groups'
                   }
@@ -50,11 +51,13 @@ module.exports = function (RED) {
                       // msg.payload = e;
                       node.send(msg);
                         })
-                          req.write(postData);
-                          req.end()	;
+                 node.warn("Vamos a mandar un mensaje con este param: "+JSON.stringify (options.params));
+                 node.warn("Al endpoint: "+options.path);
+                 req.write(postData);
+                 req.end()	;
                   });
           }     
-                
+
       function WhinReceive(config){
             const WebSocket = require('ws');
             let socket = null;
