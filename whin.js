@@ -16,7 +16,7 @@ module.exports = function (RED) {
           node.name = config.name;
           node.authconf = RED.nodes.getNode(config.auth);
           resetStatus();	
-          const options = {
+          var options = {
                   hostname: 'whin2.p.rapidapi.com',
                   port: 443,
                   path: '/send',
@@ -28,16 +28,23 @@ module.exports = function (RED) {
                         "Content-Type": "application/json"
                       }
                   };
-          node.on('input', function (msg) {	
+                  
+          node.on('input', function (msg) {	            
                   const postData = JSON.stringify(msg.payload);
-                      const req = https.request(options, (res) => {	
-                      res.setEncoding('utf8');  
-                          res.on('data', (d) => {
-                          //    msg.payload = d;    
-                          node.send(msg);
-                          })
-                        })
-                    req.on('error', (e) => {
+                  if ('gid' in msg) //it is a group request
+                  {
+                    options.params = {'gid':msg.gid};
+                    options.path = '/send2groups'
+                  }
+                  const req = https.request(options, (res) => {	
+                  res.setEncoding('utf8');  
+                  res.on('data', (d) => {
+                     //    msg.payload = d;    
+                    node.send(msg);
+                    })
+                  })
+
+                  req.on('error', (e) => {
                       //msg.payload = "ERROR";
                       msg.payload = {"ERROR":e}
                       // msg.payload = e;
@@ -46,7 +53,8 @@ module.exports = function (RED) {
                           req.write(postData);
                           req.end()	;
                   });
-          }           
+          }     
+                
       function WhinReceive(config){
             const WebSocket = require('ws');
             let socket = null;
