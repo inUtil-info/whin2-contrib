@@ -16,21 +16,22 @@ module.exports = function (RED) {
           node.name = config.name;
           node.authconf = RED.nodes.getNode(config.auth);
           resetStatus();	
-          var options = {
-                  hostname: 'whin2.p.rapidapi.com',
-                  port: 443,
-                  path: '/send',
-                  method: 'POST',
-                  headers: {
-                      "content-type": "application/json",
-                          "X-RapidAPI-Key": node.authconf.apikey,
-                          "X-RapidAPI-Host": "whin2.p.rapidapi.com",
-                        "Content-Type": "application/json"
-                      }
-                  };
-                  
+                           
           node.on('input', function (msg) {	            
                   const postData = JSON.stringify(msg.payload);
+                  var options = {
+                    hostname: 'whin2.p.rapidapi.com',
+                    port: 443,
+                    path: '/send',
+                    method: 'POST',
+                    headers: {
+                        "content-type": "application/json",
+                            "X-RapidAPI-Key": node.authconf.apikey,
+                            "X-RapidAPI-Host": "whin2.p.rapidapi.com",
+                          "Content-Type": "application/json"
+                        }
+                    };
+
                   if ('gid' in msg) //it is a group request
                   {
                     node.warn("Ha llegado con GID = "+msg.gid)
@@ -51,7 +52,7 @@ module.exports = function (RED) {
                       // msg.payload = e;
                       node.send(msg);
                         })
-                 node.warn("Vamos a mandar un mensaje con este param: "+JSON.stringify (options.params));
+                 node.warn("Vamos a mandar un http request con estas opciones: "+JSON.stringify (options));
                  node.warn("Al endpoint: "+options.path);
                  req.write(postData);
                  req.end()	;
