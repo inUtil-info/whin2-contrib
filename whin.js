@@ -101,7 +101,7 @@ module.exports = function (RED) {
                 };
             socket.onclose = function(event) {
                 node.status({ fill: "red", shape: "dot", text: "Disconnected" })
-                if (event.wasClean || event.code!=1005) {
+                if (event.wasClean && event.code!=1005) {
                 node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
                 konekt(baseurl+path);
                 } else {
