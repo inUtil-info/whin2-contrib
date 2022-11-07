@@ -37,7 +37,7 @@ module.exports = function (RED) {
                   {
                     node.warn("Ha llegado con GID = "+msg.gid)
                     //options.params = {'gid':msg.gid};
-                    options.path = '/send2groups?gid='+msg.gid;
+                    options.path = '/send2group?gid='+msg.gid;
                   }
                   const req = https.request(options, (res) => {	
                   res.setEncoding('utf8');  
