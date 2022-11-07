@@ -28,7 +28,8 @@ module.exports = function (RED) {
                         "content-type": "application/json",
                             "X-RapidAPI-Key": node.authconf.apikey,
                             "X-RapidAPI-Host": "whin2.p.rapidapi.com",
-                          "Content-Type": "application/json"
+                          "Content-Type": "application/json",
+                          "useQueryString":true
                         }
                     };
 
