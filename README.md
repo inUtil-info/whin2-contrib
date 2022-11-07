@@ -240,6 +240,6 @@ The service can be used free of charge. You will need to register at [rapidAPI.c
 
 Since whin's first release we found some "Power users" need more than the average home user to implement their use cases. If you are one of those, you can signup for one of the paid Tiers that support: special features, custom front-ends / clients, extremely high throughput, or even a dedicated tenant. 
 
-Bear in mind there is a rate limit associated with the Tier choosen when you subscribe. If the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits, or contact us at info@inutil.info for to get information on custom usage plans.
+Bear in mind there is a rate limit associated with the Tier choosen when you subscribe. If the rate limit is reached, the gateway will not process messages until the next limit cycle starts (tipically the next day). You can always upgrade your Tier if you need higher limits, or contact us at info@inutil.info  to get information on custom usage plans.
 
 You are free to change subscription Tier, or stop using the service and unsubscribe, at anytime.
