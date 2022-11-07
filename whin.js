@@ -35,8 +35,6 @@ module.exports = function (RED) {
 
                   if ('gid' in msg) //it is a group request
                   {
-                    node.warn("Ha llegado con GID = "+msg.gid)
-                    //options.params = {'gid':msg.gid};
                     options.path = '/send2group?gid='+msg.gid;
                   }
                   const req = https.request(options, (res) => {	
@@ -53,8 +51,6 @@ module.exports = function (RED) {
                       // msg.payload = e;
                       node.send(msg);
                         })
-                 node.warn("Vamos a mandar un http request con estas opciones: "+JSON.stringify (options));
-                 //node.warn("Al endpoint: "+options.path);
                  req.write(postData);
                  req.end()	;
                   });
