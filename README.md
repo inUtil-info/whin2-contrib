@@ -104,6 +104,10 @@ If you want to send a text, the msg.payload schema expected is a JSON object:
 ```
 You will send a regular text message.
 
+```
+[{"id":"087c3e77df8d470e","type":"inject","z":"cf89517d277e4d1d","name":"text","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"this is a text sent from whin\"}","payloadType":"json","x":525,"y":500,"wires":[["87c043c001c38b5f"]]}]
+```
+
 ### List message:
 If you want to send a list, the msg.payload schema expected is a JSON object:
 ```json
@@ -134,6 +138,9 @@ If you want to send a list, the msg.payload schema expected is a JSON object:
 This is how it looks the message that you will send:
 
 ![list](./icons/list.png)
+```
+[{"id":"b3f12d9fe67d298a","type":"inject","z":"cf89517d277e4d1d","name":"list","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"This is a list from whin\",\"footer\":\"nice footer, link: https://inutil.info\",\"title\":\"Amazing boldfaced list title\",\"buttonText\":\"Required, text on the button to view the list\",\"sections\":[{\"title\":\"Section 1\",\"rows\":[{\"title\":\"Option 1\",\"rowId\":\"option1\"},{\"title\":\"Option 2\",\"rowId\":\"option2\",\"description\":\"This is a description\"}]},{\"title\":\"Section 2\",\"rows\":[{\"title\":\"Option 3\",\"rowId\":\"option3\"},{\"title\":\"Option 4\",\"rowId\":\"option4\",\"description\":\"This is a description V2\"}]}]}","payloadType":"json","x":525,"y":550,"wires":[["87c043c001c38b5f"]]}]
+```
 
 ### Buttons message:
 If you want to send a set of buttons, the msg.payload schema expected is a JSON object:
@@ -152,7 +159,9 @@ If you want to send a set of buttons, the msg.payload schema expected is a JSON 
 This is how it looks the message that you will send:
 
 ![button](./icons/button.png)
-
+```
+[{"id":"f5e0f4ecdd624eb1","type":"inject","z":"cf89517d277e4d1d","name":"buttons","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"This is a button message\",\"footer\":\"Hello World\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":1}","payloadType":"json","x":525,"y":600,"wires":[["87c043c001c38b5f"]]}]
+```
 
 
 If you want to send a set of buttons with an image header, the msg.payload schema expected is a JSON object:
@@ -170,7 +179,9 @@ If you want to send a set of buttons with an image header, the msg.payload schem
 }
 ```
 
-
+```
+[{"id":"3f8228e7c05e7102","type":"inject","z":"cf89517d277e4d1d","name":"buttons and image","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"image\":{\"url\":\"https://inutil.info/img/portfolio/4.jpg\"},\"caption\":\"This is a button message with img\",\"footer\":\"Hello World\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":4}","payloadType":"json","x":490,"y":650,"wires":[["87c043c001c38b5f"]]}]
+```
 
 
 ### vCard message:
@@ -192,6 +203,9 @@ If you want to send a contact vCard, the msg.payload schema expected is a JSON o
 This is how it looks the message that you will send:
 
 ![vCard](./icons/vcard.png)
+```
+[{"id":"8d22d09848a51ae7","type":"inject","z":"cf89517d277e4d1d","name":"vCard","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"contacts\":{\"displayName\":\"whin\",\"contacts\":[{\"vcard\":\"BEGIN:VCARD\\nVERSION:3.0\\nFN:whin bot\\nORG:Inutil Labs;\\nTEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\\nEND:VCARD\"}]}}","payloadType":"json","x":525,"y":700,"wires":[["87c043c001c38b5f"]]}]
+```
 
 ### Location message:
 If you want to send a Location, the msg.payload schema expected is a JSON object:
@@ -207,6 +221,9 @@ If you want to send a Location, the msg.payload schema expected is a JSON object
 This is how it looks the message that you will send:
 
 ![Location](./icons/location.png)
+```
+[{"id":"5a5f36cf66ee4c50","type":"inject","z":"cf89517d277e4d1d","name":"location","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"location\":{\"degreesLatitude\":40.4526941,\"degreesLongitude\":-3.6897589}}","payloadType":"json","x":525,"y":750,"wires":[["87c043c001c38b5f"]]}]
+```
 
 ---
 
