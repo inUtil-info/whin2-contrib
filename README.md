@@ -1,5 +1,5 @@
 # Summary
-Whin is a whatsapp gateway designed to support home-lab most frequent use cases for free; the back-end acts as a whatsapp shared gateway, the client side is a set of node-red nodes available at the editor Palette.
+Whin is a whatsapp gateway designed to support home-lab's most frequent use cases for free; the back-end acts as a whatsapp shared gateway, the client side is a set of node-red nodes available at the editor Palette.
 
 
 ## Install: 
@@ -10,6 +10,7 @@ As an alt method: open a terminal, cd to the user modules directory (tipically ~
 
     npm install @inutil-labs/node-red-whin-whatsapp
 
+---
 
 ## Set-up whin:
 
@@ -39,6 +40,7 @@ This picture shows the overall process:
 
 ![whin-nodes](./icons/infographic-whin2.png)
 
+---
 
 ## Whin Nodes:
 When you install @inutil-labs/node-red-whin-whatsapp package, you will get two nodes available on node-red Palette under the Network category: 
@@ -80,6 +82,7 @@ Any tool that allows exposing a node-red end-point is valid (ngrok, cloudflare t
 This option is available for users on paid plans (any). For this option you do need to deploy whin-receive node.
 After adding this node to a flow, when you hit deploy on the node-red editor, you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will stablish a persistent connection to whin back-end, it will receive any whatsapp as a raw stream at your end.
 
+---
 
 ## Types of messages:
 Whin will send / receive several types of messages, you can send:
@@ -205,6 +208,8 @@ This is how it looks the message that you will send:
 
 ![Location](./icons/location.png)
 
+---
+
 ## Sample Flows:
 
 We are including a very simple set of flows under the examples folder on this repo. Use the examples to understand how the different messages formats are. We strongly recommend you use them to bootstrap your own use cases so that you get familiar with them.
@@ -215,6 +220,8 @@ Or you can also import this flow and test them all at once.
 [{"id":"b3f12d9fe67d298a","type":"inject","z":"a2b5a95f0173aba2","name":"list","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"This is a list from whin\",\"footer\":\"nice footer, link: https://inutil.info\",\"title\":\"Amazing boldfaced list title\",\"buttonText\":\"Required, text on the button to view the list\",\"sections\":[{\"title\":\"Section 1\",\"rows\":[{\"title\":\"Option 1\",\"rowId\":\"option1\"},{\"title\":\"Option 2\",\"rowId\":\"option2\",\"description\":\"This is a description\"}]},{\"title\":\"Section 2\",\"rows\":[{\"title\":\"Option 3\",\"rowId\":\"option3\"},{\"title\":\"Option 4\",\"rowId\":\"option4\",\"description\":\"This is a description V2\"}]}]}","payloadType":"json","x":290,"y":100,"wires":[["87c043c001c38b5f"]]},{"id":"87c043c001c38b5f","type":"whin-send","z":"a2b5a95f0173aba2","name":"","auth":"b1f46bed1b0c6327","x":630,"y":200,"wires":[[]]},{"id":"f5e0f4ecdd624eb1","type":"inject","z":"a2b5a95f0173aba2","name":"buttons","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"This is a button message\",\"footer\":\"Hello World\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":1}","payloadType":"json","x":290,"y":160,"wires":[["87c043c001c38b5f"]]},{"id":"3f8228e7c05e7102","type":"inject","z":"a2b5a95f0173aba2","name":"buttons and image","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"image\":{\"url\":\"https://inutil.info/img/portfolio/4.jpg\"},\"caption\":\"This is a button message with img\",\"footer\":\"Hello World\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":4}","payloadType":"json","x":330,"y":220,"wires":[["87c043c001c38b5f"]]},{"id":"087c3e77df8d470e","type":"inject","z":"a2b5a95f0173aba2","name":"text","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"this is a text sent from whin\"}","payloadType":"json","x":290,"y":40,"wires":[["87c043c001c38b5f"]]},{"id":"8d22d09848a51ae7","type":"inject","z":"a2b5a95f0173aba2","name":"vCard","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"contacts\":{\"displayName\":\"whin\",\"contacts\":[{\"vcard\":\"BEGIN:VCARD\\nVERSION:3.0\\nFN:whin bot\\nORG:Inutil Labs;\\nTEL;type=CELL;type=VOICE;waid=34605797764:+34 605 797 764\\nEND:VCARD\"}]}}","payloadType":"json","x":290,"y":280,"wires":[["87c043c001c38b5f"]]},{"id":"5a5f36cf66ee4c50","type":"inject","z":"a2b5a95f0173aba2","name":"location","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"location\":{\"degreesLatitude\":40.4526941,\"degreesLongitude\":-3.6897589}}","payloadType":"json","x":290,"y":340,"wires":[["87c043c001c38b5f"]]},{"id":"b1f46bed1b0c6327","type":"whin-config","name":"whin2","apikey":"YOUR_API_KEY_GOES_HERE"}]
 ```
 
+---
+
 ## Demo videos:
 
 ![demo-video](https://i.imgur.com/BntHvC7.gif[)
@@ -222,18 +229,26 @@ Or you can also import this flow and test them all at once.
 
 Do you want more videos? check this [playlist](https://www.youtube.com/playlist?list=PLY4sFY6dmLqxpt3SM5IagyMSdCAc6WNMP).
 
+---
+
 ## Error handling:
 There are three types of errors that you can get when using the nodes:
   1. ApiKey invalid. This means that you did a mistake when you entered the ApiKey on the config node.
   2. The number of requests reached the limit. This means that you reached the limit on requests set on your Tier.
   3. To use this API, you need to subscribe first. Self-explanatory.
 
+---
+
 ## Known bugs. 
 Please make sure you're always on the latest release. We tend to roll out new versions after deep testing, but you might find something not working as expected, please open an issue on the repo and we will follow up.
 At the moment we are not aware of anything that could be considered as a bug.
 
+---
+
 ## Security:
 While we have not implemented military-class security, we have done our best to secure your data (both in transit and at rest). Should you need some answers with details please reach out and we will try to help you understand better the internals of whin. 
+
+---
 
 ## Terms of use:
 The service can be used free of charge. You will need to register at [rapidAPI.com/whin](https://rapidapi.com/inutil-inutil-default/api/whin2/) to complete the set-up. We understand that the user sending the sign-up message wishes to use the service. The service is sending whatsapp messages ONLY to the number that was subscribed. We do not share the numbers using the service with anyone.
