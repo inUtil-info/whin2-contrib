@@ -224,7 +224,7 @@ Or you can also import this flow and test them all at once.
 
 ## Demo videos:
 
-![demo-video](https://i.imgur.com/BntHvC7.gif[)
+![demo-video](https://i.imgur.com/ZDWh9Fu.gif)
 
 
 Do you want more videos? check this [playlist](https://www.youtube.com/playlist?list=PLY4sFY6dmLqxpt3SM5IagyMSdCAc6WNMP).
