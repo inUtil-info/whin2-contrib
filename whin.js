@@ -161,7 +161,7 @@ module.exports = function (RED) {
             getToken(key)
           }
 
-    RED.nodes.registerType("whin-send", WhinSend);
-    RED.nodes.registerType("whin-receive", WhinReceive);
-    RED.nodes.registerType("whin-config", WhinConfig);
+    RED.nodes.registerType("whin_send", WhinSend);
+    RED.nodes.registerType("whin_receive", WhinReceive);
+    RED.nodes.registerType("whin_config", WhinConfig);
   }
