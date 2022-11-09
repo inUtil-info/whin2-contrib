@@ -229,12 +229,38 @@ This is how it looks the message that you will send:
 
 ## Whatsapp Groups:
 
-You can add whin to whatsapp groups. When you add whin to a whatsapp group all messages written on the group will be delivered to node-red, and all messages sent to the group from node-red, will be written on the whatsapp group.
+You can add whin to whatsapp groups. When you add whin to a whatsapp group all messages written on the group will be delivered to node-red, and all messages sent to the group from node-red will be written on the whatsapp group.
 You will be the Admin of the group, you can add or remove people, change the group settings,... anything a group Admin can do.
 
 The process starts by asking whin to create a whatsapp group. Write a whatsapp to whin with this command: 
-	whin-create-group
 
+    whin-create-group
+
+When whin receives this command, it will: 
+1. create a group, 
+2. invite you to join the group, 
+3. promote you to Admin of the group,
+4. send you an invite link.
+
+Once you're Admin of the group, it's all yours. Whin will remain as Admin of the group too, but all it will do from this point in time is: forward all the messages written on the chat to node-red (using the listener modes described above), and write to the group whatever you send to the group (using the sender node described above).
+
+To send messages to the group, you will need the group-id; a group-id is like a phone-number that identifies each group on the whatsapp network. You can ask whin which is the unique id of your group(s), writing on the group this command:
+
+    group-id
+    
+When whin reads this command (written on the group), it will send you a direct whatsapp including the group-id. 
+
+Once you know the group id, you can start sending / receiving whatsapps to / from it. It's that simple!. The whole process is shown on this [video](https://youtu.be/lCmoay0G86M).
+
+For a message to flow into the group, whin-send node expects:
+
+    msg.payload  (any of the msg types described above)
+    msg.gid      (is the group-id provided by whin)
+    
+This is a sample inject node where you can see the schema of the payload you need to use:
+```
+[{"id":"e8fc5e3a6f222588","type":"inject","z":"a2b5a95f0173aba2","name":"whatsapp group","props":[{"p":"payload"},{"p":"gid","v":"the_group_id_goes_here","vt":"str"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"text\":\"hello group from node-red\"}","payloadType":"json","x":340,"y":920,"wires":[["7801cb451d36396a"]]}]
+```
 
 ---
 
