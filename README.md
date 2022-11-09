@@ -227,6 +227,17 @@ This is how it looks the message that you will send:
 
 ---
 
+## Whatsapp Groups:
+
+You can add whin to whatsapp groups. When you add whin to a whatsapp group all messages written on the group will be delivered to node-red, and all messages sent to the group from node-red, will be written on the whatsapp group.
+You will be the Admin of the group, you can add or remove people, change the group settings,... anything a group Admin can do.
+
+The process starts by asking whin to create a whatsapp group. Write a whatsapp to whin with this command: 
+	whin-create-group
+
+
+---
+
 ## Sample Flows:
 
 We are including a very simple set of flows under the examples folder on this repo. Use the examples to understand how the different messages formats are. We strongly recommend you use them to bootstrap your own use cases so that you get familiar with them.
