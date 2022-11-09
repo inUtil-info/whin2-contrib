@@ -67,19 +67,20 @@ Anything that comes in whin-send as data payload will be sent, and bear in mind 
 
 ![sender-node2](./icons/send_flow.png)
 
-### Listener (whin-receive):
+### Listeners:
 Whin allows you to send whatsapps to your node-red environment; any message you send to whin from the whatsapp number linked to the ApiKey, will be delivered to node-red.
 You might create your own syntax to trigger stuff in node-red from whatsapp. Switching on lights or music, disconnect the alarm, run a sales report, send a document and process it on node-red somehow... Sky is the limit.
 
 The Listener can operate on two different modes: webhook mode and always-on mode. Depending on the mode, you need to use whin-receive node or not.
+You can have both modes working in parallel.
 
 #### Running on webhook mode:
 This option is available for all whin users on all Tiers. On this option whin-receive node is NOT needed, you don't need to deploy it on your flows.
 You have to expose a webhook route (using a standard http-in node) for this mode to work; the route will receive all whatsapps as http POSTs. All you need to do is set the route to tell whin back-end where you wish the messages to be delivered. You can follow the steps on this [video](https://youtu.be/8WyG_becZXM) showing how to set a webhook route, how to change to a new route, delete it...
 Any tool that allows exposing a node-red end-point is valid (ngrok, cloudflare tunnels, an exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
 
-#### Running on always-on mode:
-This option is available for users on paid plans (any). For this option you do need to deploy whin-receive node.
+#### Running on always-on mode (whin-receive):
+This option is available for users on a paid plan (any). For this option you do need to deploy whin-receive node.
 After adding this node to a flow, when you hit deploy on the node-red editor, you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will stablish a persistent connection to whin back-end, it will receive any whatsapp as a raw stream at your end.
 
 ---
@@ -92,7 +93,8 @@ Whin will send / receive several types of messages, you can send:
 - vCards.
 - locations.
 
-You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message.
+You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message. 
+These schemas are valid for messages routed to whatsapp groups also.
 
 ### Text message:
 If you want to send a text, the msg.payload schema expected is a JSON object:
