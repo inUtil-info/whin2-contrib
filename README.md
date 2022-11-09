@@ -62,10 +62,8 @@ This is the node we recomend you start using, right after you complete the confi
 
 ![sender-node](./icons/sender-node.png)
 
-Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive the whatsapp on your client (web or app). 
-Anything that comes in whin-send as data payload will be sent, and bear in mind the payload MUST be a JSON object with any of the valid schemas described below:
+Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive the whatsapp on your client (web or app). Anything that comes into whin-send as data payload will be sent, and bear in mind the payload MUST be a JSON object with any of the valid schemas described below.
 
-![sender-node2](./icons/send_flow.png)
 
 ### Listeners:
 Whin allows you to send whatsapps to your node-red environment; any message you send to whin from the whatsapp number linked to the ApiKey, will be delivered to node-red.
