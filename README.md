@@ -75,7 +75,7 @@ You can have both modes working in parallel.
 #### Running on webhook mode:
 This option is available for all whin users on all Tiers. On this option whin-receive node is NOT needed, you don't need to deploy it on your flows.
 You have to expose a webhook route (using a standard http-in node) for this mode to work; the route will receive all whatsapps as http POSTs. All you need to do is set the route to tell whin back-end where you wish the messages to be delivered. You can follow the steps on this [video](https://youtu.be/8WyG_becZXM) showing how to set a webhook route, how to change to a new route, delete it...
-Any tool that allows exposing a node-red end-point is valid ([ngrok](https://youtu.be/7FHbfo-wRtY), cloudflare tunnels, an exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
+Any tool that allows exposing a node-red end-point is valid ([ngrok](https://youtu.be/7FHbfo-wRtY), [cloudflare tunnels](https://youtu.be/mMyoH4-mOiA), an exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
 
 #### Running on always-on mode (whin-receive):
 This option is available for users on a paid plan (any). For this option you do need to deploy whin-receive node.
