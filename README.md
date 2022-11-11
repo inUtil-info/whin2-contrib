@@ -4,9 +4,9 @@ Whin is a whatsapp gateway designed to support home-lab's most frequent use case
 
 ## Install: 
 
-To install whin, your first choice should be using node-red editor Palette. Find the repo: @inutil-labs/node-red-whin-whatsapp and install.
+To install whin, your first choice should be using node-red editor Palette. Find the repo: `@inutil-labs/node-red-whin-whatsapp` and install.
 
-As an alt method: open a terminal, cd to the user modules directory (tipically ~/data/node_modules/), git clone this repository inside, cd into the folder created, and run this command:
+As an alt method: open a terminal, cd to the user modules directory (tipically `~/data/node_modules/`), git clone this repository inside, cd into the folder created, and run this command:
 
     npm install @inutil-labs/node-red-whin-whatsapp
 
@@ -27,23 +27,24 @@ A whin-config node looks like this when properly configured:
 ![Config](./icons/config-node.png)
 
 ### About the ApiKey:
-The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see from where can you copy the key that you have to paste on the config node.
-Note that the ApiKey value is linked with the phone number you used to sign-up. Consequently the messages sent from node-red will always be delivered by whin to the phone number linked with the ApiKey used. This is to prevent spam.
+The *ApiKey* field is expecting a string, numbers and letters with no spaces. If you get stucked, check this [video](https://www.youtube.com/watch?v=uOZ-oH4kP58) and see where can you find the key that you have to copy and paste on the config node.
+Note that the ApiKey value is linked with the phone number you used to sign-up. Remember the messages sent from node-red will always be delivered by whin to the phone number or whatsapp groups linked with the ApiKey set. This is to prevent spam.
 
 Each ApiKey is valid forever as long as you keep subscribed to whin; this remains true even if you are subscribed to the free plan.
 
 ### Infographic of the set-up:
 This picture shows the overall process:
+
+![whin-nodes](./icons/infographic-whin2.png)
+
 1. subscribe to the free tier and get an apikey.
 2. send a sign-up message to link your phone number with the apikey.
 3. config whin on node-red.
 
-![whin-nodes](./icons/infographic-whin2.png)
-
 ---
 
 ## Whin Nodes:
-When you install @inutil-labs/node-red-whin-whatsapp package, you will get two nodes available on node-red Palette under the Network category: 
+When you install `@inutil-labs/node-red-whin-whatsapp` package, you will get two nodes available on node-red Palette under the Network category: 
 - whin-receive, 
 - whin-send.
 
@@ -58,28 +59,28 @@ This is the field that you need to complete to set up the whin-config node:
 
 
 ### Sender (whin-send):
-This is the node we recomend you start using, right after you complete the config-node set-up. Just select the configuration you saved:
+This is the node we recomend you start using right after you complete the config-node set-up. Just select the configuration you saved:
 
 ![sender-node](./icons/sender-node.png)
 
-Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive the whatsapp on your client (web or app). Anything that comes into whin-send as data payload will be sent, and bear in mind the payload MUST be a JSON object with any of the valid schemas described below.
+Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive a message on your whatsapp client (web, desktop or mobile app). Anything that comes into whin-send as data payload will be sent, bear in mind the payload MUST be a JSON object following any of the valid schemas described below.
 
 
 ### Listeners:
-Whin allows you to send whatsapps to your node-red environment; any message you send to whin from the whatsapp number linked to the ApiKey, will be delivered to node-red.
-You might create your own syntax to trigger stuff in node-red from whatsapp. Switching on lights or music, disconnect the alarm, run a sales report, send a document and process it on node-red somehow... Sky is the limit.
+Whin allows you to send whatsapps to your node-red environment; any message you send to whin, or written on a whatsapp group in which whin was added, will be delivered to node-red.
+You might create your own syntax to trigger stuff in node-red from whatsapp. Switching on lights or music, moderate a whatsapp group, disconnect the alarm, run a sales report, send a document and process it on node-red somehow... Sky is the limit.
 
 The Listener can operate on two different modes: webhook mode and always-on mode. Depending on the mode, you need to use whin-receive node or not.
 You can have both modes working in parallel.
 
 #### Running on webhook mode:
-This option is available for all whin users on all Tiers. On this option whin-receive node is NOT needed, you don't need to deploy it on your flows.
-You have to expose a webhook route (using a standard http-in node) for this mode to work; the route will receive all whatsapps as http POSTs. All you need to do is set the route to tell whin back-end where you wish the messages to be delivered. You can follow the steps on this [video](https://youtu.be/8WyG_becZXM) showing how to set a webhook route, how to change to a new route, delete it...
-Any tool that allows exposing a node-red end-point is valid ([ngrok](https://youtu.be/7FHbfo-wRtY), [cloudflare tunnels](https://youtu.be/mMyoH4-mOiA), an exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
+This option is available for all whin users on all Tiers. If you choose this option, whin-receive node is NOT needed, there's no need to deploy the node on your flows to receive whatsapps.
+For this mode to work you have to expose a webhook route using a standard http-in node; the route will receive all whatsapps as http `POST`. All you need to do is set the route to tell whin back-end where you wish the messages to be delivered. You can follow the steps on this [video](https://youtu.be/8WyG_becZXM) showing how to set a webhook route, how to change to a new route, delete it...
+Any tool or method that allows exposing a node-red end-point is valid ([ngrok](https://youtu.be/7FHbfo-wRtY), [cloudflare tunnels](https://youtu.be/mMyoH4-mOiA), exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
 
 #### Running on always-on mode (whin-receive):
 This option is available for users on a paid plan (any). For this option you do need to deploy whin-receive node.
-After adding this node to a flow, when you hit deploy on the node-red editor, you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will stablish a persistent connection to whin back-end, it will receive any whatsapp as a raw stream at your end.
+After adding this node to a flow, hit deploy on the node-red editor, and you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will stablish a persistent connection to whin back-end that will receive any whatsapp as a raw stream at your end.
 
 ---
 
@@ -94,8 +95,10 @@ Whin will send / receive several types of messages, you can send:
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message. 
 These schemas are valid for messages routed to whatsapp groups also.
 
+
 ### Text message:
-If you want to send a text, the msg.payload schema expected is a JSON object:
+If you want to send a text, the **msg.payload** schema expected is a `JSON` object that must contain a `text` property, for example:
+
 
 ```json
 {
@@ -109,7 +112,9 @@ You will send a regular text message.
 ```
 
 ### List message:
-If you want to send a list, the msg.payload schema expected is a JSON object:
+If you want to send a list, the **msg.payload** schema expected is a `JSON` object that must contain `text`, `footer`, `title`, `buttonText`, `sections` properties, for example:
+
+
 ```json
 {
   "text": "This is a list",
@@ -143,7 +148,9 @@ This is how it looks the message that you will send:
 ```
 
 ### Buttons message:
-If you want to send a set of buttons, the msg.payload schema expected is a JSON object:
+If you want to send a set of buttons,  the **msg.payload** schema expected is a `JSON` object that must contain `text`, `footer`, `buttons`, `headerType` properties, optional properties are: `image` and `caption`. See these examples:
+
+
 ```json
 {
     "text": "This is a button message",
@@ -164,7 +171,8 @@ This is how it looks the message that you will send:
 ```
 
 
-If you want to send a set of buttons with an image header, the msg.payload schema expected is a JSON object:
+If you want to send a set of buttons with an image header: 
+
 ```json
 {
     "image": {"url": "https://inutil.info/img/portfolio/4.jpg"},
@@ -185,7 +193,7 @@ If you want to send a set of buttons with an image header, the msg.payload schem
 
 
 ### vCard message:
-If you want to send a contact vCard, the msg.payload schema expected is a JSON object:
+If you want to send a contact vCard, the **msg.payload** schema expected is a `JSON` object that must contain `contacts`, `contacts.displayName` and `contacts.contacts` with an array of data. For example:
 
 ```json
 {
@@ -208,7 +216,7 @@ This is how it looks the message that you will send:
 ```
 
 ### Location message:
-If you want to send a Location, the msg.payload schema expected is a JSON object:
+If you want to send a Location, the **msg.payload** schema expected is a `JSON` object that must contain `location`, `location.degreesLatitude` and `location.degreesLongitude` properties, for example:
 
 ```json
 {
@@ -252,7 +260,7 @@ When whin reads this command (written on the group), it will send you a direct w
 
 Once you know the group id, you can start sending / receiving whatsapps to / from it. It's that simple!. The whole process is shown on this [video](https://youtu.be/lCmoay0G86M).
 
-For a message to flow into the group, whin-send node expects:
+For a message to flow into the group, whin-send node expects a **msg.payload** schema as a `JSON` object and a **msg.gid** `JSON` object that contains the group identifier.
 
     msg.payload  (any of the msg types described above)
     msg.gid      (is the group-id provided by whin)
