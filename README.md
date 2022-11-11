@@ -238,9 +238,10 @@ This is how it looks the message that you will send:
 ## Whatsapp Groups:
 
 You can add whin to whatsapp groups. When you add whin to a whatsapp group all messages written on the group will be delivered to node-red, and all messages sent to the group from node-red will be written on the whatsapp group.
-You will be the Admin of the group, you can add or remove people, change the group settings,... anything a group Admin can do.
+You will be the Admin of the group, you can add or remove people, change the group settings,... anything a group Admin can do. 
+This [video](https://youtu.be/lCmoay0G86M) shows this feature in action.
 
-The process starts by asking whin to create a whatsapp group. Write a whatsapp to whin with this command: 
+To start using this feature, ask whin to create a whatsapp group sending a whatsapp with this command: 
 
     whin-create-group
 
