@@ -1,40 +1,40 @@
 <script type="text/javascript">
-    RED.nodes.registerType('whin-send',{
+    RED.nodes.registerType('whin_send',{
         category: 'network',
         color: '#25D366',
         defaults: {
             name: 	{value:""},
-            auth:	{value: "", type: "whin-config"}
+            auth:	{value: "", type: "whin_config"}
         },
         inputs:1,
         outputs:1,
         icon: "whatsapp-logo.png",
         label: function() {
-            return this.name||"whin-send";
+            return this.name||"whin_send";
         }
     });
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('whin-receive',{
+    RED.nodes.registerType('whin_receive',{
         category: 'network',
         color: '#25D366',
         defaults: {
             name:       {value:""},
-            auth:       {value: "", type: "whin-config"}
+            auth:       {value: "", type: "whin_config"}
         },
         inputs:0,
         outputs:1,
         icon: "whatsapp-rev.png",
         label: function() {
-            return this.name||"whin-receive";
+            return this.name||"whin_receive";
         }
     });
 </script>
 
 
 <script type="text/javascript">
-    RED.nodes.registerType('whin-config', {
+    RED.nodes.registerType('whin_config', {
         category: 'config',
         defaults: {
             name: { value: "", required: true },
@@ -47,7 +47,7 @@
 </script>
 
 
-<script type="text/x-red" data-template-name="whin-send">
+<script type="text/x-red" data-template-name="whin_send">
 
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -61,7 +61,7 @@
 		
 </script>
 
-<script type="text/x-red" data-template-name="whin-receive">
+<script type="text/x-red" data-template-name="whin_receive">
 
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -75,7 +75,7 @@
 </script>
 
 
-<script type="text/x-red" data-template-name="whin-config">
+<script type="text/x-red" data-template-name="whin_config">
     <div class="form-row">
         <label for="node-config-input-name"><i class="fa fa-globe"></i> Name</label>
         <input type="text" id="node-config-input-name">
@@ -87,7 +87,7 @@
 </script>
 
 
-<script type="text/x-red" data-help-name="whin-send">
+<script type="text/x-red" data-help-name="whin_send">
 
 <p>A node-red node that allow users to send a Whatsapp text to one&#39;s mobile.</p>
 
@@ -109,7 +109,7 @@
 
 </script>
 
-<script type="text/x-red" data-help-name="whin-receive">
+<script type="text/x-red" data-help-name="whin_receive">
 
     <p>A node-red node that allow users to receive a Whatsapp text from the mobile defined on the config.</p>
     <a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation in NR pages</a> 
