@@ -260,7 +260,7 @@ When whin reads this command (written on the group), it will send you a direct w
 
 Once you know the group id, you can start sending / receiving whatsapps to / from it. It's that simple!. The whole process is shown on this [video](https://youtu.be/lCmoay0G86M).
 
-For a message to flow into the group, whin-send node expects a **msg.payload** schema as a `JSON` object and a **msg.gid** `JSON` object that contains the group identifier.
+For a message to flow into the group, whin-send node expects a **msg.payload** schema as a `JSON` object and a **msg.gid** `STRING` that contains the group identifier.
 
     msg.payload  (any of the msg types described above)
     msg.gid      (is the group-id provided by whin)
