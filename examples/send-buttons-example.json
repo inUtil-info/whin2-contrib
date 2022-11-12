@@ -55,7 +55,7 @@
     },
     {
         "id": "c1a2645eccea04a2",
-        "type": "whin-send",
+        "type": "whin_send",
         "z": "58d0e056ac9b256d",
         "name": "",
         "auth": "5174ca9081d74ef6",
@@ -86,7 +86,7 @@
     },
     {
         "id": "5174ca9081d74ef6",
-        "type": "whin-config",
+        "type": "whin_config",
         "name": "whin",
         "apikey": "your_key_goes_here"
     }
