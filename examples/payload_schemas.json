@@ -168,7 +168,7 @@
     },
     {
         "id": "7801cb451d36396a",
-        "type": "whin-send",
+        "type": "whin_send",
         "z": "a2b5a95f0173aba2",
         "name": "",
         "auth": "20e03dc655ad6ba0",
@@ -182,7 +182,7 @@
     },
     {
         "id": "c5e0c50b4d53951a",
-        "type": "whin-receive",
+        "type": "whin_receive",
         "z": "a2b5a95f0173aba2",
         "name": "",
         "auth": "20e03dc655ad6ba0",
@@ -213,7 +213,7 @@
     },
     {
         "id": "20e03dc655ad6ba0",
-        "type": "whin-config",
+        "type": "whin_config",
         "name": "whin",
         "apikey": "YOUR-API-KEY-GOES-HERE!!!!"
     }
