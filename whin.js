@@ -54,7 +54,7 @@ module.exports = function (RED) {
                   const req = https.request(options, (res) => {	
                   res.setEncoding('utf8');  
                   res.on('data', (d) => {
-                    msg.payload = d;     
+                    msg.payload = JSON.parse(d);     
                     node.send(msg);
                     })
                      })
