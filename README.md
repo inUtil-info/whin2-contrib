@@ -295,10 +295,12 @@ Do you want more videos? check this [playlist](https://www.youtube.com/playlist?
 ---
 
 ## Error handling:
-There are three types of errors that you can get when using the nodes:
+There are several types of errors that you can get when using the nodes:
   1. ApiKey invalid. This means that you did a mistake when you entered the ApiKey on the config node.
   2. The number of requests reached the limit. This means that you reached the limit on requests set on your Tier.
   3. To use this API, you need to subscribe first. Self-explanatory.
+  4. If the message is not routed, check that you are injecting into whin-send a `JSON` object (verify it is not a `STRING` with JSON format).
+  5. If the message is not delivered and you are sure it is a `JSON` object, verify that the schema of each msg is following the specs on this help.
 
 ---
 
