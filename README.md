@@ -97,7 +97,7 @@ These schemas are valid for messages routed to whatsapp groups also.
 
 
 ### Text message:
-If you want to send a text, the **msg.payload** schema expected is a `JSON` object that must contain a `text` property, for example:
+If you want to send a text, the **msg.payload** schema expected is a `JSON` *object* that must contain a `text` property, for example:
 
 
 ```json
