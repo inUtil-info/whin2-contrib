@@ -16,6 +16,17 @@ module.exports = function (RED) {
           node.name = config.name;
           node.authconf = RED.nodes.getNode(config.auth);
           resetStatus();	
+          function isjson (m)
+            {
+            if (typeof m === 'object' && !Array.isArray(m) && m !== null) return true
+            else return false
+            }   
+          function isvalid(m)
+            {
+            if (!isjson(m)) return false;
+            if (!('text' in m ||'location' in m || 'image' in m || 'contacts' in m || 'video' in m || 'audio' in m)) return false;
+            return true;
+            }
                            
           node.on('input', function (msg) {	            
                   const postData = JSON.stringify(msg.payload);
@@ -37,14 +48,17 @@ module.exports = function (RED) {
                   {
                     options.path = '/send2group?gid='+msg.gid;
                   }
+
+                  if (isvalid(msg))
+                  {
                   const req = https.request(options, (res) => {	
                   res.setEncoding('utf8');  
                   res.on('data', (d) => {
                      //    msg.payload = d;    
                     node.send(msg);
                     })
-                  })
-
+                     })
+                      
                   req.on('error', (e) => {
                       //msg.payload = "ERROR";
                       msg.payload = {"ERROR":e}
@@ -52,7 +66,10 @@ module.exports = function (RED) {
                       node.send(msg);
                         })
                  req.write(postData);
-                 req.end()	;
+                 req.end()	;                    
+                  }
+
+                  else node.send({'Error':"Malformed message. WHIN did not deliver your message."})
                   });
           }     
 
