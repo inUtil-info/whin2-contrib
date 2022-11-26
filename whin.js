@@ -71,7 +71,7 @@ module.exports = function (RED) {
 
                   else 
                   {
-                   msg.payload = {'Error':"Malformed message. WHIN did not deliver your message."};
+                   msg.payload = {'Error':"Malformed message; a JSON was expected with the right scheme. Message could not be delivered"};
                    node.send(msg)
                   }
                       
