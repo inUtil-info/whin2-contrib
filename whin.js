@@ -61,7 +61,7 @@ module.exports = function (RED) {
                       
                   req.on('error', (e) => {
                       //msg.payload = "ERROR";
-                      msg.payload = "ERROR":e}
+                      msg.payload = {"ERROR":e}
                       // msg.payload = e;
                       node.send(msg);
                         })
