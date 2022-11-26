@@ -97,7 +97,7 @@ These schemas are valid for messages routed to whatsapp groups also.
 
 
 ### Text message:
-If you want to send a text, the **msg.payload** schema expected is a `JSON` *object* that must contain a `text` property, for example:
+If you want to send a text, the **msg.payload** schema expected is a `JSON` **object** that must contain a `text` property, for example:
 
 
 ```json
@@ -112,7 +112,7 @@ You will send a regular text message.
 ```
 
 ### List message:
-If you want to send a list, the **msg.payload** schema expected is a `JSON` object that must contain `text`, `footer`, `title`, `buttonText`, `sections` properties, for example:
+If you want to send a list, the **msg.payload** schema expected is a `JSON` **object** that must contain `text`, `footer`, `title`, `buttonText`, `sections` properties, for example:
 
 
 ```json
@@ -148,7 +148,7 @@ This is how it looks the message that you will send:
 ```
 
 ### Buttons message:
-If you want to send a set of buttons,  the **msg.payload** schema expected is a `JSON` object that must contain `text`, `footer`, `buttons`, `headerType` properties, optional properties are: `image` and `caption`. See these examples:
+If you want to send a set of buttons,  the **msg.payload** schema expected is a `JSON` **object** that must contain `text`, `footer`, `buttons`, `headerType` properties, optional properties are: `image` and `caption`. See these examples:
 
 
 ```json
@@ -193,7 +193,7 @@ If you want to send a set of buttons with an image header:
 
 
 ### vCard message:
-If you want to send a contact vCard, the **msg.payload** schema expected is a `JSON` object that must contain `contacts`, `contacts.displayName` and `contacts.contacts` with an array of data. For example:
+If you want to send a contact vCard, the **msg.payload** schema expected is a `JSON` **object** that must contain `contacts`, `contacts.displayName` and `contacts.contacts` with an array of data. For example:
 
 ```json
 {
@@ -216,7 +216,7 @@ This is how it looks the message that you will send:
 ```
 
 ### Location message:
-If you want to send a Location, the **msg.payload** schema expected is a `JSON` object that must contain `location`, `location.degreesLatitude` and `location.degreesLongitude` properties, for example:
+If you want to send a Location, the **msg.payload** schema expected is a `JSON` **object** that must contain `location`, `location.degreesLatitude` and `location.degreesLongitude` properties, for example:
 
 ```json
 {
@@ -261,7 +261,7 @@ When whin reads this command (written on the group), it will send you a direct w
 
 Once you know the group id, you can start sending / receiving whatsapps to / from it. It's that simple!. The whole process is shown on this [video](https://youtu.be/lCmoay0G86M).
 
-For a message to flow into the group, whin-send node expects a **msg.payload** schema as a `JSON` object and a **msg.gid** `STRING` that contains the group identifier.
+For a message to flow into the group, whin-send node expects a **msg.payload** schema as a `JSON` **object** and a **msg.gid** `STRING` that contains the group identifier.
 
     msg.payload  (any of the msg types described above)
     msg.gid      (is the group-id provided by whin)
@@ -299,8 +299,8 @@ There are several types of errors that you can get when using the nodes:
   1. ApiKey invalid. This means that you did a mistake when you entered the ApiKey on the config node.
   2. The number of requests reached the limit. This means that you reached the limit on requests set on your Tier.
   3. To use this API, you need to subscribe first. Self-explanatory.
-  4. If the message is not routed, check that you are injecting into whin-send a `JSON` object (verify it is not a `STRING` with JSON format).
-  5. If the message is not delivered and you are sure it is a `JSON` object, verify that the schema of each msg is following the specs on this help.
+  4. If the message is not routed, check that you are injecting into whin-send a `JSON` **object** (verify it is not a `STRING` with JSON format).
+  5. If the message is not delivered and you are sure it is a `JSON` **object**, verify that the schema of each msg is following the specs on this help.
 
 ---
 
