@@ -49,7 +49,7 @@ module.exports = function (RED) {
                     options.path = '/send2group?gid='+msg.gid;
                   }
 
-                  if (isvalid(msg))
+                  if (isvalid(msg.payload))
                   {
                   const req = https.request(options, (res) => {	
                   res.setEncoding('utf8');  
@@ -69,7 +69,12 @@ module.exports = function (RED) {
                  req.end()	;                    
                   }
 
-                  else node.send({'Error':"Malformed message. WHIN did not deliver your message."})
+                  else 
+                  {
+                   msg.payload = {'Error':"Malformed message. WHIN did not deliver your message."};
+                   node.send(msg)
+                  }
+                      
                   });
           }     
 
