@@ -24,7 +24,7 @@ module.exports = function (RED) {
           function isvalid(m)
             {
             if (!isjson(m)) return false;
-            if (!('text' in m ||'location' in m || 'image' in m || 'contacts' in m || 'video' in m || 'audio' in m)) return false;
+            if (!('text' in m ||'location' in m || 'image' in m || 'contacts' in m || 'video' in m || 'audio' in m || 'document' in m)) return false;
             return true;
             }
                            
