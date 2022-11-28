@@ -91,6 +91,10 @@ Whin will send / receive several types of messages, you can send:
 - lists.
 - vCards.
 - locations.
+- audio.
+- video.
+- image.
+- document.
 
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message. 
 These schemas are valid for messages routed to whatsapp groups also.
@@ -231,6 +235,74 @@ This is how it looks the message that you will send:
 ![Location](./icons/location.png)
 ```
 [{"id":"5a5f36cf66ee4c50","type":"inject","z":"cf89517d277e4d1d","name":"location","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"location\":{\"degreesLatitude\":40.4526941,\"degreesLongitude\":-3.6897589}}","payloadType":"json","x":525,"y":750,"wires":[["87c043c001c38b5f"]]}]
+```
+
+### Audio message:
+If you want to send an audio file, the **msg.payload** schema expected is a `JSON` **object** that must contain a `audio` and `audio.url` properties, for example:
+
+
+```json
+{
+    "audio": {
+        "url": "https://www.mboxdrive.com/gundul.mp3"
+    }
+}
+```
+You can import this sample inject node:
+
+```
+[{"id":"1c80b323d3daf4ff","type":"inject","z":"a2b5a95f0173aba2","name":"audio","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"audio\":{\"url\":\"https://www.mboxdrive.com/gundul.mp3\"}}","payloadType":"json","x":250,"y":160,"wires":[["c371740997065088"]]}]
+```
+
+### Video message:
+If you want to send a video file, the **msg.payload** schema expected is a `JSON` **object** that must contain a `video` and `video.url` properties, for example:
+
+
+```json
+{
+    "video": {
+        "url": "https://i.imgur.com/BYuofkh.mp4"
+    }
+}
+```
+You can import this sample inject node:
+
+```
+[{"id":"ab323a9e815e8524","type":"inject","z":"a2b5a95f0173aba2","name":"video","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"video\":{\"url\":\"https://i.imgur.com/BYuofkh.mp4\"}}","payloadType":"json","x":250,"y":80,"wires":[["c371740997065088"]]}]
+```
+
+### Image message:
+If you want to send an image file, the **msg.payload** schema expected is a `JSON` **object** that must contain a `image` and `image.url` properties, for example:
+
+
+```json
+{
+    "image": {
+        "url": "https://i.imgur.com/F4sdrY4.jpeg"
+    }
+}
+```
+You can import this sample inject node:
+
+```
+[{"id":"62e16908c8c28b27","type":"inject","z":"a2b5a95f0173aba2","name":"image","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"image\":{\"url\":\"https://i.imgur.com/F4sdrY4.jpeg\"}}","payloadType":"json","x":250,"y":120,"wires":[["c371740997065088"]]}]
+```
+
+### Document message:
+If you want to send a document file, the **msg.payload** schema expected is a `JSON` **object** that must contain a `document` and `document.url` properties, for example:
+
+
+```json
+{
+    "document": {
+        "url": "https://file-examples.com/storage/feeb31b1716385276a318de/2017/10/file-sample_150kB.pdf"
+    }
+}
+```
+You can import this sample inject node:
+
+```
+[{"id":"a7e212ef39a48861","type":"inject","z":"a2b5a95f0173aba2","name":"document","props":[{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","payload":"{\"document\":{\"url\":\"https://file-examples.com/storage/feeb31b1716385276a318de/2017/10/file-sample_150kB.pdf\"},\"name\":\"documento\"}","payloadType":"json","x":260,"y":200,"wires":[["c371740997065088"]]}]
 ```
 
 ---

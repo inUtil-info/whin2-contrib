@@ -1,0 +1,138 @@
+[
+    {
+        "id": "3db838c26620a267",
+        "type": "debug",
+        "z": "a2b5a95f0173aba2",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "62e16908c8c28b27",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "image",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"image\":{\"url\":\"https://i.imgur.com/F4sdrY4.jpeg\"}}",
+        "payloadType": "json",
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "c371740997065088"
+            ]
+        ]
+    },
+    {
+        "id": "c371740997065088",
+        "type": "whin_send",
+        "z": "a2b5a95f0173aba2",
+        "name": "",
+        "auth": "51678ea64dbf1453",
+        "x": 670,
+        "y": 100,
+        "wires": [
+            [
+                "3db838c26620a267"
+            ]
+        ]
+    },
+    {
+        "id": "ab323a9e815e8524",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "video",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"video\":{\"url\":\"https://i.imgur.com/BYuofkh.mp4\"}}",
+        "payloadType": "json",
+        "x": 430,
+        "y": 40,
+        "wires": [
+            [
+                "c371740997065088"
+            ]
+        ]
+    },
+    {
+        "id": "1c80b323d3daf4ff",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "audio",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"audio\":{\"url\":\"https://www.mboxdrive.com/gundul.mp3\"}}",
+        "payloadType": "json",
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "c371740997065088"
+            ]
+        ]
+    },
+    {
+        "id": "a7e212ef39a48861",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "document",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"document\":{\"url\":\"https://file-examples.com/storage/feeb31b1716385276a318de/2017/10/file-sample_150kB.pdf\"},\"name\":\"document\"}",
+        "payloadType": "json",
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "c371740997065088"
+            ]
+        ]
+    },
+    {
+        "id": "51678ea64dbf1453",
+        "type": "whin_config",
+        "name": "config-name",
+        "apikey": "YOUR_APIKEY_GOES_HERE"
+    }
+]
