@@ -4,7 +4,7 @@ module.exports = function (RED) {
       this.phone = n.phone;
       this.apikey = n.apikey;
       }  
-      function WhinSend(config) {
+    function WhinSend(config) {
           var https = require('https');
           RED.nodes.createNode(this, config);
           const node = this;
@@ -78,7 +78,7 @@ module.exports = function (RED) {
                   });
           }     
 
-      function WhinReceive(config){
+    function WhinReceive(config){
             const WebSocket = require('ws');
             let socket = null;
             let token = ""
@@ -183,7 +183,178 @@ module.exports = function (RED) {
             getToken(key)
           }
 
+    function whingroupcommander (config)
+    {
+    var resp = "";
+            const https = require('https');
+            const options = {
+                hostname: 'whin2.p.rapidapi.com',
+                port: 443,
+                path: '/grpcmd',
+                method: 'POST',
+                headers: {
+                    "content-type": "application/json",
+                        "X-RapidAPI-Key": node.authconf.apikey,
+                        "X-RapidAPI-Host": "whin2.p.rapidapi.com",
+                      "Content-Type": "application/json"
+                    }
+                };
+
+    var postdata = {};
+    const err=0;
+    var gid = "";
+
+        switch(msg.wgcmd) {
+              case "create":
+                postdata ={
+                    'gname' : msg.gname ||  "whin-group",
+                    'mlist' : msg.mlist || [],
+                    'cmd' : "create"
+                }
+                break;
+              case "add":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "add",
+                    'mlist' : msg.mlist || []
+                    }
+                break;
+              case "remove":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "remove",
+                    'mlist' : msg.mlist || []
+                    }
+                break;
+              case "promote":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "promote",
+                    'mlist' : msg.mlist || []
+                    }
+                break;
+            case "demote":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "demote",
+                    'mlist' : msg.mlist || []
+                    }
+                break;     
+            case "leave":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "leave"
+                    }
+                break;
+            case "getcode":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "getcode"
+                    }
+                break;
+            case "rvkcode":
+                if (!msg.gid) {error = 1; break}
+                if (!(msg.gid.includes('@'))) {gid = msg.gid+"@g.us"} else {gid = msg.gid}
+                postdata = {
+                    'gid' : gid,
+                    'cmd' : "rvkcode"
+                    }
+                break;              
+              default:
+                // code block
+            } 
+
+        for (let i=0; i<msg.mlist.length;i++ )
+        {
+            if (!(msg.mlist[i].includes("@"))) {msg.mlist[i]=msg.mlist[i]+"@s.whatsapp.net"}
+        }
+        if (error=1) {msg.payload={"ERROR":"Invalid group identifier (gid)"}; node.send(msg)}
+        else
+          {
+            const req = https.request(options, (res) => {	
+                res.setEncoding('utf8');  
+                res.on('data', (d) => {
+                  msg.payload = JSON.parse(d);     
+                  node.send(msg);
+                  })
+                   })
+                    
+                req.on('error', (e) => {
+                    //msg.payload = "ERROR";
+                    msg.payload = {"ERROR":e}
+                    // msg.payload = e;
+                    node.send(msg);
+                      })
+               req.write(postData);
+               req.end()                
+          }
+
+
+
+
+    }
+/*
+msg.payload = { "cmd" : "create", "gname" :"mega inutiles", "mlist": ["34639019298@s.whatsapp.net", "34607455805@s.whatsapp.net"] }
+
+Returns: Information on the created group.
+
+Add members to group One needs to specify the group ID and an array with a list of the identifiers of the members to be added.
+
+Example:
+
+msg.payload = { "cmd" : "add", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
+
+Remove members from group
+
+Example:
+
+msg.payload = { "cmd" : "remove", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
+
+Promote member(s) to admin
+
+Example:
+
+msg.payload = { "cmd" : "promote", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
+
+Demote member(s) from admin to regular user
+
+Example:
+
+msg.payload = { "cmd" : "demote", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
+
+Leave Group
+
+msg.payload = { "cmd" : "leave", "gid":"xxxxyyyyzzzzxxxyyyzzz@g.us" }
+
+Get Group Invite Code This command will create an invitation code.
+
+Example:
+
+msg.payload = { "cmd" : "getcode", "gid":"xxxxyyyyzzzzxxxyyyzzz@g.us" }
+
+Revoke Group Invite Code This command will revoke the existing invitation code and will revert with a new valid code.
+
+Example:
+
+msg.payload = { "cmd" : "rvkcode", "gid":"xxxxyyyyzzzzxxxyyyzzz@g.us" }
+*/
+
+
+
     RED.nodes.registerType("whin_send", WhinSend);
     RED.nodes.registerType("whin_receive", WhinReceive);
+    RED.nodes.registerType("whin_group_commander", whingroupcommander)
     RED.nodes.registerType("whin_config", WhinConfig);
   }
