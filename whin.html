@@ -32,6 +32,23 @@
     });
 </script>
 
+<script type="text/javascript">
+    RED.nodes.registerType('whin_group_commander',{
+        category: 'network',
+        color: '#25D366',
+        defaults: {
+            name:       {value:""},
+            auth:       {value: "", type: "whin_config"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "whatsapp-rev.png",
+        label: function() {
+            return this.name||"whin_group_commander";
+        }
+    });
+</script>
+
 
 <script type="text/javascript">
     RED.nodes.registerType('whin_config', {

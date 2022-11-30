@@ -305,53 +305,6 @@ module.exports = function (RED) {
 
 
     }
-/*
-msg.payload = { "cmd" : "create", "gname" :"mega inutiles", "mlist": ["34639019298@s.whatsapp.net", "34607455805@s.whatsapp.net"] }
-
-Returns: Information on the created group.
-
-Add members to group One needs to specify the group ID and an array with a list of the identifiers of the members to be added.
-
-Example:
-
-msg.payload = { "cmd" : "add", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
-
-Remove members from group
-
-Example:
-
-msg.payload = { "cmd" : "remove", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
-
-Promote member(s) to admin
-
-Example:
-
-msg.payload = { "cmd" : "promote", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
-
-Demote member(s) from admin to regular user
-
-Example:
-
-msg.payload = { "cmd" : "demote", "gid":"xxxyyyzzzxxxxyyyyzzzz@g.us", "mlist": [ "xxxxxxx@s.whatsapp.net"] }
-
-Leave Group
-
-msg.payload = { "cmd" : "leave", "gid":"xxxxyyyyzzzzxxxyyyzzz@g.us" }
-
-Get Group Invite Code This command will create an invitation code.
-
-Example:
-
-msg.payload = { "cmd" : "getcode", "gid":"xxxxyyyyzzzzxxxyyyzzz@g.us" }
-
-Revoke Group Invite Code This command will revoke the existing invitation code and will revert with a new valid code.
-
-Example:
-
-msg.payload = { "cmd" : "rvkcode", "gid":"xxxxyyyyzzzzxxxyyyzzz@g.us" }
-*/
-
-
 
     RED.nodes.registerType("whin_send", WhinSend);
     RED.nodes.registerType("whin_receive", WhinReceive);
