@@ -306,7 +306,7 @@ module.exports = function (RED) {
                     // msg.payload = e;
                     node.send(msg);
                       })
-               req.write(postData);
+               req.write(postdata);
                req.end()                
           }
     })
