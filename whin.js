@@ -197,24 +197,23 @@ module.exports = function (RED) {
     node.name = config.name;
     node.authconf = RED.nodes.getNode(config.auth);
     resetStatus();	
+    node.on('input', function (msg) {
 
-    const options = {
-        hostname: 'whin2.p.rapidapi.com',
-        port: 443,
-        path: '/grpcmd',
-        method: 'POST',
-        headers: {
+        const options = {
+            hostname: 'whin2.p.rapidapi.com',
+            port: 443,
+            path: '/grpcmd',
+            method: 'POST',
+            headers: {
                 "content-type": "application/json",
                 "X-RapidAPI-Key": node.authconf.apikey,
                 "X-RapidAPI-Host": "whin2.p.rapidapi.com",
                 "Content-Type": "application/json"
                     }
                 };
-
-    var postdata = {};
-    const err=0;
-    var gid = "";
-
+        var postdata = {};
+        const err=0;
+        var gid = "";   
         switch(msg.wgcmd) {
               case "create":
                 postdata ={
@@ -286,14 +285,12 @@ module.exports = function (RED) {
               default:
                 // code block
             } 
-
         for (let i=0; i<msg.mlist.length;i++ )
         {
             if (!(msg.mlist[i].includes("@"))) {msg.mlist[i]=msg.mlist[i]+"@s.whatsapp.net"}
         }
         if (error=1) {msg.payload={"ERROR":"Invalid group identifier (gid)"}; node.send(msg)}
-        else
-          {
+        else {
             const req = https.request(options, (res) => {	
                 res.setEncoding('utf8');  
                 res.on('data', (d) => {
@@ -311,9 +308,7 @@ module.exports = function (RED) {
                req.write(postData);
                req.end()                
           }
-
-
-
+    })
 
     }
 
