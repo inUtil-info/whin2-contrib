@@ -186,17 +186,28 @@ module.exports = function (RED) {
     function whingroupcommander (config)
     {
     var resp = "";
-            const https = require('https');
-            const options = {
-                hostname: 'whin2.p.rapidapi.com',
-                port: 443,
-                path: '/grpcmd',
-                method: 'POST',
-                headers: {
-                    "content-type": "application/json",
-                        "X-RapidAPI-Key": node.authconf.apikey,
-                        "X-RapidAPI-Host": "whin2.p.rapidapi.com",
-                      "Content-Type": "application/json"
+    var https = require('https');
+    RED.nodes.createNode(this, config);
+    const node = this;
+    const resetStatus = () => node.status({});
+    const raiseError = (text, msg) => {
+        node.status({ fill: "red", shape: "dot", text: text });
+        node.error(text, msg);
+        };
+    node.name = config.name;
+    node.authconf = RED.nodes.getNode(config.auth);
+    resetStatus();	
+
+    const options = {
+        hostname: 'whin2.p.rapidapi.com',
+        port: 443,
+        path: '/grpcmd',
+        method: 'POST',
+        headers: {
+                "content-type": "application/json",
+                "X-RapidAPI-Key": node.authconf.apikey,
+                "X-RapidAPI-Host": "whin2.p.rapidapi.com",
+                "Content-Type": "application/json"
                     }
                 };
 
