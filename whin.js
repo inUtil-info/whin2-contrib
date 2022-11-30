@@ -215,6 +215,7 @@ module.exports = function (RED) {
         const err=0;
         var error=0;
         var gid = "";   
+        if (typeof msg.mlist!='object') {msg.mlist=[]; error=2}
         switch(msg.wgcmd) {
               case "create":
                 postdata ={
@@ -222,6 +223,7 @@ module.exports = function (RED) {
                     'mlist' : msg.mlist || [],
                     'cmd' : "create"
                 }
+                node.warn("Accion create seleccionada");
                 break;
               case "add":
                 if (!msg.gid) {error = 1; break}
@@ -288,6 +290,7 @@ module.exports = function (RED) {
             } 
         for (let i=0; i<msg.mlist.length;i++ )
         {
+            node.warn("En el loop de control de error de mlist");
             if (!(msg.mlist[i].includes("@"))) {msg.mlist[i]=msg.mlist[i]+"@s.whatsapp.net"}
         }
         if (error==1) {msg.payload={"ERROR":"Invalid group identifier (gid)"}; node.send(msg)}
@@ -295,15 +298,15 @@ module.exports = function (RED) {
             const req = https.request(options, (res) => {	
                 res.setEncoding('utf8');  
                 res.on('data', (d) => {
+                  node.warn("EL POST a rapidapi SI ha funcionado")
                   msg.payload = JSON.parse(d);     
                   node.send(msg);
                   })
                    })
                     
                 req.on('error', (e) => {
-                    //msg.payload = "ERROR";
+                    node.warn("EL POST a rapidapi NO ha funcionado")
                     msg.payload = {"ERROR":e}
-                    // msg.payload = e;
                     node.send(msg);
                       })
                req.write(postdata);
