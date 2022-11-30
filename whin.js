@@ -213,6 +213,7 @@ module.exports = function (RED) {
                 };
         var postdata = {};
         const err=0;
+        var error=0;
         var gid = "";   
         switch(msg.wgcmd) {
               case "create":
@@ -289,7 +290,7 @@ module.exports = function (RED) {
         {
             if (!(msg.mlist[i].includes("@"))) {msg.mlist[i]=msg.mlist[i]+"@s.whatsapp.net"}
         }
-        if (error=1) {msg.payload={"ERROR":"Invalid group identifier (gid)"}; node.send(msg)}
+        if (error==1) {msg.payload={"ERROR":"Invalid group identifier (gid)"}; node.send(msg)}
         else {
             const req = https.request(options, (res) => {	
                 res.setEncoding('utf8');  
