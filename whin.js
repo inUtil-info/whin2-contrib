@@ -313,7 +313,7 @@ module.exports = function (RED) {
                     node.send(msg);
                       })
  
-            req.write(JSON.stringify(await pdata()));
+            req.write(JSON.stringify(msg));
             req.end()                
           }
     })
