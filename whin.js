@@ -199,7 +199,7 @@ module.exports = function (RED) {
     resetStatus();	
     
     node.on('input', function (msg) {
-     const options = {
+        const options = {
         hostname: 'whin2.p.rapidapi.com',
         port: 443,
         path: '/grpcmd',
@@ -286,7 +286,7 @@ module.exports = function (RED) {
                     }
                 break;              
               default:
-                postdata=msg.payload;
+                postdata={};
                 // code block
             } 
 
@@ -312,7 +312,7 @@ module.exports = function (RED) {
                       })
 
         //node.warn(pd);  
-            req.write(JSON.stringify(postdata));
+            req.write("");
             req.end()                
           }
     })
