@@ -315,8 +315,9 @@ module.exports = function (RED) {
                     node.send(msg);
                       })
 
-            
-            req.write(JSON.stringify(await setbody() || {}));
+        var pd = await setbody();
+        //node.warn(pd);  
+            req.write(JSON.stringify({}));
             req.end()                
           }
     })
