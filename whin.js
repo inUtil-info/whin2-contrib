@@ -183,7 +183,7 @@ module.exports = function (RED) {
             getToken(key)
           }
 
-    async function whingroupcommander (config)
+    function whingroupcommander (config)
     {
     var resp = "";
     var https = require('https');
@@ -310,9 +310,8 @@ module.exports = function (RED) {
                     msg.payload = {"ERROR":e}
                     node.send(msg);
                       })
-
-        //node.warn(pd);  
-            req.write("");
+ 
+            req.write(JSON.stringify(postdata));
             req.end()                
           }
     })
