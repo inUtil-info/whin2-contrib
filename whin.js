@@ -199,10 +199,7 @@ module.exports = function (RED) {
     resetStatus();	
     
     node.on('input', async function (msg) {
-
-    
-
-    const options = {
+     const options = {
         hostname: 'whin2.p.rapidapi.com',
         port: 443,
         path: '/grpcmd',
@@ -213,8 +210,7 @@ module.exports = function (RED) {
             "X-RapidAPI-Host": "whin2.p.rapidapi.com",
             "Content-Type": "application/json"
                     }
-                };
-        
+        };
         const err=0;
         var error=0;
         var gid = "";   
@@ -318,8 +314,9 @@ module.exports = function (RED) {
                     msg.payload = {"ERROR":e}
                     node.send(msg);
                       })
- 
-            req.write(JSON.stringify(await setbody()));
+
+            
+            req.write(JSON.stringify(await setbody() || {}));
             req.end()                
           }
     })
