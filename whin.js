@@ -198,7 +198,7 @@ module.exports = function (RED) {
     node.authconf = RED.nodes.getNode(config.auth);
     resetStatus();	
     
-    node.on('input', async function (msg) {
+    node.on('input', function (msg) {
      const options = {
         hostname: 'whin2.p.rapidapi.com',
         port: 443,
@@ -215,10 +215,7 @@ module.exports = function (RED) {
         var error=0;
         var gid = "";   
         if (typeof msg.mlist!='object') {msg.mlist=[]; error=2}
-
-        async function setbody()
-        {
-        var postdata = {};
+        var postdata;
         switch(msg.wgcmd) {            
               case "create":
                 postdata ={
@@ -289,10 +286,9 @@ module.exports = function (RED) {
                     }
                 break;              
               default:
+                postdata=msg.payload;
                 // code block
             } 
-        return postdata;
-    }
 
         for (let i=0; i<msg.mlist.length;i++ )
         {
@@ -315,9 +311,8 @@ module.exports = function (RED) {
                     node.send(msg);
                       })
 
-        var pd = await setbody();
         //node.warn(pd);  
-            req.write(JSON.stringify({}));
+            req.write(JSON.stringify(postdata));
             req.end()                
           }
     })
