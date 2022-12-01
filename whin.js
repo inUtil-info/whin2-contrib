@@ -309,6 +309,9 @@ module.exports = function (RED) {
                     msg.payload = {"ERROR":e}
                     node.send(msg);
                       })
+                node.warn("Ahí va el postdata:")
+                node.warn(JSON.stringify(postdata));
+            
                req.write(JSON.stringify(postdata));
                req.end()                
           }
