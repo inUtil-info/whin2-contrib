@@ -199,16 +199,16 @@ module.exports = function (RED) {
     resetStatus();	
     node.on('input', function (msg) {
 
-        const options = {
-            hostname: 'whin2.p.rapidapi.com',
-            port: 443,
-            path: '/grpcmd',
-            method: 'POST',
-            headers: {
-                "content-type": "application/json",
-                "X-RapidAPI-Key": node.authconf.apikey,
-                "X-RapidAPI-Host": "whin2.p.rapidapi.com",
-                "Content-Type": "application/json"
+    const options = {
+        hostname: 'whin2.p.rapidapi.com',
+        port: 443,
+        path: '/grpcmd',
+        method: 'POST',
+        headers: {
+            "content-type": "application/json",
+            "X-RapidAPI-Key": node.authconf.apikey,
+            "X-RapidAPI-Host": "whin2.p.rapidapi.com",
+            "Content-Type": "application/json"
                     }
                 };
         var postdata = {};
@@ -309,7 +309,7 @@ module.exports = function (RED) {
                     msg.payload = {"ERROR":e}
                     node.send(msg);
                       })
-               req.write(postdata);
+               req.write(JSON.stringify(postdata));
                req.end()                
           }
     })
