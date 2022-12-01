@@ -183,7 +183,7 @@ module.exports = function (RED) {
             getToken(key)
           }
 
-    function whingroupcommander (config)
+    async function whingroupcommander (config)
     {
     var resp = "";
     var https = require('https');
@@ -197,7 +197,10 @@ module.exports = function (RED) {
     node.name = config.name;
     node.authconf = RED.nodes.getNode(config.auth);
     resetStatus();	
-    node.on('input', function (msg) {
+    
+    node.on('input', async function (msg) {
+
+    
 
     const options = {
         hostname: 'whin2.p.rapidapi.com',
@@ -211,12 +214,16 @@ module.exports = function (RED) {
             "Content-Type": "application/json"
                     }
                 };
-        var postdata = {};
+        
         const err=0;
         var error=0;
         var gid = "";   
         if (typeof msg.mlist!='object') {msg.mlist=[]; error=2}
-        switch(msg.wgcmd) {
+
+        async function setbody()
+        {
+        var postdata = {};
+        switch(msg.wgcmd) {            
               case "create":
                 postdata ={
                     'gname' : msg.gname ||  "whin-group",
@@ -288,6 +295,9 @@ module.exports = function (RED) {
               default:
                 // code block
             } 
+        return postdata;
+    }
+
         for (let i=0; i<msg.mlist.length;i++ )
         {
             node.warn("En el loop de control de error de mlist");
@@ -302,18 +312,15 @@ module.exports = function (RED) {
                   msg.payload = JSON.parse(d);     
                   node.send(msg);
                   })
-                   })
-                    
+                   })       
                 req.on('error', (e) => {
                     node.warn("EL POST a rapidapi NO ha funcionado")
                     msg.payload = {"ERROR":e}
                     node.send(msg);
                       })
-                node.warn("Ahí va el postdata:")
-                node.warn(JSON.stringify(postdata));
-            
-               req.write(JSON.stringify(postdata));
-               req.end()                
+ 
+            req.write(JSON.stringify(await setbody()));
+            req.end()                
           }
     })
 
