@@ -211,6 +211,7 @@ module.exports = function (RED) {
             "Content-Type": "application/json"
                     }
         };
+        /*
         const err=0;
         var error=0;
         var gid = "";   
@@ -298,24 +299,19 @@ module.exports = function (RED) {
             if (!(msg.mlist[i].includes("@"))) {msg.mlist[i]=msg.mlist[i]+"@s.whatsapp.net"}
         }
         if (error==1) {msg.payload={"ERROR":"Invalid group identifier (gid)"}; node.send(msg)}
-        else {
-            const req = https.request(options, (res) => {	
-                res.setEncoding('utf8');  
-                res.on('data', (d) => {
-                  node.warn("EL POST a rapidapi SI ha funcionado")
-                  msg.payload = JSON.parse(d);     
-                  node.send(msg);
-                  })
-                   })       
-                req.on('error', (e) => {
-                    node.warn("EL POST a rapidapi NO ha funcionado")
+        else {} */
+        const req = https.request(options, (res) => {	
+            res.setEncoding('utf8');  
+            res.on('data', (d) => {
+            msg.payload = JSON.parse(d);     
+            node.send(msg); })
+            })       
+            req.on('error', (e) => {
                     msg.payload = {"ERROR":e}
                     node.send(msg);
                       })
- 
             req.write(JSON.stringify(msg));
-            req.end()                
-          }
+            req.end()          
     })
 
     }
