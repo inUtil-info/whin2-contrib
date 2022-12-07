@@ -323,42 +323,6 @@ When whin receives this command, it will:
 3. promote you to Admin of the group (*),
 4. send you an invite link.
 
-(*) 
-whin
-FREEMIUM
-Verified
-✓
-By inUtil Labs | Updated 11 days ago | Communication | Edit
-Popularity
-9.5 / 10
-Latency
-573ms
-Service Level
-100%
-
-    Endpoints About Tutorials Discussions Pricing
-
-Back to All Tutorials (3)
-
-How to use the endpoints under the groups category to send and receive whatsapps to/from groups?
-Public
-
-You can add whin to whatsapp’s groups.
-When you add whin to a whatsapp group all messages written on the group will be delivered to your listener, and all messages sent to the group from rapidAPI will be written on the whatsapp group.
-You will be the Admin of the group, you can add or remove people, change the group settings,… anything a whatsapp group Admin can do.
-
-The process starts by asking whin to create a whatsapp group. This can be achieved:
-
-    programmatically: by making a request on the “create a group” endpoint.
-    manually: by sending a whatsapp to whin with the command: whin-create-group, or clicking on this link: https://wa.me/34605797764?text=whin-create-group
-
-When whin receives this command, it will:
-
-create a group,
-invite you to join the group,
-promote you to Admin of the group (*),
-send you an invite link.
-
 (*) Bear in mind that if you have set `Whatsapp groups privacy settings` to: “Do not allow others to add me to groups”, you will receive an invitation to join the group, but Whin won’t be able to promote you to Admin. If you wish to be the Admin of the group, you need to add Whin to your contacts (or change your privacy settings) before the group is created.
 
 Once you're Admin of the group, it's all yours. Whin will remain as Admin of the group too, but all it will do from this point in time is: forward all the messages written on the chat to node-red (using the listener modes described above), and write to the group whatever you send to the group (using the sender node described above).
