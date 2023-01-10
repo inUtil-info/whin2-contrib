@@ -282,6 +282,17 @@ If you want to send an image file, the **msg.payload** schema expected is a `JSO
     }
 }
 ```
+adding a `caption` property will add a text on the footer:
+
+```json
+{
+    "image": {
+        "url": "https://i.imgur.com/Y6A0o7y.jpeg"
+    },
+    "caption": "This is an image with text"
+}
+```
+
 You can import this sample inject node:
 
 ```
