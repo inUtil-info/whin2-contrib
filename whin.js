@@ -180,8 +180,19 @@ module.exports = function (RED) {
             req.end();
             }; 
             const key=node.authconf.apikey;
-            getToken(key)
-          }
+
+            node.on('input', function (msg) {
+
+                if (msg.payload == 'off' || msg.payload === false) {
+                  (async function () {
+                    await ng.kill();
+                    msg.payload = null;
+                    node.send(msg);
+                    node.status({ fill: "red", shape: "ring", text: "disconnected" });
+                  })();
+          
+                } else if (msg.payload == 'on' || msg.payload == true) {getToken(key)}
+          });
 
     function whingroupcommander (config)
     {
@@ -320,4 +331,19 @@ module.exports = function (RED) {
     RED.nodes.registerType("whin_receive", WhinReceive);
     RED.nodes.registerType("whin_group_commander", whingroupcommander)
     RED.nodes.registerType("whin_config", WhinConfig);
+    RED.httpAdmin.post("/wrInject/:id", RED.auth.needsPermission("inject.write"), function (req, res) {
+        var node = RED.nodes.getNode(req.params.id);
+        if (node != null) {
+          try {
+            var state = (req.body.on == 'true');
+            node.receive({ payload: state });
+            res.sendStatus(200);
+          } catch (err) {
+            res.sendStatus(500);
+            node.error(RED._("inject.failed", { error: err.toString() }));
+          }
+        } else {
+          res.sendStatus(404);
+        }
+      });
   }

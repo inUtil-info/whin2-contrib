@@ -21,13 +21,52 @@
         color: '#25D366',
         defaults: {
             name:       {value:""},
-            auth:       {value: "", type: "whin_config"}
+            auth:       {value: "", type: "whin_config"},
+            buttonState: { value: false },
+            inputtype: { value: "button" },
+            inputs: { value: 0 }
+
         },
-        inputs:0,
+        inputs:1,
         outputs:1,
         icon: "whatsapp-rev.png",
         label: function() {
             return this.name||"whin_receive";
+        },
+        button: {
+            visible: function () {
+                if (this.inputtype == 'button') {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            toggle: "buttonState",
+            onclick: function () {
+                var node = this;
+                $.ajax({
+                    url: "wrrokInject/" + this.id,
+                    type: "POST",
+                    data: { "on": this.buttonState },
+                    success: function (resp, ) {
+                        if (node.buttonState) {
+                            RED.notify("Connecting", {type: "success"});
+                        }  else {
+                            RED.notify("Disconnecting", {type: "success"});
+                        }
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error(errorThrown)
+                        console.error(textStatus)
+                        if (jqXHR.status == 404) {
+                            RED.notify("ERROR Not Deployed", {type: "error"});
+                        } else {
+                            RED.notify("ERROR -- View Log", {type: "error"});
+                        }
+                    }
+                });
+            }
         }
     });
 </script>
