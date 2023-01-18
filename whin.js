@@ -191,8 +191,11 @@ module.exports = function (RED) {
                     node.status({ fill: "red", shape: "ring", text: "disconnected" });
                   })();
           
-                } else if (msg.payload == 'on' || msg.payload == true) {getToken(key)}
+                } else if (msg.payload == 'on' || msg.payload == true) {     
+
+            getToken(key)}
           });
+        }
 
     function whingroupcommander (config)
     {
