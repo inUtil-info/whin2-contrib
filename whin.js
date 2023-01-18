@@ -185,7 +185,7 @@ module.exports = function (RED) {
 
                 if (msg.payload == 'off' || msg.payload === false) {
                   (async function () {
-                    await ng.kill();
+                    socket.close();
                     msg.payload = null;
                     node.send(msg);
                     node.status({ fill: "red", shape: "ring", text: "disconnected" });
