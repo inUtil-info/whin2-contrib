@@ -132,8 +132,8 @@ module.exports = function (RED) {
                 if (!!msg.payload) node.send(msg);  
                 };
             socket.onclose = function(event) {
-                node.status({ fill: "red", shape: "dot", text: "Disconnected" })
                 node.buttonState=false;
+                node.status({ fill: "yellow", shape: "ring", text: "Click to reconnect" })                
                 if (event.wasClean) {
                 node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
                 //  && event.code!=1005 (this is the closing code when .close() is called without parameters    
