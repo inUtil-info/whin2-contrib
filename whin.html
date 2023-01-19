@@ -158,17 +158,17 @@
 
 <script type="text/x-red" data-help-name="whin_send">
 
-<p>A node-red node that allow users to send a Whatsapp text to one&#39;s mobile.</p>
+<p>A node-red node that allow users to send a Whatsapp message; the message can be routed to your own number or to a whatsapp group you own.</p>
 
 <h3>Inputs</h3>
-<p>1. Standard Input: the text that will be sent to whatsapp.</p>
-<a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation in NR pages</a>
+<p>1. Standard Input: the message that will be sent to whatsapp. All types of whatsapps are supported (text, images, buttons,...)</p>
+<a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation for details of the payload schemas that are expected for the node to work properly.</a>
 
 <h3>Output</h3>
-<p>1. Standard Output: produces a "Request received" response when the message is received by the shared gateway. </p>
+<p>1. Standard Output: produces a response that includes de content of the message sent, and its recipient (your mobile number or the whatsapp group id). The payload you get on the output is the response received by the shared gateway. </p>
 
 <h3>Details</h3>
-<p>The <code>msg.payload</code> must be an object that contains a complete set of the message properties expected by whin:
+<p>The <code>msg.payload</code> must be a JSON object that contains the complete set of message properties expected by whin (read the docs to understand all valid schemas and the type of message for each):
 
  <ul>
  <li><code>payload</code> the message content</li>
@@ -180,8 +180,8 @@
 
 <script type="text/x-red" data-help-name="whin_receive">
 
-    <p>A node-red node that allow users to receive a Whatsapp text from the mobile defined on the config.</p>
-    <a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation in NR pages</a> 
+    <p>A node-red node that allow users to receive a Whatsapp from the mobile defined on the config, or from any whatsapp group that the user owns. This node must be turned on before it is used. If you don't have a paid subscription of whin, the node will NOT connect and will NOT work.</p>
+    <a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation to understand an alternative method to receive whatsapp messages, if you are a FREE subscriber of whin.</a> 
 
     
     <h3>Output</h3>
@@ -194,12 +194,17 @@
 
 <script type="text/x-red" data-help-name="whin_group_commander">
 
-    <p>KAKAKAKAKAK A node-red node that allow users to receive a Whatsapp text from the mobile defined on the config.</p>
-    <a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation in NR pages</a> 
+    <p>This node is still under development, its function is managing whatsapp groups owned by a whin user. It's features are still not documented, do not expect to understand how it works.</p>
+    <a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">When the node is functional, we will update the documentation.</a> 
 
     
+    <h3>Inputs</h3>
+    <p>1. Standard Input: the command sent to whin to manage the whatsapp group.</p>
+    <a href="https://flows.nodered.org/node/@inutil-labs/node-red-whin-whatsapp">Please review the documentation for details of the payload schemas that are expected for the node to work properly.</a>
+
+
     <h3>Output</h3>
-    <p>1. Standard Output: contains the message received, the content can be used for example as a command that is passed into a flow.</p>
+    <p>1. Standard Output: a confirmation of the management command executed on the whatsapp group.</p>
     
     <h3>Details</h3>
     <p>The <code>msg.payload</code> produced as output is a string.

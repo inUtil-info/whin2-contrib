@@ -79,8 +79,8 @@ For this mode to work you have to expose a webhook route using a standard http-i
 Any tool or method that allows exposing a node-red end-point is valid ([ngrok](https://youtu.be/7FHbfo-wRtY), [cloudflare tunnels](https://youtu.be/mMyoH4-mOiA), exposed proxy, opening a port,...), click on the links to watch videos showing how-to.
 
 #### Running on always-on mode (whin-receive):
-This option is available for users on a paid plan (any). For this option you do need to deploy whin-receive node.
-After adding this node to a flow, hit deploy on the node-red editor, and you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will establish a persistent connection to whin back-end that will receive any whatsapp as a raw stream at your end.
+This option is ONLY available for users on a paid plan (any). For this option you do need to deploy whin-receive node, and turn it on.
+After adding this node to a flow, you need to turn it on, and you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will establish a persistent connection to whin back-end that will receive any whatsapp as a raw stream at your end.
 
 ---
 
@@ -97,6 +97,7 @@ Whin will send / receive several types of messages, you can send:
 - document.
 
 You need to set the right payload schema so that the back-end understands the request you send, otherwise whin wont be able to route the message. 
+If you want to add a footer text to any media message (audio, video, image,...) adding a `caption` property will add the text on the footer.
 These schemas are valid for messages routed to whatsapp groups also.
 
 

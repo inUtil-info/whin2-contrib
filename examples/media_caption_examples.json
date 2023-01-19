@@ -1,0 +1,209 @@
+[
+    {
+        "id": "3f8228e7c05e7102",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "buttons and image",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "gid",
+                "v": "120363029588668734",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"image\":{\"url\":\"https://inutil.info/img/portfolio/4.jpg\"},\"caption\":\"This is a button message with one img\",\"footer\":\"Hello youtube\",\"buttons\":[{\"buttonId\":\"id1\",\"buttonText\":{\"displayText\":\"Button 1\"},\"type\":1},{\"buttonId\":\"id2\",\"buttonText\":{\"displayText\":\"Button 2\"},\"type\":1},{\"buttonId\":\"id3\",\"buttonText\":{\"displayText\":\"Button 3\"},\"type\":1}],\"headerType\":4}",
+        "payloadType": "json",
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "6871e3ec3fb5e7d2"
+            ]
+        ]
+    },
+    {
+        "id": "087c3e77df8d470e",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "text json object",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"text\":\"this is a text sent from whin\"}",
+        "payloadType": "json",
+        "x": 640,
+        "y": 120,
+        "wires": [
+            [
+                "6871e3ec3fb5e7d2"
+            ]
+        ]
+    },
+    {
+        "id": "3db838c26620a267",
+        "type": "debug",
+        "z": "a2b5a95f0173aba2",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "62e16908c8c28b27",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "image with caption",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"image\":{\"url\":\"https://i.imgur.com/Y6A0o7y.jpeg\"},\"caption\":\"This is an image with text\"}",
+        "payloadType": "json",
+        "x": 650,
+        "y": 80,
+        "wires": [
+            [
+                "6871e3ec3fb5e7d2"
+            ]
+        ]
+    },
+    {
+        "id": "ab323a9e815e8524",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "video with caption",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"video\":{\"url\":\"https://i.imgur.com/vJXvxaG.mp4\"},\"caption\":\"This is a video with text\"}",
+        "payloadType": "json",
+        "x": 650,
+        "y": 40,
+        "wires": [
+            [
+                "6871e3ec3fb5e7d2"
+            ]
+        ]
+    },
+    {
+        "id": "832b3ff60a803b9a",
+        "type": "inject",
+        "z": "a2b5a95f0173aba2",
+        "name": "command",
+        "props": [
+            {
+                "p": "cmd",
+                "v": "promote",
+                "vt": "str"
+            },
+            {
+                "p": "mlist",
+                "v": "[\t   \"num@s.whatsapp.net\"\t]",
+                "vt": "jsonata"
+            },
+            {
+                "p": "gid",
+                "v": "120363046607681141",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 620,
+        "y": 220,
+        "wires": [
+            [
+                "ab29c24fbe882678"
+            ]
+        ]
+    },
+    {
+        "id": "6871e3ec3fb5e7d2",
+        "type": "whin_send",
+        "z": "a2b5a95f0173aba2",
+        "name": "",
+        "auth": "40c41f5838f18348",
+        "x": 930,
+        "y": 100,
+        "wires": [
+            [
+                "3db838c26620a267"
+            ]
+        ]
+    },
+    {
+        "id": "ab29c24fbe882678",
+        "type": "whin_group_commander",
+        "z": "a2b5a95f0173aba2",
+        "name": "",
+        "auth": "40c41f5838f18348",
+        "x": 950,
+        "y": 220,
+        "wires": [
+            [
+                "3db838c26620a267"
+            ]
+        ]
+    },
+    {
+        "id": "4954b110d898f9fd",
+        "type": "whin_receive",
+        "z": "a2b5a95f0173aba2",
+        "name": "",
+        "auth": "40c41f5838f18348",
+        "buttonState": false,
+        "inputtype": "button",
+        "inputs": 0,
+        "x": 930,
+        "y": 160,
+        "wires": [
+            [
+                "3db838c26620a267"
+            ]
+        ]
+    },
+    {
+        "id": "40c41f5838f18348",
+        "type": "whin_config",
+        "name": "your-whin-user",
+        "apikey": "API_KEY"
+    }
+]
