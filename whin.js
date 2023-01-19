@@ -96,6 +96,7 @@ module.exports = function (RED) {
             resetStatus();
             node.on('close', function() {
                 socket.close();// tidy up any state
+                node.buttonState=false;
             });
           
             function konekt(wsurl) 
