@@ -82,6 +82,8 @@ Any tool or method that allows exposing a node-red end-point is valid ([ngrok](h
 This option is ONLY available for users on a paid plan (any). For this option you do need to deploy whin-receive node, and turn it on.
 After adding this node to a flow, you need to turn it on, and you will see that whin-receive shows a green message saying: "Connected to Whatsapp". No further configuration is needed, nor is needed exposing any route or opening ports. The whin-receive node will establish a persistent connection to whin back-end that will receive any whatsapp as a raw stream at your end.
 
+Whenever you do a `Full Deploy` or `Restart all flows` you may have to reconnect the node to whin backend, by clicking on the toggle switch. This will restablish the websocket connection.
+
 ---
 
 ## Types of messages:
