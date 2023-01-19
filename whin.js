@@ -132,7 +132,7 @@ module.exports = function (RED) {
                 };
             socket.onclose = function(event) {
                 node.status({ fill: "red", shape: "dot", text: "Disconnected" })
-                node
+                node.buttonState=false;
                 if (event.wasClean) {
                 node.warn(`[WHIN] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
                 //  && event.code!=1005 (this is the closing code when .close() is called without parameters    
@@ -147,6 +147,7 @@ module.exports = function (RED) {
             };
             socket.onerror = function(error) {
             node.warn(`[WHIN-Error] ${error.message}`);
+            node.buttonState=false
             };
             }
 
@@ -187,7 +188,6 @@ module.exports = function (RED) {
                 if (msg.payload == 'off' || msg.payload === false) {
                   (async function () {
                     if (typeof socket != "undefined") {
-                     //node.warn("Se ha activado ek off y se supone que el socket existe. Veamos\n");
                      socket.close();                     
                      msg.payload = null;
                      node.send(msg);
