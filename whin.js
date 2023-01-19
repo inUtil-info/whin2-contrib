@@ -89,6 +89,7 @@ module.exports = function (RED) {
             const resetStatus = () => node.status({});    
             const raiseError = (text, msg) => {
                 node.status({ fill: "red", shape: "dot", text: text });
+                node.buttonState=false;
                 node.error(text, msg);
                 };
             node.name = config.name;
