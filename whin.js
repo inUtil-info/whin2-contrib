@@ -185,9 +185,11 @@ module.exports = function (RED) {
 
                 if (msg.payload == 'off' || msg.payload === false) {
                   (async function () {
-                    socket.close();
-                    msg.payload = null;
-                    //node.send(msg);
+                    if (typeof socket != "undefined") {
+                     socket.close();
+                     msg.payload = null;
+                     node.send(msg);
+                     }                    
                     node.status({ fill: "red", shape: "ring", text: "disconnected" });
                   })();
           
