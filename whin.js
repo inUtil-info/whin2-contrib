@@ -187,19 +187,19 @@ module.exports = function (RED) {
             node.on('input', function (msg) {
 
                 if (msg.payload == 'off' || msg.payload === false) {
-                  (async function () {
+    
                     if (typeof socket != "undefined") {
-                     socket.close();                     
-                     msg.payload = null;
-                     node.send(msg);
-                     }                    
+                     try 
+                     {socket.close();                     
+                     }
+                     catch(e){}   
+                    }
+                    msg.payload = null;
+                    node.send(msg);                 
                     node.status({ fill: "red", shape: "ring", text: "disconnected" });
-                    node.buttonState=false;                    
-                  })();
-          
-                } else if (msg.payload == 'on' || msg.payload == true) {     
-
-            getToken(key)}
+                    node.buttonState=false;           
+                } 
+                else if (msg.payload == 'on' || msg.payload == true) {getToken(key)}
           });
         }
 
