@@ -187,7 +187,7 @@ module.exports = function (RED) {
                   (async function () {
                     socket.close();
                     msg.payload = null;
-                    node.send(msg);
+                    //node.send(msg);
                     node.status({ fill: "red", shape: "ring", text: "disconnected" });
                   })();
           
