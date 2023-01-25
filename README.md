@@ -345,7 +345,7 @@ To send messages to the group, you will need the group-id; a group-id is like a 
 
     group-id
     
-When whin reads this command (written on the group), it will send you a direct whatsapp including the group-id. 
+When whin reads this command (written on the group), it will send you a direct whatsapp including the group-id. Bear in mind the `group-id` command will NOT be read if you have activated expiring messages, you need to deactivate the feature before sending the command (you can turn the feature on after).
 
 Once you know the group id, you can start sending / receiving whatsapps to / from it. It's that simple!. The whole process is shown on this [video](https://youtu.be/lCmoay0G86M).
 
