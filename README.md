@@ -1,3 +1,5 @@
+# This REPO is archived and the node-red nodes will not work till code review is completed.
+
 # Summary
 Whin is a whatsapp gateway designed to support home-lab's most frequent use cases for free; the back-end acts as a whatsapp shared gateway, the client side is a set of node-red nodes available at the editor Palette.
 
