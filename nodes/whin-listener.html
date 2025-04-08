@@ -27,29 +27,57 @@
 </script>
 
 <script type="text/x-red" data-help-name="whin-listener">
-    <p>Retrieve webhook routes for a specified origin</p>
+    <p>Get webhook URLs that, when configured in external services, will send messages to your WhatsApp</p>
+
+    <h3>How It Works</h3>
+    <ol>
+        <li>This node retrieves webhook URLs for a specified origin (like CloudFlare, Grafana, etc.)</li>
+        <li>You configure these URLs in the external service (the "origin")</li>
+        <li>When that service sends data to the webhook URL, you will receive a WhatsApp message with that information</li>
+    </ol>
 
     <h3>Inputs</h3>
     <p>Input message must contain the origin in <code>msg.payload.origin</code>.</p>
+    <p>Supported origins and their exact formats:</p>
+    <ul>
+        <li><code>Generic</code> - For generic webhooks</li>
+        <li><code>CloudFlare</code> - For CloudFlare webhooks</li>
+        <li><code>Grafana</code> - For Grafana webhooks</li>
+        <li><code>IFTTT</code> - For IFTTT webhooks</li>
+        <li><code>Telegram</code> - For Telegram webhooks</li>
+        <li><code>TypeForm</code> - For TypeForm webhooks</li>
+    </ul>
+    <p><strong>Note:</strong> The origin value is case-sensitive. The node will automatically format the input to match the required format.</p>
 
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload <span class="property-type">object</span></dt>
-        <dd>Webhook route details directly from the Whin API</dd>
+        <dd>Contains webhook URLs that you need to configure in your external service</dd>
     </dl>
 
     <h3>Details</h3>
     <p>This node allows you to:</p>
     <ul>
-        <li>Retrieve webhook routes for a specific origin</li>
-        <li>Specify the origin via input message payload</li>
+        <li>Get webhook URLs that will forward messages to your WhatsApp</li>
+        <li>Connect external services like CloudFlare, Grafana, IFTTT to your WhatsApp</li>
+        <li>Automatically format the origin to match the API requirements</li>
+        <li>Handle API responses and errors appropriately</li>
     </ul>
+
+    <h3>Example Use Case</h3>
+    <p>If you want to receive Grafana alerts on your WhatsApp:</p>
+    <ol>
+        <li>Use this node with <code>msg.payload.origin: "grafana"</code></li>
+        <li>Get the webhook URL from the node output</li>
+        <li>Configure this URL in Grafana's notification channels</li>
+        <li>Now any Grafana alert will be sent to your WhatsApp</li>
+    </ol>
 
     <h3>Example Flows</h3>
     <pre>
 // Retrieve webhook routes for CloudFlare
 [{"id":"listener-node","type":"whin-listener"}]
-[{"id":"inject","type":"inject","payload":{"origin":"CloudFlare"}}]
+[{"id":"inject","type":"inject","payload":{"origin":"cloudflare"}}]
     </pre>
 
     <h3>Example Output</h3>
@@ -61,4 +89,12 @@
     }
 }
     </pre>
+
+    <h3>Error Handling</h3>
+    <p>The node will:</p>
+    <ul>
+        <li>Show an error status if the origin is not specified</li>
+        <li>Display API errors in the node status</li>
+        <li>Log detailed error messages for debugging</li>
+    </ul>
 </script> 

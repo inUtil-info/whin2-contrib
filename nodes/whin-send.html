@@ -1,16 +1,16 @@
 <script type="text/javascript">
-    RED.nodes.registerType('whin-send',{
+    RED.nodes.registerType('whin-send', {
         category: 'whatsapp',
         color: '#25D366',
         defaults: {
-            name: {value:""},
-            auth: {value:"", type:"whin-config"}
+            name: {value: ""},
+            auth: {value: "", type: "whin-config"}
         },
-        inputs:1,
-        outputs:1,
+        inputs: 1,
+        outputs: 1,
         icon: "font-awesome/fa-paper-plane",
         label: function() {
-            return this.name||"whin-send";
+            return this.name || "Whin Send";
         }
     });
 </script>
@@ -21,63 +21,102 @@
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-auth"><i class="icon-tag"></i> Auth</label>
-        <input type="text" id="node-input-auth" placeholder="Auth">
+        <label for="node-input-auth"><i class="icon-lock"></i> Authentication</label>
+        <input type="text" id="node-input-auth" placeholder="Whin Configuration">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="whin-send">
-    <p>Node to send messages through the Whin API</p>
+    <p>Send messages to your registered WhatsApp account through the Whin API</p>
 
-    <h3>Supported Message Types</h3>
+    <h3>Quick Start</h3>
+    <ol>
+        <li>Configure your Whin API credentials in the Authentication field</li>
+        <li>Connect the node to your flow and deploy</li>
+        <li>Send a message with the appropriate payload format</li>
+    </ol>
+
+    <h3>Message Types</h3>
+    <p>You can send different types of messages by configuring the <code>msg.payload</code>:</p>
+    
+    <h4>Text Message</h4>
+    <pre>
+{
+    "text": "Hello, this is a test message"
+}</pre>
+
+    <h4>Location</h4>
+    <pre>
+{
+    "location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "name": "New York City"
+    }
+}</pre>
+
+    <h4>Image with Caption</h4>
+    <pre>
+{
+    "image": {
+        "url": "https://example.com/image.jpg",
+        "caption": "Image description"
+    }
+}</pre>
+
+    <h4>Video</h4>
+    <pre>
+{
+    "video": {
+        "url": "https://example.com/video.mp4",
+        "caption": "Video description"
+    }
+}</pre>
+
+    <h4>Audio</h4>
+    <pre>
+{
+    "audio": {
+        "url": "https://example.com/audio.mp3"
+    }
+}</pre>
+
+    <h4>Document</h4>
+    <pre>
+{
+    "document": {
+        "url": "https://example.com/document.pdf",
+        "filename": "document.pdf"
+    }
+}</pre>
+
+    <h3>Response Format</h3>
+    <p>The node will output a response object containing:</p>
+    <pre>
+{
+    "status": "success",
+    "messageId": "3EB0C767D94B8B33",
+    "timestamp": 1234567890
+}</pre>
+
+    <h3>Error Handling</h3>
+    <p>The node will show errors in the following cases:</p>
     <ul>
-        <li><code>text</code>: Simple text message</li>
-        <li><code>location</code>: Geographic location</li>
-        <li><code>image</code>: Image with optional caption</li>
-        <li><code>contacts</code>: Contact information</li>
-        <li><code>video</code>: Video with optional caption</li>
-        <li><code>audio</code>: Audio file</li>
-        <li><code>document</code>: Document file</li>
+        <li>Missing or invalid authentication configuration</li>
+        <li>Invalid message payload format</li>
+        <li>API request failures</li>
     </ul>
 
-    <h3>Usage Example</h3>
+    <h3>Best Practices</h3>
+    <ul>
+        <li>Use HTTPS URLs for media files</li>
+        <li>Keep text messages under 4096 characters</li>
+        <li>Handle API rate limits in your flow</li>
+        <li>Use appropriate message types for your content</li>
+    </ul>
+
+    <h3>Example Flow</h3>
     <pre>
-// Text message
-msg.payload = {
-    text: "Hello, this is a test message"
-}
-
-// Location
-msg.payload = {
-    location: {
-        latitude: 40.7128,
-        longitude: -74.0060,
-        name: "New York City"
-    }
-}
-
-// Image with caption
-msg.payload = {
-    image: {
-        url: "https://example.com/image.jpg",
-        caption: "Image description"
-    }
-}
-
-// Video
-msg.payload = {
-    video: {
-        url: "https://example.com/video.mp4",
-        caption: "Video description" // Optional
-    }
-}
-    </pre>
-
-    <h3>Notes</h3>
-    <p>
-    - Requires a configuration node with Whin API key
-    - Sends messages only to the API user
-    - Does not support group messaging (use a separate node)
-    - No support for lists or interactive buttons
-    </p>
+[{"id":"send-node","type":"whin-send"}]
+[{"id":"inject","type":"inject","payload":{"text":"Hello!"}}]</pre>
 </script> 

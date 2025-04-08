@@ -122,7 +122,7 @@ Key steps:
 
 You can follow this [video](https://youtu.be/8WyG_becZXM) showing how to set up a webhook route, change routes, or delete them.
 
-**Note**: The previous "always-on mode" using websockets is no longer supported. All users must now use the webhook mechanism to receive messages.
+**Note**: WebSocket connections are no longer supported in any form. All users must use the webhook mechanism to receive messages. The WebSocket functionality has been completely removed from this package.
 
 ---
 

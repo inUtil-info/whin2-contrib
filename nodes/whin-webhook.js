@@ -1,4 +1,4 @@
-const WhinApiClient = require('../lib/api-client');
+const https = require('https');
 
 module.exports = function(RED) {
     function WhinWebhookNode(config) {
@@ -14,13 +14,60 @@ module.exports = function(RED) {
             return;
         }
 
-        // Create API client instance
-        const apiClient = new WhinApiClient(node.whinConfig.apikey);
+        // Helper function to make API requests
+        async function makeRequest(path, method, body = null) {
+            const options = {
+                hostname: 'whin2.p.rapidapi.com',
+                port: 443,
+                path: path,
+                method: method,
+                headers: {
+                    'X-RapidAPI-Key': node.whinConfig.apikey,
+                    'X-RapidAPI-Host': 'whin2.p.rapidapi.com'
+                }
+            };
+
+            if (body) {
+                options.headers['Content-Type'] = 'application/json';
+            }
+
+            return new Promise((resolve, reject) => {
+                const req = https.request(options, (res) => {
+                    let data = '';
+                    res.on('data', chunk => data += chunk);
+                    res.on('end', () => {
+                        try {
+                            // Try to parse as JSON first
+                            const parsedData = JSON.parse(data);
+                            resolve({
+                                statusCode: res.statusCode,
+                                data: parsedData
+                            });
+                        } catch (e) {
+                            // If not valid JSON, return as is
+                            resolve({
+                                statusCode: res.statusCode,
+                                data: data
+                            });
+                        }
+                    });
+                });
+
+                req.on('error', (error) => {
+                    reject(error);
+                });
+                
+                if (body) {
+                    req.write(JSON.stringify(body));
+                }
+                req.end();
+            });
+        }
 
         // Method to set webhook URL
         node.setWebhookUrl = async function(url) {
             try {
-                const response = await apiClient.makeRequest('/seturl', 'POST', { url: url });
+                const response = await makeRequest('/seturl', 'POST', { url: url });
 
                 if (response.statusCode < 200 || response.statusCode >= 300) {
                     throw new Error(`API request failed with status ${response.statusCode}`);
@@ -47,7 +94,7 @@ module.exports = function(RED) {
         // Method to show current webhook URL
         node.showWebhookUrl = async function() {
             try {
-                const response = await apiClient.makeRequest('/showurl', 'GET');
+                const response = await makeRequest('/showurl', 'GET');
 
                 if (response.statusCode < 200 || response.statusCode >= 300) {
                     throw new Error(`API request failed with status ${response.statusCode}`);
@@ -74,7 +121,7 @@ module.exports = function(RED) {
         // Method to delete webhook URL
         node.deleteWebhookUrl = async function() {
             try {
-                const response = await apiClient.makeRequest('/delurl', 'GET');
+                const response = await makeRequest('/delurl', 'GET');
 
                 if (response.statusCode < 200 || response.statusCode >= 300) {
                     throw new Error(`API request failed with status ${response.statusCode}`);
