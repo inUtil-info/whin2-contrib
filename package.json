@@ -6,11 +6,14 @@
     "type": "git",
     "url": "git+https://github.com/inUtil-info/whin2-contrib.git"
   },
-  "main": "whin.js",
   "node-red": {
     "version": ">=1.0.0",
     "nodes": {
-      "whin-send": "whin.js"
+      "whin-config": "nodes/whin-config.js",
+      "whin-send": "nodes/whin-send.js",
+      "whin-group": "nodes/whin-group.js",
+      "whin-webhook": "nodes/whin-webhook.js",
+      "whin-listener": "nodes/whin-listener.js"
     }
   },
   "keywords": [
@@ -20,18 +23,19 @@
   ],
   "author": "info@inutil.info",
   "bugs": {
-    "url": "https://github.com/inutil-info/whin2-contrib/issues"
+    "url": "https://github.com/inUtil-info/whin2-contrib/issues"
   },
-  "homepage": "https://github.com/inutil-info/whin2-contrib#readme",
+  "homepage": "https://github.com/inUtil-info/whin2-contrib#readme",
   "license": "MIT",
   "directories": {
-    "example": "examples"
+    "example": "examples",
+    "icons": "icons"
   },
   "engines": {
     "node": ">=10.0.0"
   },
   "dependencies": {
-    "ws":"^7.5.5"
+    "ws": "^7.5.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

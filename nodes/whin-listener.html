@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    RED.nodes.registerType('whin-listener', {
+        category: 'whatsapp',
+        color: '#25D366',
+        defaults: {
+            name: {value: ""},
+            auth: {value: "", type: "whin-config"}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-link",
+        label: function() {
+            return this.name || "Whin Listener";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="whin-listener">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-auth"><i class="icon-lock"></i> Authentication</label>
+        <input type="text" id="node-input-auth" placeholder="Whin Configuration">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="whin-listener">
+    <p>Retrieve webhook routes for a specified origin</p>
+
+    <h3>Inputs</h3>
+    <p>Input message must contain the origin in <code>msg.payload.origin</code>.</p>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>Webhook route details directly from the Whin API</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node allows you to:</p>
+    <ul>
+        <li>Retrieve webhook routes for a specific origin</li>
+        <li>Specify the origin via input message payload</li>
+    </ul>
+
+    <h3>Example Flows</h3>
+    <pre>
+// Retrieve webhook routes for CloudFlare
+[{"id":"listener-node","type":"whin-listener"}]
+[{"id":"inject","type":"inject","payload":{"origin":"CloudFlare"}}]
+    </pre>
+
+    <h3>Example Output</h3>
+    <pre>
+{
+    "payload": {
+        "Personal": "https://whin2.p.rapidapi.com/hk/luu4t/tf?rapidapi-key=YOUR_ACTUAL_API_KEY",
+        "Group": "https://whin2.p.rapidapi.com/hk/120363315626250728/tf?rapidapi-key=YOUR_ACTUAL_API_KEY"
+    }
+}
+    </pre>
+</script> 

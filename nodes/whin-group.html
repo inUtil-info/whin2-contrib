@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    RED.nodes.registerType('whin-group',{
+        category: 'whatsapp',
+        color: '#25D366',
+        defaults: {
+            name: {value:""},
+            auth: {value:"", type:"whin-config"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-users",
+        label: function() {
+            return this.name||"whin-group";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="whin-group">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-auth"><i class="icon-tag"></i> Auth</label>
+        <input type="text" id="node-input-auth" placeholder="Auth">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="whin-group">
+    <p>A node-red node for managing WhatsApp groups.</p>
+
+    <h3>Inputs</h3>
+    <p>The input message should contain:</p>
+    <ul>
+        <li><code>msg.wgcmd</code>: Command to execute (create, add, remove, list, info)</li>
+        <li><code>msg.gname</code>: Group name (for create command)</li>
+        <li><code>msg.mlist</code>: Array of phone numbers</li>
+        <li><code>msg.gid</code>: Group ID (for add, remove, list, info commands)</li>
+    </ul>
+
+    <h3>Output</h3>
+    <p>1. Standard Output: contains the result of the group management command.</p>
+
+    <h3>Commands</h3>
+    <ul>
+        <li><code>create</code>: Create a new group</li>
+        <li><code>add</code>: Add members to a group</li>
+        <li><code>remove</code>: Remove members from a group</li>
+        <li><code>list</code>: List group members</li>
+        <li><code>info</code>: Get group information</li>
+    </ul>
+</script> 

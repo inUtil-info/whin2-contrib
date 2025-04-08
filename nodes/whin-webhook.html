@@ -1,0 +1,81 @@
+<script type="text/javascript">
+    RED.nodes.registerType('whin-webhook', {
+        category: 'whatsapp',
+        color: '#25D366',
+        defaults: {
+            name: {value: ""},
+            url: {value: ""},
+            auth: {value: "", type: "whin-config"}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-link",
+        label: function() {
+            return this.name || "Whin Webhook";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="whin-webhook">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-url"><i class="icon-link"></i> Webhook URL</label>
+        <input type="text" id="node-input-url" placeholder="https://your-webhook-url.com/path">
+    </div>
+    <div class="form-row">
+        <label for="node-input-auth"><i class="icon-lock"></i> Authentication</label>
+        <input type="text" id="node-input-auth" placeholder="Whin Configuration">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="whin-webhook">
+    <p>Configure, set, show, and delete webhook URL for receiving Whin messages</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload.action <span class="property-type">string</span></dt>
+        <dd>Optional action to perform:
+            <ul>
+                <li><code>set</code>: Set a new webhook URL (default behavior)</li>
+                <li><code>show</code>: Retrieve the current webhook URL</li>
+                <li><code>delete</code>: Remove the current webhook URL</li>
+            </ul>
+        </dd>
+        <dt>payload.url <span class="property-type">string</span></dt>
+        <dd>Webhook URL to set. If not provided, uses the URL configured in the node.</dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>Response from the Whin API after setting, showing, or deleting the webhook URL.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node allows you to manage webhook URLs for incoming Whin messages:</p>
+    <ul>
+        <li>Configure a default webhook URL in the node settings</li>
+        <li>Set a new webhook URL dynamically</li>
+        <li>Retrieve the current webhook URL</li>
+        <li>Delete the current webhook URL</li>
+        <li>Receive the API response as output</li>
+    </ul>
+
+    <h3>Example Flows</h3>
+    <pre>
+// Set webhook URL from node configuration
+[{"id":"webhook-node","type":"whin-webhook","name":"Set Webhook","url":"https://webhook.my-target-host.com/path"}]
+
+// Set webhook URL dynamically
+[{"id":"inject","type":"inject","payload":{"action":"set","url":"https://webhook.my-target-host.com/path"}}]
+
+// Show current webhook URL
+[{"id":"inject","type":"inject","payload":{"action":"show"}}]
+
+// Delete current webhook URL
+[{"id":"inject","type":"inject","payload":{"action":"delete"}}]
+    </pre>
+</script> 

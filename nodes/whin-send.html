@@ -1,0 +1,83 @@
+<script type="text/javascript">
+    RED.nodes.registerType('whin-send',{
+        category: 'whatsapp',
+        color: '#25D366',
+        defaults: {
+            name: {value:""},
+            auth: {value:"", type:"whin-config"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-paper-plane",
+        label: function() {
+            return this.name||"whin-send";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="whin-send">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-auth"><i class="icon-tag"></i> Auth</label>
+        <input type="text" id="node-input-auth" placeholder="Auth">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="whin-send">
+    <p>Node to send messages through the Whin API</p>
+
+    <h3>Supported Message Types</h3>
+    <ul>
+        <li><code>text</code>: Simple text message</li>
+        <li><code>location</code>: Geographic location</li>
+        <li><code>image</code>: Image with optional caption</li>
+        <li><code>contacts</code>: Contact information</li>
+        <li><code>video</code>: Video with optional caption</li>
+        <li><code>audio</code>: Audio file</li>
+        <li><code>document</code>: Document file</li>
+    </ul>
+
+    <h3>Usage Example</h3>
+    <pre>
+// Text message
+msg.payload = {
+    text: "Hello, this is a test message"
+}
+
+// Location
+msg.payload = {
+    location: {
+        latitude: 40.7128,
+        longitude: -74.0060,
+        name: "New York City"
+    }
+}
+
+// Image with caption
+msg.payload = {
+    image: {
+        url: "https://example.com/image.jpg",
+        caption: "Image description"
+    }
+}
+
+// Video
+msg.payload = {
+    video: {
+        url: "https://example.com/video.mp4",
+        caption: "Video description" // Optional
+    }
+}
+    </pre>
+
+    <h3>Notes</h3>
+    <p>
+    - Requires a configuration node with Whin API key
+    - Sends messages only to the API user
+    - Does not support group messaging (use a separate node)
+    - No support for lists or interactive buttons
+    </p>
+</script> 
