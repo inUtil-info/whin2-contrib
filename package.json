@@ -13,7 +13,8 @@
       "whin-send": "nodes/whin-send.js",
       "whin-group": "nodes/whin-group.js",
       "whin-webhook": "nodes/whin-webhook.js",
-      "whin-listener": "nodes/whin-listener.js"
+      "whin-listener": "nodes/whin-listener.js",
+      "whin-enrol": "nodes/whin-enrol.js"
     }
   },
   "keywords": [

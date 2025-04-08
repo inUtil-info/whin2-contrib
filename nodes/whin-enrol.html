@@ -1,0 +1,166 @@
+<script type="text/javascript">
+    RED.nodes.registerType('whin-enrol', {
+        category: 'whatsapp',
+        color: '#25D366',
+        defaults: {
+            name: {value: ""},
+            auth: {value: "", type: "whin-config"}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-qrcode",
+        label: function() {
+            return this.name || "Whin Enrol";
+        },
+        oneditprepare: function() {
+            const node = this;
+            const nodeId = node.id;
+            
+            console.log("Editing node:", nodeId);
+            
+            // Create QR display container - add it to the dialog form
+            const qrContainer = $('<div/>', {
+                id: 'whin-qr-container',
+                class: 'form-row',
+                style: 'text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;'
+            }).appendTo('#dialog-form');
+            
+            $('<h3/>', {
+                style: 'margin-bottom: 10px;'
+            }).text('WhatsApp QR Code').appendTo(qrContainer);
+            
+            $('<div/>', {
+                style: 'font-style: italic; color: #666; margin-bottom: 10px;'
+            }).text('Scan the QR code below with your WhatsApp to enrol your device').appendTo(qrContainer);
+            
+            $('<div/>', {
+                id: 'whin-qr-code',
+                style: 'width: 300px; height: 300px; margin: 0 auto; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; background: #f9f9f9;'
+            }).text('QR code will appear here when node is triggered').appendTo(qrContainer);
+            
+            // Add a button to manually refresh the QR code
+            $('<button/>', {
+                id: 'refresh-qr-button',
+                class: 'red-ui-button',
+                style: 'margin-top: 15px;'
+            }).text('Refresh QR Code').appendTo(qrContainer).click(function(e) {
+                e.preventDefault();
+                fetchAndDisplayQR(nodeId);
+            });
+            
+            // Add a note about how to trigger the QR
+            $('<div/>', {
+                style: 'font-size: 0.9em; margin-top: 15px; color: #666;'
+            }).html('<strong>Note:</strong> To get a QR code, first deploy the flow, then send a message to this node. Once the node status shows "QR ready", the QR code will appear here.').appendTo(qrContainer);
+            
+            // Try to fetch QR code immediately if we think it might be available
+            setTimeout(function() {
+                console.log("Attempting to fetch QR code for node:", nodeId);
+                fetchAndDisplayQR(nodeId);
+            }, 500);
+            
+            function fetchAndDisplayQR(nodeId) {
+                console.log("Fetching QR for node:", nodeId);
+                
+                // Update UI to show we're loading
+                $('#whin-qr-code').html('<i class="fa fa-spinner fa-spin"></i> Loading QR code...');
+                
+                // Make request with full path to ensure it works
+                const url = RED.settings.httpAdminRoot + 'whin-enrol/' + nodeId + '/qr';
+                console.log("Fetching QR from URL:", url);
+                
+                $.getJSON(url)
+                    .done(function(response) {
+                        console.log("QR fetch response:", response);
+                        const qrElement = $('#whin-qr-code');
+                        qrElement.empty();
+                        
+                        if (response && response.qrData) {
+                            $('<img/>', {
+                                src: 'data:image/png;base64,' + response.qrData,
+                                width: 300,
+                                height: 300,
+                                style: 'max-width: 100%;'
+                            }).appendTo(qrElement);
+                            console.log("QR image added to DOM");
+                        } else {
+                            qrElement.html('<i class="fa fa-exclamation-triangle"></i> Error: Received invalid QR data');
+                            console.log("Invalid QR data received");
+                        }
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log("QR fetch failed:", textStatus, errorThrown);
+                        $('#whin-qr-code').html('<i class="fa fa-exclamation-triangle"></i> QR code not available.<br>Send a message to the node first, then refresh.');
+                    });
+            }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="whin-enrol">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-auth"><i class="fa fa-lock"></i> Authentication</label>
+        <input type="text" id="node-input-auth" placeholder="Whin Configuration">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="whin-enrol">
+    <p>Generate a QR code to enrol your WhatsApp device with Whin</p>
+
+    <h3>How It Works</h3>
+    <ol>
+        <li>Configure this node with your Whin API credentials</li>
+        <li>Trigger the node by sending any message to it</li>
+        <li>The node will request a QR code from the Whin API</li>
+        <li>Scan the QR code with your WhatsApp app to complete enrollment</li>
+    </ol>
+
+    <h3>Instructions</h3>
+    <ol>
+        <li>Deploy the flow with this node</li>
+        <li>Inject a message into the node (any message will work)</li>
+        <li>When the node displays "QR ready", double-click on the node to open its properties</li>
+        <li>The QR code will be displayed in the properties panel</li>
+        <li>Open WhatsApp on your phone, go to Settings > Linked Devices > Link a Device</li>
+        <li>Scan the QR code with your phone's camera</li>
+        <li>Your WhatsApp is now connected to Whin</li>
+    </ol>
+
+    <h3>Inputs</h3>
+    <p>This node accepts any input message to trigger the QR code generation.</p>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>Contains the QR code as a base64 string and a ready-to-use image URL</dd>
+        <dd class="property-description">
+            <ul>
+                <li><code>qrString</code> - Base64 encoded PNG image</li>
+                <li><code>qrImage</code> - Data URL for the QR code image</li>
+            </ul>
+        </dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node allows you to:</p>
+    <ul>
+        <li>Generate a QR code for WhatsApp enrollment</li>
+        <li>Connect your WhatsApp account to Whin services</li>
+        <li>Enable sending and receiving WhatsApp messages through Node-RED</li>
+    </ul>
+
+    <h3>Error Handling</h3>
+    <p>The node will:</p>
+    <ul>
+        <li>Show an error status if authentication is not configured</li>
+        <li>Display API errors in the node status</li>
+        <li>Log detailed error messages for debugging</li>
+    </ul>
+
+    <h3>Note</h3>
+    <p>The QR code is valid for a limited time. If it expires, simply send another message to the node to generate a new QR code.</p>
+</script> 

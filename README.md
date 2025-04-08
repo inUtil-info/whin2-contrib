@@ -49,11 +49,13 @@ This picture shows the overall process:
 
 ## Whin Nodes:
 
-When you install `@inutil-labs/node-red-whin-whatsapp` package, you will get three nodes available on node-red Palette under the Network category:
+When you install `@inutil-labs/node-red-whin-whatsapp` package, you will get these nodes available on node-red Palette under the Network category:
 
 - whin-send
 - whin-group
 - whin-webhook
+- whin-listener
+- whin-enrol
 
 These Nodes rely on a configuration Node called whin-config (not visible on the editor Palette).
 
@@ -72,6 +74,45 @@ This is the node we recommend you start using right after you complete the confi
 ![sender-node](./icons/sender-node.png)
 
 Wire an inject node to whin-send, choose the type of message you want to send (see all types and its schemas below), and you should receive a message on your whatsapp client (web, desktop or mobile app). Anything that comes into whin-send as data payload will be sent, bear in mind the payload MUST be a JSON object following any of the valid schemas described below.
+
+### WhatsApp Enrollment (whin-enrol):
+
+This node allows you to generate a QR code to enrol your WhatsApp device with Whin. This is especially useful for setting up new devices or reconnecting after a session has expired.
+
+#### How it works:
+
+1. Configure the node with your Whin API credentials
+2. Trigger the node by sending any message to it
+3. The node will request a QR code from the Whin API
+4. Double-click on the node to open its properties panel where the QR code will be displayed
+5. Scan the QR code with your WhatsApp app (Settings > Linked Devices > Link a Device)
+
+#### Features:
+
+- Displays a scannable QR code directly in Node-RED editor
+- Automatically converts API response to a proper image format
+- Includes a refresh button to generate a new QR code if needed
+- Outputs the QR data that can be used in your flows or UI
+
+#### Example flow:
+
+```json
+[
+  {
+    "id": "enrol-node",
+    "type": "whin-enrol",
+    "name": "WhatsApp Enrollment"
+  },
+  {
+    "id": "inject",
+    "type": "inject",
+    "payload": {},
+    "wires": [["enrol-node"]]
+  }
+]
+```
+
+**Note**: The QR code is valid for a limited time. If it expires, simply send another message to the node to generate a new QR code.
 
 ### Webhook Configuration (whin-webhook):
 
@@ -100,6 +141,10 @@ Example flow:
   }
 ]
 ```
+
+### Webhook Routes (whin-listener):
+
+This node retrieves webhook URLs for specified origins (like CloudFlare, Grafana, etc.). When you configure these URLs in the external service, any data sent to these URLs will be forwarded to your WhatsApp.
 
 ### Listeners:
 
